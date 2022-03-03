@@ -1,6 +1,8 @@
-﻿namespace BabyMemory.Areas.Identity.Pages.Account
+﻿using BabyMemory.Contracts;
+
+namespace BabyMemory.Areas.Identity.Pages.Account
 {
-    #nullable disable
+#nullable disable
     using BabyMemory.Data.Models;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Identity;
@@ -20,13 +22,15 @@
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IUserController _userController;
 
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUserController userController)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -34,22 +38,28 @@
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _userController = userController;
         }
-        
+
         [BindProperty]
         public InputModel Input { get; set; }
-        
+
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-        
+
         public class InputModel
         {
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
             [Display(Name = "Username")]
             public string UserName { get; set; }
-           
+
+            [Required]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Display(Name = "Full Name ex.: 'Jon Smith'")]
+            public string UserFullName { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -61,7 +71,7 @@
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            
+
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -87,7 +97,7 @@
                 await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
+                 _userController.SetUserFullName(user, Input.UserFullName);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -114,6 +124,7 @@
                         return LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
