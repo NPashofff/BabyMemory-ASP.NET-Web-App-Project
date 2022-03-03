@@ -17,3 +17,7 @@ body {
   margin-bottom: 60px;
     background-color: #F2F2F2;
 }
+
+.form-floating {
+    margin: 1em;
+}
