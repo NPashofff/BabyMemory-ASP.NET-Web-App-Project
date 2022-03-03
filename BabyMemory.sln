@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabyMemory", "BabyMemory\BabyMemory.csproj", "{A150ECAC-0CE3-4725-9E63-15F62DA0BEFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A150ECAC-0CE3-4725-9E63-15F62DA0BEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A150ECAC-0CE3-4725-9E63-15F62DA0BEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A150ECAC-0CE3-4725-9E63-15F62DA0BEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A150ECAC-0CE3-4725-9E63-15F62DA0BEFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BCC2A94-A2E9-472F-A8AC-3DA11F09F14D}
+	EndGlobalSection
+EndGlobal
