@@ -18,5 +18,11 @@ namespace BabyMemory.Controllers
             user.UserFullName = fullName;
             context.SaveChangesAsync();
         }
+
+        public void SetUserDate(User user)
+        {
+            user.RegisterDate = DateTime.Now;
+            context.SaveChangesAsync();
+        }
     }
 }

@@ -42,13 +42,13 @@ namespace BabyMemory.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public RegisterInputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        
+
 
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -69,7 +69,9 @@ namespace BabyMemory.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                 _userController.SetUserFullName(user, Input.UserFullName);
+                _userController.SetUserDate(user);
+                _userController.SetUserFullName(user, Input.UserFullName);
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

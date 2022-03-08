@@ -12,6 +12,16 @@ namespace BabyMemory.Data
         }
 
         //public DbSet<User> Users { get; set; }
+
         public DbSet<Child> Children { get; set; }
+
+        public DbSet<Event> Events { get; set; }
+
+        public DbSet<HealthProcedure> HealthProcedures { get; set; }
+
+        public DbSet<Medicine> Medicines { get; set; }
+
+        public DbSet<Memory> Memories { get; set; }
+        
     }
 }
