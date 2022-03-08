@@ -158,27 +158,6 @@ namespace BabyMemory.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Children",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Picture = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Children", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Children_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Events",
                 columns: table => new
                 {
@@ -202,6 +181,33 @@ namespace BabyMemory.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Childrens",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Picture = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: true),
+                    EventId = table.Column<string>(type: "nvarchar(36)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Childrens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Childrens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Childrens_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HealthProcedures",
                 columns: table => new
                 {
@@ -209,15 +215,15 @@ namespace BabyMemory.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(254)", maxLength: 254, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ChildId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    ChildrenId = table.Column<string>(type: "nvarchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HealthProcedures", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_HealthProcedures_Children_ChildId",
-                        column: x => x.ChildId,
-                        principalTable: "Children",
+                        name: "FK_HealthProcedures_Childrens_ChildrenId",
+                        column: x => x.ChildrenId,
+                        principalTable: "Childrens",
                         principalColumn: "Id");
                 });
 
@@ -230,15 +236,15 @@ namespace BabyMemory.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(254)", maxLength: 254, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: true),
                     Picture = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: true),
-                    ChildId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    ChildrenId = table.Column<string>(type: "nvarchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Memories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Memories_Children_ChildId",
-                        column: x => x.ChildId,
-                        principalTable: "Children",
+                        name: "FK_Memories_Childrens_ChildrenId",
+                        column: x => x.ChildrenId,
+                        principalTable: "Childrens",
                         principalColumn: "Id");
                 });
 
@@ -300,8 +306,13 @@ namespace BabyMemory.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Children_UserId",
-                table: "Children",
+                name: "IX_Childrens_EventId",
+                table: "Childrens",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Childrens_UserId",
+                table: "Childrens",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -310,9 +321,9 @@ namespace BabyMemory.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HealthProcedures_ChildId",
+                name: "IX_HealthProcedures_ChildrenId",
                 table: "HealthProcedures",
-                column: "ChildId");
+                column: "ChildrenId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Medicines_HealthProcedureId",
@@ -320,9 +331,9 @@ namespace BabyMemory.Data.Migrations
                 column: "HealthProcedureId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Memories_ChildId",
+                name: "IX_Memories_ChildrenId",
                 table: "Memories",
-                column: "ChildId");
+                column: "ChildrenId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -343,9 +354,6 @@ namespace BabyMemory.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Events");
-
-            migrationBuilder.DropTable(
                 name: "Medicines");
 
             migrationBuilder.DropTable(
@@ -358,7 +366,10 @@ namespace BabyMemory.Data.Migrations
                 name: "HealthProcedures");
 
             migrationBuilder.DropTable(
-                name: "Children");
+                name: "Childrens");
+
+            migrationBuilder.DropTable(
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

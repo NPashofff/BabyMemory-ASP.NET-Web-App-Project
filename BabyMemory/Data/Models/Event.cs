@@ -1,9 +1,9 @@
-﻿using SharedTrip.Shared;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BabyMemory.Data.Models
+﻿namespace BabyMemory.Data.Models
 {
+    using SharedTrip.Shared;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Event
     {
         [Key]
@@ -27,6 +27,10 @@ namespace BabyMemory.Data.Models
         [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
-        
+
+        public User User { get; set; }
+
+        public ICollection<Children> Childrens { get; set; }
+
     }
 }

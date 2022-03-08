@@ -13,7 +13,7 @@ namespace BabyMemory.Data
 
         //public DbSet<User> Users { get; set; }
 
-        public DbSet<Child> Children { get; set; }
+        public DbSet<Children> Childrens { get; set; }
 
         public DbSet<Event> Events { get; set; }
 

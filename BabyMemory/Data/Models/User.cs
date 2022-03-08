@@ -15,7 +15,7 @@
 
         public DateTime RegisterDate { get; set; }
 
-        public ICollection<Child> Childrens { get; set; }
+        public ICollection<Children> Childrens { get; set; }
 
         public ICollection<Event> Events { get; set; }
     }

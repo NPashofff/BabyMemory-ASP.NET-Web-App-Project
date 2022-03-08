@@ -22,7 +22,7 @@ namespace BabyMemory.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BabyMemory.Data.Models.Child", b =>
+            modelBuilder.Entity("BabyMemory.Data.Models.Children", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
@@ -30,6 +30,9 @@ namespace BabyMemory.Data.Migrations
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("EventId")
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -50,9 +53,11 @@ namespace BabyMemory.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EventId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Children");
+                    b.ToTable("Childrens");
                 });
 
             modelBuilder.Entity("BabyMemory.Data.Models.Event", b =>
@@ -96,7 +101,7 @@ namespace BabyMemory.Data.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
-                    b.Property<string>("ChildId")
+                    b.Property<string>("ChildrenId")
                         .HasColumnType("nvarchar(36)");
 
                     b.Property<DateTime>("CreationDate")
@@ -113,7 +118,7 @@ namespace BabyMemory.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChildId");
+                    b.HasIndex("ChildrenId");
 
                     b.ToTable("HealthProcedures");
                 });
@@ -145,7 +150,7 @@ namespace BabyMemory.Data.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
-                    b.Property<string>("ChildId")
+                    b.Property<string>("ChildrenId")
                         .HasColumnType("nvarchar(36)");
 
                     b.Property<DateTime>("CreationDate")
@@ -166,7 +171,7 @@ namespace BabyMemory.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChildId");
+                    b.HasIndex("ChildrenId");
 
                     b.ToTable("Memories");
                 });
@@ -385,8 +390,12 @@ namespace BabyMemory.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BabyMemory.Data.Models.Child", b =>
+            modelBuilder.Entity("BabyMemory.Data.Models.Children", b =>
                 {
+                    b.HasOne("BabyMemory.Data.Models.Event", null)
+                        .WithMany("Childrens")
+                        .HasForeignKey("EventId");
+
                     b.HasOne("BabyMemory.Data.Models.User", null)
                         .WithMany("Childrens")
                         .HasForeignKey("UserId");
@@ -394,18 +403,20 @@ namespace BabyMemory.Data.Migrations
 
             modelBuilder.Entity("BabyMemory.Data.Models.Event", b =>
                 {
-                    b.HasOne("BabyMemory.Data.Models.User", null)
+                    b.HasOne("BabyMemory.Data.Models.User", "User")
                         .WithMany("Events")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BabyMemory.Data.Models.HealthProcedure", b =>
                 {
-                    b.HasOne("BabyMemory.Data.Models.Child", null)
+                    b.HasOne("BabyMemory.Data.Models.Children", null)
                         .WithMany("HelthProcedures")
-                        .HasForeignKey("ChildId");
+                        .HasForeignKey("ChildrenId");
                 });
 
             modelBuilder.Entity("BabyMemory.Data.Models.Medicine", b =>
@@ -417,9 +428,9 @@ namespace BabyMemory.Data.Migrations
 
             modelBuilder.Entity("BabyMemory.Data.Models.Memory", b =>
                 {
-                    b.HasOne("BabyMemory.Data.Models.Child", null)
+                    b.HasOne("BabyMemory.Data.Models.Children", null)
                         .WithMany("Memories")
-                        .HasForeignKey("ChildId");
+                        .HasForeignKey("ChildrenId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -473,11 +484,16 @@ namespace BabyMemory.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BabyMemory.Data.Models.Child", b =>
+            modelBuilder.Entity("BabyMemory.Data.Models.Children", b =>
                 {
                     b.Navigation("HelthProcedures");
 
                     b.Navigation("Memories");
+                });
+
+            modelBuilder.Entity("BabyMemory.Data.Models.Event", b =>
+                {
+                    b.Navigation("Childrens");
                 });
 
             modelBuilder.Entity("BabyMemory.Data.Models.HealthProcedure", b =>

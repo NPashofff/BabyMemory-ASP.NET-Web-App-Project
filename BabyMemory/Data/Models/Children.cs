@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using SharedTrip.Shared;
 
-    public class Child
+    public class Children
     {
         [Key]
         [MaxLength(GlobalConstants.IdGuidMaxLen)]
