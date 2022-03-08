@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SharedTrip.Shared;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using NuGet.Protocol.Core.Types;
-using SharedTrip.Shared;
 
 namespace BabyMemory.Data.Models
 {
@@ -28,9 +27,6 @@ namespace BabyMemory.Data.Models
         [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
-
-        public User User { get; set; }
-
-        //public ICollection<string> ChildrenId { get; set; }
+        
     }
 }

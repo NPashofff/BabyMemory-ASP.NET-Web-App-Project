@@ -24,9 +24,7 @@
         public string? Picture { get; set; }
 
         public ICollection<Memory> Memories { get; set; }
-
-        public ICollection<Event> Events { get; set; }
-
+        
         public ICollection<HealthProcedure> HelthProcedures { get; set; }
     }
 }
