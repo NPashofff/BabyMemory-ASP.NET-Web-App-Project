@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BabyMemory.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220308140842_AddDbModels")]
-    partial class AddDbModels
+    [Migration("20220309071001_AddDbModelsAndNews")]
+    partial class AddDbModelsAndNews
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,6 +131,10 @@ namespace BabyMemory.Data.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
                     b.Property<string>("HealthProcedureId")
                         .HasColumnType("nvarchar(36)");
 
@@ -176,6 +180,29 @@ namespace BabyMemory.Data.Migrations
                     b.HasIndex("ChildrenId");
 
                     b.ToTable("Memories");
+                });
+
+            modelBuilder.Entity("BabyMemory.Data.Models.News", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("BabyMemory.Data.Models.User", b =>

@@ -3,17 +3,19 @@
     using System.ComponentModel.DataAnnotations;
     using SharedTrip.Shared;
 
-    public class Medicine
+    public class News
     {
         [Key]
         [MaxLength(GlobalConstants.IdGuidMaxLen)]
-        public string Id { get; set; } = new Guid().ToString();
+        public string Id { get; set; }
 
         [Required]
-        [MaxLength(GlobalConstants.MedicineNameMaxLen)]
+        [MaxLength(GlobalConstants.NewsNameMaxLen)]
         public string Name { get; set; }
 
-        [MaxLength(GlobalConstants.MedicineDescriptionMaxLen)]
+        [MaxLength(GlobalConstants.NewsDescriptionMaxLen)]
         public string? Description { get; set; }
+
+        public bool IsActive { get; set; } = true;
     }
 }

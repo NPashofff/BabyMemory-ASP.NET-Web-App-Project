@@ -23,5 +23,6 @@ namespace BabyMemory.Data
 
         public DbSet<Memory> Memories { get; set; }
         
+        public DbSet<News> News { get; set; }
     }
 }

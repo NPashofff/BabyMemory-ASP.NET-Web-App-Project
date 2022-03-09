@@ -28,8 +28,18 @@
         public const int EventNameMaxLen = 254;
         public const int EventDescriptionMaxLen = 2048;
 
+        //Medicine
+        public const int MedicineNameMaxLen = 254;
+        public const int MedicineDescriptionMaxLen = 2048;
 
+        //News
+        public const int NewsNameMaxLen = 254;
+        public const int NewsDescriptionMaxLen = 2048;
+
+
+        //Shared
         public const int IdGuidMaxLen = 36;
+
         public const int CarModelMAxLen = 20;
         public const int HashedPasswordMAxLen = 64;
         public const int ProductNameMAxLen = 20;
