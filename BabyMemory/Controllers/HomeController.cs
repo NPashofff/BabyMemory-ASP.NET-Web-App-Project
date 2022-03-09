@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using BabyMemory.Data;
+using BabyMemory.Data.Models;
 using SharedTrip.Shared;
 
 namespace BabyMemory.Controllers
@@ -46,10 +47,34 @@ namespace BabyMemory.Controllers
 
         public IActionResult AddNews()
         {
+            //TODO: User Admin
             if (!User.Identity.IsAuthenticated)
             {
                 return Redirect("/");
             }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddNews(AddNewsViewModel model)
+        {
+            //TODO:Admin
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                
+            }
+
+            var news = new News
+            {
+                Name = model.Name,
+                Description = model.Description
+            };
 
             return View();
         }
