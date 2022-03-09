@@ -68,9 +68,9 @@ namespace BabyMemory.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
                 _userController.SetUserDate(user);
                 _userController.SetUserFullName(user, Input.UserFullName);
+                var result = await _userManager.CreateAsync(user, Input.Password);
                 
                 if (result.Succeeded)
                 {

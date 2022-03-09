@@ -18,8 +18,13 @@ namespace BabyMemory.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult News()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+
             return View();
         }
 
