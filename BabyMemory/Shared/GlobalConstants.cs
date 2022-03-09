@@ -35,6 +35,8 @@
         //News
         public const int NewsNameMaxLen = 254;
         public const int NewsDescriptionMaxLen = 2048;
+        public const string NewsLogo = "https://static.tildacdn.com/tild6437-3735-4635-a539-346232383864/News.jpg";
+
 
 
         //Shared
@@ -49,7 +51,6 @@
         public const int SeatMaxLen = 6;
         public const double PriceMinLen = 0.05;
         public const double PriceMaxLen = 1000;
-        public const string SeatsErrorMsg = "{0} must be between {1} and {2}";
         public const string EmailError = "Email must be valid.";
         public const string UserNameExist = "User alredy exist.";
         public const string ThimeError = "DepartureTime is not in correct format.";

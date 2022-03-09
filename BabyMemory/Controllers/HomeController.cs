@@ -1,16 +1,21 @@
 ﻿using BabyMemory.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using BabyMemory.Data;
+using SharedTrip.Shared;
 
 namespace BabyMemory.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
+        private ApplicationDbContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            ApplicationDbContext context)
         {
-            _logger = logger;
+            this.logger = logger;
+            this.context = context;
         }
 
         public IActionResult Index()
@@ -19,6 +24,27 @@ namespace BabyMemory.Controllers
         }
 
         public IActionResult News()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+
+            var models = context.News
+                .Where(x=>x.IsActive == true)
+                .Select(x => new NewsViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                Picture = GlobalConstants.NewsLogo,
+                IsActive = x.IsActive
+            }).ToArray();
+
+            return View(models);
+        }
+
+        public IActionResult AddNews()
         {
             if (!User.Identity.IsAuthenticated)
             {

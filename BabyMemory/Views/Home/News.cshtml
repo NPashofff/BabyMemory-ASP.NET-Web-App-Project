@@ -1,6 +1,27 @@
-﻿@{
+﻿@model NewsViewModel[];
+
+@{
     ViewData["Title"] = "N e w s";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's News.</p>
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <a href="/Home/AddNews" class="btn btn-info text-uppercase">Add News</a>
+</div>
+<div class="row mt-2 mb-4">
+    @foreach (var item in Model)
+    {
+        <div class="card col-6 col-lg-3">
+            <img src="@item.Picture"
+             class="img-fluid rounded" data-toggle="tooltip"
+             data-placement="bottom" title="Title">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-center">@item.Name</li>
+                    <li class="list-group-item text-center">@item.Description</li>
+                </ul>
+                <a href="/Home/DeleteNews?@item.Id" class="btn-danger btn">Delete</a>
+            </div>
+        </div>
+    }
+</div>

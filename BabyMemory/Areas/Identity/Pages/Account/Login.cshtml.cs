@@ -1,16 +1,13 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-#nullable disable
-
-using BabyMemory.Data.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
-
+﻿#nullable disable
 namespace BabyMemory.Areas.Identity.Pages.Account
 {
+    using BabyMemory.Data.Models;
+    using BabyMemory.Models;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+
     public class LoginModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
@@ -22,36 +19,16 @@ namespace BabyMemory.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        
         [BindProperty]
-        public InputModel Input { get; set; }
-
-       
+        public LoginVievModel Input { get; set; }
+        
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        
         public string ReturnUrl { get; set; }
 
-        
         [TempData]
         public string ErrorMessage { get; set; }
-
-       
-        public class InputModel
-        {
-            [Required]
-            public string Username { get; set; }
-
-          
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-
-            
-            [Display(Name = "Remember me?")]
-            public bool RememberMe { get; set; }
-        }
-
+        
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
