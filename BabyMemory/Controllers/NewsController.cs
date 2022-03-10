@@ -1,11 +1,11 @@
-﻿using BabyMemory.Data;
-using BabyMemory.Data.Models;
-using BabyMemory.Models;
-using Microsoft.AspNetCore.Mvc;
-using SharedTrip.Shared;
-
-namespace BabyMemory.Controllers
+﻿namespace BabyMemory.Controllers
 {
+    using Data;
+    using Data.Models;
+    using Models;
+    using Microsoft.AspNetCore.Mvc;
+    using SharedTrip.Shared;
+
     public class NewsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -15,7 +15,7 @@ namespace BabyMemory.Controllers
             _context = context;
         }
 
-        public IActionResult News()
+        public IActionResult All()
         {
             if (!User.Identity.IsAuthenticated)
             {
@@ -71,6 +71,14 @@ namespace BabyMemory.Controllers
             _context.SaveChanges();
 
             return Redirect("/News");
+        }
+
+        public IActionResult DeleteNews(string id)
+        {
+            var news = _context.News.FirstOrDefault(x => x.Id == id);
+            _context.News.Remove(news);
+            _context.SaveChanges();
+            return Redirect("/News/All");
         }
     }
 }
