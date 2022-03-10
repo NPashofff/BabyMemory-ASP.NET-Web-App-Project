@@ -1,12 +1,10 @@
-﻿using BabyMemory.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using BabyMemory.Data;
-using BabyMemory.Data.Models;
-using SharedTrip.Shared;
-
-namespace BabyMemory.Controllers
+﻿namespace BabyMemory.Controllers
 {
+    using Data;
+    using Models;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> logger;
@@ -23,7 +21,7 @@ namespace BabyMemory.Controllers
         {
             return View();
         }
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
