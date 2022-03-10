@@ -76,9 +76,9 @@ namespace BabyMemory.Controllers
                 Description = model.Description
             };
 
-            context.News.Add(news);
+            context.News.AddAsync(news);
 
-            context.SaveChanges();
+            context.SaveChangesAsync();
 
             return Redirect("/Home/News");
         }
