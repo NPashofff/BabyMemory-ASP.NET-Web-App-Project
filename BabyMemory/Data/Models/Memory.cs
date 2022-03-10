@@ -1,4 +1,6 @@
-﻿namespace BabyMemory.Data.Models
+﻿using System.Security.Principal;
+
+namespace BabyMemory.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
     using SharedTrip.Shared;
@@ -7,7 +9,7 @@
     {
         [Key]
         [MaxLength(GlobalConstants.IdGuidMaxLen)]
-        public string Id { get; set; } = new Guid().ToString();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         public DateTime CreationDate { get; set; }
 

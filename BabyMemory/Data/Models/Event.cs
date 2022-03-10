@@ -8,7 +8,7 @@
     {
         [Key]
         [MaxLength(GlobalConstants.IdGuidMaxLen)]
-        public string Id { get; set; } = new Guid().ToString();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [MaxLength(GlobalConstants.EventNameMaxLen)]

@@ -10,13 +10,13 @@ namespace BabyMemory.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> logger;
-        private ApplicationDbContext context;
+        private readonly ApplicationDbContext context;
 
-        public HomeController(ILogger<HomeController> logger,
-            ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> _logger,
+            ApplicationDbContext _context)
         {
-            this.logger = logger;
-            this.context = context;
+            this.logger = _logger;
+            this.context = _context;
         }
 
         public IActionResult Index()
@@ -32,15 +32,15 @@ namespace BabyMemory.Controllers
             }
 
             var models = context.News
-                .Where(x=>x.IsActive == true)
+                .Where(x => x.IsActive == true)
                 .Select(x => new NewsViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Description = x.Description,
-                Picture = GlobalConstants.NewsLogo,
-                IsActive = x.IsActive
-            }).ToArray();
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Picture = GlobalConstants.NewsLogo,
+                    IsActive = x.IsActive
+                }).ToArray();
 
             return View(models);
         }
@@ -60,23 +60,27 @@ namespace BabyMemory.Controllers
         public IActionResult AddNews(AddNewsViewModel model)
         {
             //TODO:Admin
-            if (!User.Identity.IsAuthenticated)
+             if (!User.Identity.IsAuthenticated)
             {
                 return Redirect("/");
             }
 
             if (!ModelState.IsValid)
             {
-                
+                return View("/Views/Shared/Error.cshtml");
             }
 
             var news = new News
             {
-                Name = model.Name,
+               Name = model.Name,
                 Description = model.Description
             };
 
-            return View();
+            context.News.Add(news);
+
+            context.SaveChanges();
+
+            return Redirect("/Home/News");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

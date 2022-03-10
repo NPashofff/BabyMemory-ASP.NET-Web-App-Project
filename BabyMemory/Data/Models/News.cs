@@ -1,13 +1,13 @@
 ﻿namespace BabyMemory.Data.Models
 {
-    using System.ComponentModel.DataAnnotations;
     using SharedTrip.Shared;
+    using System.ComponentModel.DataAnnotations;
 
     public class News
     {
         [Key]
         [MaxLength(GlobalConstants.IdGuidMaxLen)]
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [MaxLength(GlobalConstants.NewsNameMaxLen)]
