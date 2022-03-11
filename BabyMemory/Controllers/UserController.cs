@@ -7,7 +7,7 @@ namespace BabyMemory.Controllers
 
     public class UserController : IUserController
     {
-        private ApplicationDbContext context;
+        private readonly ApplicationDbContext context;
 
         public UserController(ApplicationDbContext context)
         {

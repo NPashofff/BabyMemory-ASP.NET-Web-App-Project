@@ -1,6 +1,6 @@
 ﻿namespace BabyMemory.Controllers
 {
-    using Data;
+    using BabyMemory.Infrastructure.Data;
     using Models;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
