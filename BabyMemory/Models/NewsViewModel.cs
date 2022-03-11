@@ -1,4 +1,6 @@
-﻿namespace BabyMemory.Models
+﻿#nullable disable
+
+namespace BabyMemory.Models
 {
     public class NewsViewModel
     {

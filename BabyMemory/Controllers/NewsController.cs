@@ -1,10 +1,11 @@
-﻿namespace BabyMemory.Controllers
+﻿#nullable disable
+namespace BabyMemory.Controllers
 {
-    using Data;
-    using Data.Models;
-    using Models;
+    using BabyMemory.Infrastructure.Data.Models;
+    using BabyMemory.Infrastructure.Data;
+    using BabyMemory.Infrastructure.Shared;
     using Microsoft.AspNetCore.Mvc;
-    using SharedTrip.Shared;
+    using Models;
 
     public class NewsController : Controller
     {
@@ -70,7 +71,7 @@
             _context.News.Add(news);
             _context.SaveChanges();
 
-            return Redirect("/News");
+            return Redirect("/News/All");
         }
 
         public IActionResult DeleteNews(string id)

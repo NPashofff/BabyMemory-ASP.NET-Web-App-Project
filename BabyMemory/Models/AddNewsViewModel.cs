@@ -1,8 +1,8 @@
-﻿namespace BabyMemory.Models
+﻿#nullable disable
+namespace BabyMemory.Models
 {
+    using BabyMemory.Infrastructure.Shared;
     using System.ComponentModel.DataAnnotations;
-    using SharedTrip.Shared;
-
     public class AddNewsViewModel
     {
         [Required]

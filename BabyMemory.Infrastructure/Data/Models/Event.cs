@@ -1,6 +1,9 @@
-﻿namespace BabyMemory.Data.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+#nullable disable
+namespace BabyMemory.Infrastructure.Data.Models
 {
-    using SharedTrip.Shared;
+    using BabyMemory.Infrastructure.Shared;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,7 +18,8 @@
         public string Name { get; set; }
 
         [MaxLength(GlobalConstants.EventDescriptionMaxLen)]
-        public string? Description { get; set; }
+        [AllowNull]
+        public string Description { get; set; }
 
         public DateTime CreationDate { get; set; }
 

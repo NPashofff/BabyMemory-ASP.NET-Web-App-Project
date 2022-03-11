@@ -1,6 +1,6 @@
-﻿namespace SharedTrip.Shared
+﻿namespace BabyMemory.Infrastructure.Shared
 {
-    internal class GlobalConstants
+    public class GlobalConstants
     {
         //RegisterInputModel
         public const int UserNameMAxLen = 100;

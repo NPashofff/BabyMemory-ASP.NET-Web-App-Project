@@ -1,10 +1,10 @@
 ﻿using BabyMemory.Contracts;
+using BabyMemory.Infrastructure.Data.Models;
 using BabyMemory.Models;
 
 namespace BabyMemory.Areas.Identity.Pages.Account
 {
 #nullable disable
-    using BabyMemory.Data.Models;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
@@ -117,8 +117,8 @@ namespace BabyMemory.Areas.Identity.Pages.Account
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(Data.Models.User)}'. " +
-                    $"Ensure that '{nameof(Data.Models.User)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{(User)}'. " +
+                    $"Ensure that '{nameof(User)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }

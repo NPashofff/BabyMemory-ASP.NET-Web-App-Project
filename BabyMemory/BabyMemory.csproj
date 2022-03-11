@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
+    <ProjectReference Include="..\BabyMemory.Infrastructure\BabyMemory.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

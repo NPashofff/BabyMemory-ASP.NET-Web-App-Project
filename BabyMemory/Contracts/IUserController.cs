@@ -1,4 +1,4 @@
-﻿using BabyMemory.Data.Models;
+﻿using BabyMemory.Infrastructure.Data.Models;
 
 namespace BabyMemory.Contracts
 {

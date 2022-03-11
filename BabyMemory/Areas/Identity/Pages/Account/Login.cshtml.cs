@@ -1,7 +1,8 @@
-﻿#nullable disable
+﻿
+#nullable disable
 namespace BabyMemory.Areas.Identity.Pages.Account
 {
-    using BabyMemory.Data.Models;
+    using BabyMemory.Infrastructure.Data.Models;
     using BabyMemory.Models;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Identity;
@@ -20,15 +21,15 @@ namespace BabyMemory.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public LoginVievModel Input { get; set; }
-        
+        public LoginViewModel Input { get; set; }
+
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public string ReturnUrl { get; set; }
 
         [TempData]
         public string ErrorMessage { get; set; }
-        
+
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))

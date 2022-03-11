@@ -1,6 +1,9 @@
-﻿namespace BabyMemory.Data.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+#nullable disable
+namespace BabyMemory.Infrastructure.Data.Models
 {
-    using SharedTrip.Shared;
+    using BabyMemory.Infrastructure.Shared;
     using System.ComponentModel.DataAnnotations;
 
     public class News
@@ -14,7 +17,8 @@
         public string Name { get; set; }
 
         [MaxLength(GlobalConstants.NewsDescriptionMaxLen)]
-        public string? Description { get; set; }
+        [AllowNull]
+        public string Description { get; set; }
 
         public bool IsActive { get; set; } = true;
     }

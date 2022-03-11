@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿#nullable disable
 namespace BabyMemory.Models
 {
-    public class LoginVievModel
+    using System.ComponentModel.DataAnnotations;
+    public class LoginViewModel
     {
         [Required]
         public string Username { get; set; }

@@ -1,8 +1,8 @@
-﻿namespace BabyMemory.Models
+﻿#nullable disable
+namespace BabyMemory.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using SharedTrip.Shared;
-
+    using BabyMemory.Infrastructure.Shared;
     public class RegisterInputModel
     {
         [Required]

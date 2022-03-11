@@ -1,7 +1,10 @@
-﻿namespace BabyMemory.Data.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+#nullable disable
+namespace BabyMemory.Infrastructure.Data.Models
 {
+    using BabyMemory.Infrastructure.Shared;
     using System.ComponentModel.DataAnnotations;
-    using SharedTrip.Shared;
 
     public class Children
     {
@@ -21,10 +24,11 @@
         public DateTime BirthDate { get; set; }
 
         [MaxLength(GlobalConstants.UrlMaxLen)]
-        public string? Picture { get; set; }
+        [AllowNull]
+        public string Picture { get; set; }
 
         public ICollection<Memory> Memories { get; set; }
-        
+
         public ICollection<HealthProcedure> HelthProcedures { get; set; }
     }
 }

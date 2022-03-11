@@ -1,9 +1,9 @@
+#nullable disable
 using BabyMemory.Contracts;
 using BabyMemory.Controllers;
-using BabyMemory.Data;
-using BabyMemory.Data.Models;
+using BabyMemory.Infrastructure.Data;
+using BabyMemory.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

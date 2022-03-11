@@ -1,9 +1,10 @@
-﻿using BabyMemory.Contracts;
-using BabyMemory.Data;
-using BabyMemory.Data.Models;
-
+﻿#nullable disable
 namespace BabyMemory.Controllers
 {
+    using BabyMemory.Contracts;
+    using BabyMemory.Infrastructure.Data;
+    using BabyMemory.Infrastructure.Data.Models;
+
     public class UserController : IUserController
     {
         private ApplicationDbContext context;

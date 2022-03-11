@@ -1,9 +1,10 @@
-﻿using System.Security.Principal;
+﻿using System.Diagnostics.CodeAnalysis;
 
-namespace BabyMemory.Data.Models
+#nullable disable
+namespace BabyMemory.Infrastructure.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using SharedTrip.Shared;
+    using BabyMemory.Infrastructure.Shared;
 
     public class Memory
     {
@@ -18,9 +19,11 @@ namespace BabyMemory.Data.Models
         public string Name { get; set; }
 
         [MaxLength(GlobalConstants.MemoryDescriptionMaxLen)]
-        public string? Description { get; set; }
+        [AllowNull]
+        public string Description { get; set; }
 
         [MaxLength(GlobalConstants.UrlMaxLen)]
-        public string? Picture { get; set; }
+        [AllowNull]
+        public string Picture { get; set; }
     }
 }

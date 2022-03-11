@@ -1,8 +1,11 @@
-﻿namespace BabyMemory.Data.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+#nullable disable
+namespace BabyMemory.Infrastructure.Data.Models
 {
+    using BabyMemory.Infrastructure.Shared;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Identity;
-    using SharedTrip.Shared;
 
     public class User : IdentityUser
     {
@@ -11,7 +14,8 @@
         public string UserFullName { get; set; }
 
         [MaxLength(GlobalConstants.UrlMaxLen)]
-        public string? Picture { get; set; }
+        [AllowNull]
+        public string Picture { get; set; }
 
         public DateTime RegisterDate { get; set; }
 
