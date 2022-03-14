@@ -22,6 +22,6 @@ namespace BabyMemory.Infrastructure.Data.Models
 
         public DateTime CreationDate { get; set; }
 
-        public ICollection<Medicine> Medicines { get; set; }
+        public ICollection<Medicine> Medicines { get; set; } = new List<Medicine>();
     }
 }

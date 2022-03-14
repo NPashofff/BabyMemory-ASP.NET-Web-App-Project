@@ -34,7 +34,7 @@ namespace BabyMemory.Infrastructure.Data.Models
 
         public User User { get; set; }
 
-        public ICollection<Children> Childrens { get; set; }
+        public ICollection<Children> Childrens { get; set; } = new List<Children>();
 
     }
 }

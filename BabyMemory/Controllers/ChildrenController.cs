@@ -17,7 +17,10 @@ namespace BabyMemory.Controllers
 
         public IActionResult All()
         {
-            return View();
+            string name = User.Identity.Name;
+
+            ChildrenViewModel[] children = _childrenService.All(name);
+            return View(children);
         }
 
         public IActionResult Add()
@@ -30,9 +33,10 @@ namespace BabyMemory.Controllers
         {
             if (ModelState.IsValid)
             {
-                _childrenService.AddChildren(model);
-
+                _childrenService.AddChildren(model, User.Identity.Name);
+                return Redirect("/Children/All");
             }
+
             return View();
         }
     }

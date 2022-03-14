@@ -1,12 +1,12 @@
-﻿@model BabyMemory.Infrastructure.Models.ChildrenAddViewModel[];
+﻿@model BabyMemory.Infrastructure.Models.ChildrenViewModel[];
 
 @{
-    ViewData["Title"] = "N e w s";
+    ViewData["Title"] = "Children";
 }
 
 <div>
     <h1>@ViewData["Title"]</h1>
-    <a href="/News/AddNews" class="btn btn-info text-uppercase">Add News</a>
+    <a href="/Children/Add" class="btn btn-info text-uppercase">Add Child</a>
 </div>
 <div class="row col-9 ">
     @foreach (var item in Model)

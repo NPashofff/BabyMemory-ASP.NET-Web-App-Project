@@ -27,8 +27,8 @@ namespace BabyMemory.Infrastructure.Data.Models
         [AllowNull]
         public string Picture { get; set; }
 
-        public ICollection<Memory> Memories { get; set; }
+        public ICollection<Memory> Memories { get; set; } = new List<Memory>();
 
-        public ICollection<HealthProcedure> HealthProcedures { get; set; }
+        public ICollection<HealthProcedure> HealthProcedures { get; set; } = new List<HealthProcedure>();
     }
 }

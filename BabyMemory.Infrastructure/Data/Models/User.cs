@@ -19,8 +19,8 @@ namespace BabyMemory.Infrastructure.Data.Models
 
         public DateTime RegisterDate { get; set; }
 
-        public ICollection<Children> Childrens { get; set; }
+        public ICollection<Children> Childrens { get; set; } = new List<Children>();
 
-        public ICollection<Event> Events { get; set; }
+        public ICollection<Event> Events { get; set; } = new List<Event>();
     }
 }
