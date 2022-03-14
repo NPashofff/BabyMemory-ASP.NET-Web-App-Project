@@ -1,12 +1,15 @@
-﻿#nullable disable
+﻿using Microsoft.AspNetCore.Authorization;
+
+#nullable disable
 namespace BabyMemory.Controllers
 {
     using BabyMemory.Infrastructure.Data.Models;
     using BabyMemory.Infrastructure.Data;
     using BabyMemory.Infrastructure.Shared;
     using Microsoft.AspNetCore.Mvc;
-    using Models;
+    using Infrastructure.Models;
 
+    [Authorize]
     public class NewsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,11 +21,6 @@ namespace BabyMemory.Controllers
 
         public IActionResult All()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Redirect("/");
-            }
-
             var models = _context.News
                 .Where(x => x.IsActive == true)
                 .Select(x => new NewsViewModel
@@ -40,11 +38,7 @@ namespace BabyMemory.Controllers
         public IActionResult AddNews()
         {
             //TODO: User Admin
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Redirect("/");
-            }
-
+            
             return View();
         }
 
@@ -52,12 +46,7 @@ namespace BabyMemory.Controllers
         public IActionResult AddNews(AddNewsViewModel model)
         {
             //TODO:Admin
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Redirect("/");
-            }
-
-            if (!ModelState.IsValid)
+           if (!ModelState.IsValid)
             {
                 return View("/Views/Shared/Error.cshtml");
             }

@@ -1,5 +1,5 @@
 ﻿#nullable disable
-namespace BabyMemory.Models
+namespace BabyMemory.Infrastructure.Models
 {
     using BabyMemory.Infrastructure.Shared;
     using System.ComponentModel.DataAnnotations;

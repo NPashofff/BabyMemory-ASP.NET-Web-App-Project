@@ -29,6 +29,6 @@ namespace BabyMemory.Infrastructure.Data.Models
 
         public ICollection<Memory> Memories { get; set; }
 
-        public ICollection<HealthProcedure> HelthProcedures { get; set; }
+        public ICollection<HealthProcedure> HealthProcedures { get; set; }
     }
 }

@@ -1,0 +1,39 @@
+﻿@model BabyMemory.Infrastructure.Models.ChildrenAddViewModel
+
+<h1>Add Children</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <input asp-for="@Model.Name" class="form-control" autocomplete="name" aria-required="true" />
+                <label asp-for="@Model.Name"></label>
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="@Model.LastName" class="form-control" autocomplete="lastName" aria-required="true" />
+                <label asp-for="@Model.LastName"></label>
+                <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="@Model.BirthDate" class="form-control" autocomplete="birthDate" aria-required="true" />
+                <label asp-for="@Model.BirthDate"></label>
+                <span asp-validation-for="@Model.BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="@Model.Picture" class="form-control" autocomplete="picture" aria-required="false" />
+                <label asp-for="@Model.Picture"></label>
+                <span asp-validation-for="@Model.Picture" class="text-danger"></span>
+            </div>
+            
+            <button id="addCildrenSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Add Children</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

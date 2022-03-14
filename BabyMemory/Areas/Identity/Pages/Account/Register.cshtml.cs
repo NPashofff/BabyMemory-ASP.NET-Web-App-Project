@@ -1,6 +1,6 @@
 ﻿using BabyMemory.Contracts;
 using BabyMemory.Infrastructure.Data.Models;
-using BabyMemory.Models;
+using BabyMemory.Infrastructure.Models;
 
 namespace BabyMemory.Areas.Identity.Pages.Account
 {

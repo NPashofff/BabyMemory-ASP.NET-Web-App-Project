@@ -1,0 +1,18 @@
+﻿namespace BabyMemory.Infrastructure.Models
+{
+#nullable disable
+    public class ChildrenViewModel
+    {
+        public string Id { get; set; }
+
+        public string Name { get; set; }
+
+        public int Age { get; set; }
+
+        public string LastName { get; set; }
+
+        public DateTime BirthDate { get; set; }
+
+        public string Picture { get; set; }
+    }
+}

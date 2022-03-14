@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BabyMemory.Infrastructure\BabyMemory.Infrastructure.csproj" />
+    <ProjectReference Include="..\BabyMemory.Core\BabyMemory.Core.csproj" />
   </ItemGroup>
 
 </Project>

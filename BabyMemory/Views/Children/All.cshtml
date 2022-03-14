@@ -1,4 +1,4 @@
-﻿@model BabyMemory.Infrastructure.Models.NewsViewModel[];
+﻿@model BabyMemory.Infrastructure.Models.ChildrenAddViewModel[];
 
 @{
     ViewData["Title"] = "N e w s";
@@ -17,10 +17,10 @@
              data-placement="bottom" title="Title">
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item text-center">@item.Name</li>
-                    <li class="list-group-item text-center">@item.Description</li>
+                    <li class="list-group-item text-center">@(item.Name + " " + item.LastName)</li>
+                    <li class="list-group-item text-center">@item.BirthDate</li>
                 </ul>
-                <a href="/News/DeleteNews?id=@item.Id" class="btn-danger btn">Delete</a>
+                @*<a href="/News/DeleteNews?id=@item.Id" class="btn-danger btn">Delete</a>*@
             </div>
         </div>
     }

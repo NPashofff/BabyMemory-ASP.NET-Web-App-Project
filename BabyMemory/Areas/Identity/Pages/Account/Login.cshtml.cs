@@ -3,7 +3,7 @@
 namespace BabyMemory.Areas.Identity.Pages.Account
 {
     using BabyMemory.Infrastructure.Data.Models;
-    using BabyMemory.Models;
+    using BabyMemory.Infrastructure.Models;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;

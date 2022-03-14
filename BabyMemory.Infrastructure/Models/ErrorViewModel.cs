@@ -1,4 +1,4 @@
-namespace BabyMemory.Models
+namespace BabyMemory.Infrastructure.Models
 {
     public class ErrorViewModel
     {

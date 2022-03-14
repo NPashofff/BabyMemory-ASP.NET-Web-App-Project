@@ -1,6 +1,9 @@
 #nullable disable
 using BabyMemory.Contracts;
 using BabyMemory.Controllers;
+using BabyMemory.Core.Common;
+using BabyMemory.Core.Contracts;
+using BabyMemory.Core.Services;
 using BabyMemory.Infrastructure.Data;
 using BabyMemory.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +26,9 @@ builder.Services.AddDefaultIdentity<User>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUserController, UserController>();
+builder.Services.AddScoped<IChildrenService, ChildrenService>();
+builder.Services.AddScoped<IRepository, Repository>();
+
 
 var app = builder.Build();
 
