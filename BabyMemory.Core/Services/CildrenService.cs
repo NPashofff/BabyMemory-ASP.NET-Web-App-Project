@@ -1,13 +1,12 @@
-﻿using BabyMemory.Core.Common;
-using BabyMemory.Core.Contracts;
-using BabyMemory.Infrastructure.Data;
-using BabyMemory.Infrastructure.Data.Models;
-using BabyMemory.Infrastructure.Models;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
-namespace BabyMemory.Core.Services
+﻿namespace BabyMemory.Core.Services
 {
+    using Common;
+    using Contracts;
+    using BabyMemory.Infrastructure.Data;
+    using BabyMemory.Infrastructure.Data.Models;
+    using Infrastructure.Models;
+    using Microsoft.EntityFrameworkCore;
+
     public class ChildrenService : IChildrenService
     {
         private readonly IRepository _repository;
@@ -20,7 +19,7 @@ namespace BabyMemory.Core.Services
             _repo = repo;
         }
 
-        public void AddChildren(ChildrenAddViewModel model,string userName)
+        public void AddChildren(ChildrenAddViewModel model, string userName)
         {
             Children children = new Children
             {
@@ -32,15 +31,17 @@ namespace BabyMemory.Core.Services
                 HealthProcedures = new List<HealthProcedure>()
             };
             var user = _repo.Users.FirstOrDefault(x => x.UserName == userName);
-            user.Childrens.Add(children);
+            user?.Childrens.Add(children);
 
             _repo.SaveChanges();
         }
 
+
+
         public ChildrenViewModel[] All(string name)
         {
-            User user = _repo.Users
-                .Include(x=>x.Childrens)
+            var user = _repo.Users
+                .Include(x => x.Childrens)
                 .FirstOrDefault(x => x.UserName == name);
 
             var children = user.Childrens.Select(x => new ChildrenViewModel

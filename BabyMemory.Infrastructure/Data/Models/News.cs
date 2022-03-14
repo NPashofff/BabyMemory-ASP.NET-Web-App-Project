@@ -1,8 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-#nullable disable
+﻿#nullable disable
 namespace BabyMemory.Infrastructure.Data.Models
 {
+    using System.Diagnostics.CodeAnalysis;
     using BabyMemory.Infrastructure.Shared;
     using System.ComponentModel.DataAnnotations;
 
@@ -19,6 +18,8 @@ namespace BabyMemory.Infrastructure.Data.Models
         [MaxLength(GlobalConstants.NewsDescriptionMaxLen)]
         [AllowNull]
         public string Description { get; set; }
+
+        public DateTime CreationDate { get; set; } = DateTime.Now;
 
         public bool IsActive { get; set; } = true;
     }

@@ -1,27 +1,18 @@
 ﻿@model BabyMemory.Infrastructure.Models.NewsViewModel[];
 
-@{
-    ViewData["Title"] = "N e w s";
-}
-
 <div>
-    <h1>@ViewData["Title"]</h1>
+    <h1>News</h1>
     <a href="/News/AddNews" class="btn btn-info text-uppercase">Add News</a>
 </div>
-<div class="row col-9 ">
-    @foreach (var item in Model)
-    {
-        <div class="card col-6 col-lg-3">
-            <img src="@item.Picture"
-             class="img-fluid rounded" data-toggle="tooltip"
-             data-placement="bottom" title="Title">
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item text-center">@item.Name</li>
-                    <li class="list-group-item text-center">@item.Description</li>
-                </ul>
-                <a href="/News/DeleteNews?id=@item.Id" class="btn-danger btn">Delete</a>
-            </div>
-        </div>
-    }
-</div>
+@foreach (var item in Model)
+{
+    <div class="card-body">
+        <h5 class="card-title">@item.Name</h5>
+        <p class="card-text">
+            @item.Description
+        </p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="/News/DeleteNews?id=@item.Id" class="btn-danger btn">Delete</a>
+    </div>
+}
+

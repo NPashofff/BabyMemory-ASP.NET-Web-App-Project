@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BabyMemory.Core.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 #nullable disable
 namespace BabyMemory.Controllers
@@ -13,25 +14,19 @@ namespace BabyMemory.Controllers
     public class NewsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly INewsService _newsService;
 
-        public NewsController(ApplicationDbContext context)
+        public NewsController(ApplicationDbContext context, 
+            INewsService newsService)
         {
             _context = context;
+            _newsService = newsService;
         }
 
         public IActionResult All()
         {
-            var models = _context.News
-                .Where(x => x.IsActive == true)
-                .Select(x => new NewsViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Description = x.Description,
-                    Picture = GlobalConstants.NewsLogo,
-                    IsActive = x.IsActive
-                }).ToArray();
-
+            var models = _newsService.GetAllNews();
+             
             return View(models);
         }
 

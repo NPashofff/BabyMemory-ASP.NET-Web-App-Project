@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using BabyMemory.Infrastructure.Shared;
-
+﻿#nullable disable
 namespace BabyMemory.Infrastructure.Models
 {
-#nullable disable
+    using BabyMemory.Infrastructure.Shared;
+    using System.ComponentModel.DataAnnotations;
     public class ChildrenAddViewModel
     {
         [Required]

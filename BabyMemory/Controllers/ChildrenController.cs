@@ -2,7 +2,7 @@
 using BabyMemory.Infrastructure.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+#nullable disable
 namespace BabyMemory.Controllers
 {
     [Authorize]

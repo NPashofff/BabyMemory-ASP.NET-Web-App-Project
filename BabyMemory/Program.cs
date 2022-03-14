@@ -28,6 +28,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUserController, UserController>();
 builder.Services.AddScoped<IChildrenService, ChildrenService>();
 builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<INewsService, NewsService>();
 
 
 var app = builder.Build();
