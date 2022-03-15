@@ -11,7 +11,7 @@
     }
     @foreach (var item in Model)
     {
-        <div class="card col-12 col-lg-auto">
+        <div class="card col-6 col-lg-6">
             <img src="@item.Picture"
              class="img-fluid rounded" data-toggle="tooltip"
              data-placement="bottom" title="Title">
@@ -20,7 +20,7 @@
                     <li class="list-group-item text-center">@(item.Name + " " + item.LastName)</li>
                     <li class="list-group-item text-center">@item.BirthDate</li>
                 </ul>
-                <a href="/Children/Profile?id=@item.Id" class="btn btn">View</a>
+                <a href="/Children/Profile?id=@item.Id" class="btn btn-primary">View</a>
             </div>
         </div>
 
