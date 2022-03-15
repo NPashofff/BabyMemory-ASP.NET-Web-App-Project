@@ -1,15 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Warehouse.Core.CustomAttributes
+﻿#nullable disable
+namespace BabyMemory.Core.CustomAttributes
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class IsBeforeAttribute : ValidationAttribute
     {
-        private readonly string propertyToCompare;
+        private readonly string _propertyToCompare;
 
-        public IsBeforeAttribute(string _propertyToCompare, string errorMessage = "")
+        public IsBeforeAttribute(string propertyToCompare, string errorMessage = "")
         {
-            this.propertyToCompare = _propertyToCompare;
-            this.ErrorMessage = errorMessage;
+            _propertyToCompare = propertyToCompare;
+            ErrorMessage = errorMessage;
         }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
@@ -17,9 +18,9 @@ namespace Warehouse.Core.CustomAttributes
             try
             {
                 DateTime dateToCompare = (DateTime)validationContext
-                .ObjectType
-                .GetProperty(propertyToCompare)
-                .GetValue(validationContext.ObjectInstance);
+                    .ObjectType
+                    .GetProperty(_propertyToCompare)!
+                    .GetValue(validationContext.ObjectInstance)!;
 
                 if ((DateTime)value < dateToCompare)
                 {
@@ -27,7 +28,7 @@ namespace Warehouse.Core.CustomAttributes
                 }
             }
             catch (Exception)
-            {}
+            { }
 
             return new ValidationResult(ErrorMessage);
         }
