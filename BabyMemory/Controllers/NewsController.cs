@@ -2,9 +2,8 @@
 namespace BabyMemory.Controllers
 {
     using BabyMemory.Core.Contracts;
-    using Microsoft.AspNetCore.Authorization;
-    using Infrastructure.Data;
     using Infrastructure.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
@@ -12,8 +11,7 @@ namespace BabyMemory.Controllers
     {
         private readonly INewsService _newsService;
 
-        public NewsController(ApplicationDbContext context,
-            INewsService newsService)
+        public NewsController(INewsService newsService)
         {
             _newsService = newsService;
         }
