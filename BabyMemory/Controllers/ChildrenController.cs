@@ -55,11 +55,9 @@ namespace BabyMemory.Controllers
 
         public IActionResult Profile(string id)
         {
-            ChildrenViewModel result = _childrenService.GetChildren(id);
-
+            var result = _childrenService.GetChildren(id);
             
-
-            return View();
+            return View(result);
         }
     }
 }
