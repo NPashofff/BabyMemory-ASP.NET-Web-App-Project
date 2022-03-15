@@ -1,5 +1,6 @@
 ﻿using BabyMemory.Core.Contracts;
 using BabyMemory.Infrastructure.Data;
+using BabyMemory.Infrastructure.Data.Models;
 using BabyMemory.Infrastructure.Models;
 using BabyMemory.Infrastructure.Shared;
 
@@ -29,6 +30,43 @@ namespace BabyMemory.Core.Services
                 }).ToArray();
 
            return result;
+        }
+
+        public (bool, string) AddNews(AddNewsViewModel model)
+        {
+            var news = new News
+            {
+                Name = model.Name,
+                Description = model.Description
+            };
+
+            _context.News.Add(news);
+            var result =_context.SaveChanges();
+
+            if (result == 1)
+            {
+                return (true, "");
+            }
+            else
+            {
+                return (false, GlobalConstants.NewsAddError);
+            }
+        }
+
+        public (bool, string) DeleteNews(string id)
+        {
+            var news = _context.News.FirstOrDefault(x => x.Id == id);
+            _context.News.Remove(news);
+            var result = _context.SaveChanges();
+
+            if (result == 1)
+            {
+                return (true, "");
+            }
+            else
+            {
+                return (false, GlobalConstants.ChidenNotDeletedError);
+            }
         }
     }
 }

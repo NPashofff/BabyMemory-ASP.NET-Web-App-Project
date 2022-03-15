@@ -1,14 +1,11 @@
-﻿using BabyMemory.Core.Contracts;
-using Microsoft.AspNetCore.Authorization;
-
-#nullable disable
+﻿#nullable disable
 namespace BabyMemory.Controllers
 {
-    using BabyMemory.Infrastructure.Data.Models;
-    using BabyMemory.Infrastructure.Data;
-    using BabyMemory.Infrastructure.Shared;
-    using Microsoft.AspNetCore.Mvc;
+    using BabyMemory.Core.Contracts;
+    using Microsoft.AspNetCore.Authorization;
+    using Infrastructure.Data;
     using Infrastructure.Models;
+    using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
     public class NewsController : Controller
@@ -16,7 +13,7 @@ namespace BabyMemory.Controllers
         private readonly ApplicationDbContext _context;
         private readonly INewsService _newsService;
 
-        public NewsController(ApplicationDbContext context, 
+        public NewsController(ApplicationDbContext context,
             INewsService newsService)
         {
             _context = context;
@@ -26,14 +23,14 @@ namespace BabyMemory.Controllers
         public IActionResult All()
         {
             var models = _newsService.GetAllNews();
-             
+
             return View(models);
         }
 
         public IActionResult AddNews()
         {
             //TODO: User Admin
-            
+
             return View();
         }
 
@@ -41,29 +38,35 @@ namespace BabyMemory.Controllers
         public IActionResult AddNews(AddNewsViewModel model)
         {
             //TODO:Admin
-           if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return View("/Views/Shared/Error.cshtml");
+                return View("Error");
             }
 
-            var news = new News
+            (bool, string) result = _newsService.AddNews(model);
+
+            if (result.Item1)
             {
-                Name = model.Name,
-                Description = model.Description
-            };
-
-            _context.News.Add(news);
-            _context.SaveChanges();
-
-            return Redirect("/News/All");
+                return Redirect("/News/All");
+            }
+            else
+            {
+                return View("Error", result.Item2);
+            }
         }
 
         public IActionResult DeleteNews(string id)
         {
-            var news = _context.News.FirstOrDefault(x => x.Id == id);
-            _context.News.Remove(news);
-            _context.SaveChanges();
-            return Redirect("/News/All");
+            (bool, string) result = _newsService.DeleteNews(id);
+
+            if (result.Item1)
+            {
+                return Redirect("/News/All");
+            }
+            else
+            {
+                return View("Error", result.Item2);
+            }
         }
     }
 }
