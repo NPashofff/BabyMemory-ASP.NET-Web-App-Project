@@ -10,13 +10,11 @@ namespace BabyMemory.Controllers
     [Authorize]
     public class NewsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly INewsService _newsService;
 
         public NewsController(ApplicationDbContext context,
             INewsService newsService)
         {
-            _context = context;
             _newsService = newsService;
         }
 

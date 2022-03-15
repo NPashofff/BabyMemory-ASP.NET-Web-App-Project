@@ -56,7 +56,11 @@ namespace BabyMemory.Core.Services
         public (bool, string) DeleteNews(string id)
         {
             var news = _context.News.FirstOrDefault(x => x.Id == id);
-            _context.News.Remove(news);
+            if (news != null)
+            {
+                _context.News.Remove(news);
+            }
+
             var result = _context.SaveChanges();
 
             if (result == 1)

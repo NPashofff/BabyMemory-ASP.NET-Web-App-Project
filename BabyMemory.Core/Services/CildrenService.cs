@@ -3,7 +3,6 @@
 #nullable disable
 namespace BabyMemory.Core.Services
 {
-    using Common;
     using Contracts;
     using BabyMemory.Infrastructure.Data;
     using BabyMemory.Infrastructure.Data.Models;
@@ -12,19 +11,16 @@ namespace BabyMemory.Core.Services
 
     public class ChildrenService : IChildrenService
     {
-        private readonly IRepository _repository;
         private readonly ApplicationDbContext _repo;
 
-        public ChildrenService(IRepository repository,
-            ApplicationDbContext repo)
+        public ChildrenService(ApplicationDbContext repo)
         {
-            _repository = repository;
             _repo = repo;
         }
 
         public void AddChildren(ChildrenAddViewModel model, string userName)
         {
-            Children children = new Children
+            var children = new Children
             {
                 Name = model.Name,
                 LastName = model.LastName,
@@ -80,7 +76,7 @@ namespace BabyMemory.Core.Services
             }
         }
 
-        private int GetAge(DateTime argBirthDate)
+        private static int GetAge(DateTime argBirthDate)
         {
             return (DateTime.Now - argBirthDate).Days / 365;
         }

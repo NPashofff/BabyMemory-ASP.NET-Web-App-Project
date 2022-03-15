@@ -4,6 +4,9 @@
     <h1>News</h1>
     <a href="/News/AddNews" class="btn btn-info text-uppercase">Add News</a>
 </div>
+@{
+    System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
+}
 @foreach (var item in Model)
 {
     <div class="card-body">

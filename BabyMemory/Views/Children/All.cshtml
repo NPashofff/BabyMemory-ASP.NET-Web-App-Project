@@ -5,6 +5,10 @@
     <a href="/Children/Add" class="btn btn-info text-uppercase">Add Child</a>
 </div>
 <div class="row col-9">
+
+    @{
+        System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
+    }
     @foreach (var item in Model)
     {
         <div class="card col-12 col-lg-auto">
