@@ -39,5 +39,17 @@ namespace BabyMemory.Controllers
 
             return View();
         }
+
+        public IActionResult Delete(string id)
+        {
+            (bool, string) result = _childrenService.Delete(id);
+
+            if (result.Item1)
+            {
+                return Redirect("/Children/All");
+            }
+
+            return View("/Error", result.Item2);
+        }
     }
 }

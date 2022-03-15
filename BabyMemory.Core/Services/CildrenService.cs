@@ -1,4 +1,7 @@
-﻿namespace BabyMemory.Core.Services
+﻿using BabyMemory.Infrastructure.Shared;
+
+#nullable disable
+namespace BabyMemory.Core.Services
 {
     using Common;
     using Contracts;
@@ -55,6 +58,26 @@
             }).ToArray();
 
             return children;
+        }
+
+        public (bool, string) Delete(string id)
+        {
+            Children children = _repo.Childrens.FirstOrDefault(x => x.Id == id);
+            if (children != null)
+            {
+                _repo.Childrens.Remove(children);
+            }
+
+            var result = _repo.SaveChanges();
+
+            if (result == 1)
+            {
+                return (true, "");
+            }
+            else
+            {
+                return (false, GlobalConstants.ChidenNotDeletedError);
+            }
         }
 
         private int GetAge(DateTime argBirthDate)

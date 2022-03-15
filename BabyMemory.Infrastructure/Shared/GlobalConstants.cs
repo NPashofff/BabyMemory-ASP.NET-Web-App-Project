@@ -53,7 +53,7 @@
         public const double PriceMaxLen = 1000;
         public const string EmailError = "Email must be valid.";
         public const string UserNameExist = "User alredy exist.";
-        public const string ThimeError = "DepartureTime is not in correct format.";
+        public const string ChidenNotDeletedError = "Not Deleted.";
         public const string UserTypeError = "Value must be: 'Client' or 'Mechanic'.";
     }
 }
