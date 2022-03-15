@@ -7,5 +7,6 @@
 
         ChildrenViewModel[] All(string name);
         (bool, string) Delete(string id);
+        ChildrenViewModel GetChildren(string id);
     }
 }

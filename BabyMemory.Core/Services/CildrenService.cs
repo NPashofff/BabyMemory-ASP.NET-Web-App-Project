@@ -76,6 +76,29 @@ namespace BabyMemory.Core.Services
             }
         }
 
+        public ChildrenViewModel GetChildren(string id)
+        {
+            var children = _repo.Childrens
+                .FirstOrDefault(x => x.Id == id);
+
+            if (children != null)
+            {
+                return new ChildrenViewModel
+                {
+                    Id = children.Id,
+                    Name = children.Name,
+                    Age = GetAge(children.BirthDate),
+                    LastName = children.LastName,
+                    BirthDate = children.BirthDate,
+                    Picture = children.Picture
+                };
+            }
+            else
+            {
+                return new ChildrenViewModel();
+            }
+        }
+
         private static int GetAge(DateTime argBirthDate)
         {
             return (DateTime.Now - argBirthDate).Days / 365;

@@ -1,4 +1,5 @@
 ﻿using BabyMemory.Core.Contracts;
+using BabyMemory.Infrastructure.Data.Models;
 using BabyMemory.Infrastructure.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -50,6 +51,15 @@ namespace BabyMemory.Controllers
             }
 
             return View("/Error", result.Item2);
+        }
+
+        public IActionResult Profile(string id)
+        {
+            ChildrenViewModel result = _childrenService.GetChildren(id);
+
+            
+
+            return View();
         }
     }
 }
