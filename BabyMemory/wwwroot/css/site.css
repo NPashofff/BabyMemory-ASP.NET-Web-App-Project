@@ -49,3 +49,7 @@ div.card.col-6.col-lg-3{
     padding-left: 0.5em !important;
     padding-right: 0.5em !important;
 }
+
+.card{
+    opacity: 0.9 !important;
+}

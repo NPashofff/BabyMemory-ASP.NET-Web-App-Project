@@ -19,7 +19,9 @@
 
         //Memory
         public const int MemoryNameMaxLen = 254;
+        public const int MemoryNameMinLen = 4;
         public const int MemoryDescriptionMaxLen = 2048;
+        public const int MemoryDescriptionMinLen = 8;
 
         //HealthProcedure
         public const int HealthProcedureNameMAxLenDb = 254;

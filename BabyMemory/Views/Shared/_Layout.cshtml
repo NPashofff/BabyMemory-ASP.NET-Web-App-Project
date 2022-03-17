@@ -6,7 +6,10 @@
     <title>@ViewData["Title"] - BabyMemory</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BabyMemory.styles.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/BabyMemory.styles.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
 </head>
 <body>
     <header>
@@ -43,14 +46,19 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+   @* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - BabyMemory - <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
         </div>
-    </footer>
+    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="~/dist/js/demo.js"></script>
 </body>
 </html>
+

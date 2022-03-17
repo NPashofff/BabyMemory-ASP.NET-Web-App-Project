@@ -1,9 +1,9 @@
 ﻿#nullable disable
 namespace BabyMemory.Controllers
 {
-    using BabyMemory.Contracts;
-    using BabyMemory.Infrastructure.Data;
-    using BabyMemory.Infrastructure.Data.Models;
+    using Contracts;
+    using Infrastructure.Data;
+    using Infrastructure.Data.Models;
 
     public class UserController : IUserController
     {
