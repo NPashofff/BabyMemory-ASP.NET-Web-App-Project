@@ -5,6 +5,8 @@
 
     public class MemoryAddViewModel
     {
+        public string? ChildId { get; set; }
+
         [Required]
         [StringLength(GlobalConstants.MemoryNameMaxLen,
             MinimumLength = GlobalConstants.MemoryNameMinLen)]

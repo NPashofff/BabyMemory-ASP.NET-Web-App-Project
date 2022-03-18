@@ -1,4 +1,6 @@
-﻿namespace BabyMemory.Infrastructure.Models
+﻿using BabyMemory.Infrastructure.Data.Models;
+
+namespace BabyMemory.Infrastructure.Models
 {
 #nullable disable
     public class ChildrenViewModel
@@ -14,5 +16,7 @@
         public DateTime BirthDate { get; set; }
 
         public string Picture { get; set; }
+
+        public ICollection<Memory> Memories { get; set; } = new List<Memory>();
     }
 }

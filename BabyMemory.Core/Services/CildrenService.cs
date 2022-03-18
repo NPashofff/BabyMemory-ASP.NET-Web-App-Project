@@ -41,6 +41,7 @@ namespace BabyMemory.Core.Services
         {
             var user = _repo.Users
                 .Include(x => x.Childrens)
+                .ThenInclude(c =>c.Memories)
                 .FirstOrDefault(x => x.UserName == name);
 
             var children = user.Childrens.Select(x => new ChildrenViewModel
@@ -50,7 +51,8 @@ namespace BabyMemory.Core.Services
                 Age = GetAge(x.BirthDate),
                 LastName = x.LastName,
                 BirthDate = x.BirthDate,
-                Picture = x.Picture
+                Picture = x.Picture,
+                Memories = x.Memories
             }).ToArray();
 
             return children;
