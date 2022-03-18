@@ -4,8 +4,8 @@
 namespace BabyMemory.Core.Services
 {
     using Contracts;
-    using BabyMemory.Infrastructure.Data;
-    using BabyMemory.Infrastructure.Data.Models;
+    using Infrastructure.Data;
+    using Infrastructure.Data.Models;
     using Infrastructure.Models;
     using Microsoft.EntityFrameworkCore;
 
@@ -34,9 +34,7 @@ namespace BabyMemory.Core.Services
 
             _repo.SaveChanges();
         }
-
-
-
+        
         public ChildrenViewModel[] All(string name)
         {
             var user = _repo.Users
@@ -44,7 +42,9 @@ namespace BabyMemory.Core.Services
                 .ThenInclude(c =>c.Memories)
                 .FirstOrDefault(x => x.UserName == name);
 
-            var children = user.Childrens.Select(x => new ChildrenViewModel
+            var children = user
+                .Childrens
+                .Select(x => new ChildrenViewModel
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -81,6 +81,7 @@ namespace BabyMemory.Core.Services
         public ChildrenViewModel GetChildren(string id)
         {
             var children = _repo.Childrens
+                .Include(x=>x.Memories)
                 .FirstOrDefault(x => x.Id == id);
 
             if (children != null)
@@ -92,7 +93,8 @@ namespace BabyMemory.Core.Services
                     Age = GetAge(children.BirthDate),
                     LastName = children.LastName,
                     BirthDate = children.BirthDate,
-                    Picture = children.Picture
+                    Picture = children.Picture,
+                    Memories = children.Memories
                 };
             }
             else
