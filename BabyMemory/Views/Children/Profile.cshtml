@@ -49,26 +49,46 @@
                         <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                     </div>
-
                 </div>
-
             </div>
 
             <div class="col-md-9">
                 <div class="card">
-                    @foreach (var item in Model.Memories)
-                    {
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item text-center">@(item.Name)</li>
-                            <li class="list-group-item text-center">@item.CreationDate</li>
-                            <li class="list-group-item text-center">@item.Description</li>
-                        </ul>
-                    }
+                    <ul class="list-group list-group-flush">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- The time line -->
+                                @foreach (var item in Model.Memories)
+                                {
+                                    <div class="timeline">
+                                        <div class="time-label">
+                                            <span class="bg-green">@item.CreationDate.ToString("D")</span>
+                                            <img class="memory-img img-circle" src="@Url.Content("~/Img/"+Model.Picture)" alt="...">
+                                        </div>
+                                        <div>
+                                            <div class="timeline-item">
+                                                <span class="time"><i class="fas fa-clock"></i>@item.CreationDate.ToString("t")</span>
+                                                <h2 class="timeline-header"><b>@item.Name</b></h2>
+                                                <div class="timeline-body">
+                                                    @item.Description
+
+                                                </div>
+                                                <div class="timeline-footer">
+                                                    <a class="btn btn-primary btn-sm">Read more</a>
+                                                    <a class="btn btn-danger btn-sm">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END timeline item -->
+                                </div>
+                                }
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </ul>
+
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </section>
