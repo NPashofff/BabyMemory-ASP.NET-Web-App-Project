@@ -48,5 +48,25 @@ namespace BabyMemory.Controllers
 
             return View();
         }
+
+        public async Task<IActionResult> Edit(string Id)
+        {
+            Memory memory = await _memoryService.GetMemoryAsync(Id);
+
+            return View(memory);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Memory model)
+        {
+            await _memoryService.Edit(model);
+
+            return Redirect("/Children/All");
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            return View();
+        }
     }
 }
