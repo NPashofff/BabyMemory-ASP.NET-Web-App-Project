@@ -49,5 +49,12 @@ namespace BabyMemory.Core.Services
 
             return Task.CompletedTask;
         }
+
+        public async Task DeleteAsync(Memory model)
+        {
+            _repo.Memories.Remove(model);
+           await _repo.SaveChangesAsync();
+            
+        }
     }
 }

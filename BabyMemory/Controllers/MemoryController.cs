@@ -57,16 +57,21 @@ namespace BabyMemory.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Memory model)
+        public async Task<IActionResult> Edit(Memory model, string submitButton)
         {
-            await _memoryService.Edit(model);
+            if (submitButton == "Edit")
+            {
+                await _memoryService.Edit(model);
+            }
+
+            if (submitButton == "Delete")
+            {
+                await _memoryService.DeleteAsync(model);
+            }
 
             return Redirect("/Children/All");
         }
 
-        public async Task<IActionResult> Delete(string id)
-        {
-            return View();
-        }
+        
     }
 }
