@@ -6,6 +6,7 @@ using BabyMemory.Core.Contracts;
 using BabyMemory.Core.Services;
 using BabyMemory.Infrastructure.Data;
 using BabyMemory.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
         options.Password.RequireUppercase = false;
         options.User.RequireUniqueEmail = true;
     })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();

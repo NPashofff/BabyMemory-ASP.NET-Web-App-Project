@@ -1,5 +1,4 @@
 ﻿using BabyMemory.Core.Contracts;
-using BabyMemory.Infrastructure.Data.Models;
 using BabyMemory.Infrastructure.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

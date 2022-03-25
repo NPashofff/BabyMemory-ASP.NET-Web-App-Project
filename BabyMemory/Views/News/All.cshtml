@@ -2,7 +2,10 @@
 
 <div>
     <h1>News</h1>
-    <a href="/News/AddNews" class="btn btn-info text-uppercase">Add News</a>
+    @if (User.IsInRole("Administrator"))
+    {
+        <a href="/News/AddNews" class="btn btn-info text-uppercase">Add News</a>
+    }
 </div>
 @{
     System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
@@ -15,7 +18,12 @@
             @item.Description
         </p>
         <a href="#" class="card-link">link</a>
-        <a href="/News/DeleteNews?id=@item.Id" class="btn-danger btn">Delete</a>
+
+        @if (User.IsInRole("Administrator"))
+        {
+            <a href="/News/DeleteNews?id=@item.Id" class="btn-danger btn">Delete</a>
+        }
+
     </div>
 }
 
