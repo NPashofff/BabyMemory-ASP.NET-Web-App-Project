@@ -1,4 +1,4 @@
-﻿using BabyMemory.Contracts;
+﻿using BabyMemory.Core.Contracts;
 using BabyMemory.Infrastructure.Data.Models;
 using BabyMemory.Infrastructure.Models;
 
@@ -22,7 +22,7 @@ namespace BabyMemory.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly IUserController _userController;
+        private readonly IUserService _userService;
 
         public RegisterModel(
             UserManager<User> userManager,
@@ -30,7 +30,7 @@ namespace BabyMemory.Areas.Identity.Pages.Account
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IUserController userController)
+            IUserService userService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -38,7 +38,7 @@ namespace BabyMemory.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _userController = userController;
+            _userService = userService;
         }
 
         [BindProperty]
@@ -68,8 +68,8 @@ namespace BabyMemory.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                _userController.SetUserDate(user);
-                _userController.SetUserFullName(user, Input.UserFullName);
+                await _userService.SetUserDateAsync(user);
+                await _userService.SetUserFullNameAsync(user, Input.UserFullName);
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 
                 if (result.Succeeded)

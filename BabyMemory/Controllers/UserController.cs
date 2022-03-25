@@ -1,46 +1,26 @@
 ﻿#nullable disable
 namespace BabyMemory.Controllers
 {
-    using Microsoft.AspNetCore.Identity;
+    using Infrastructure.Shared;
+    using Microsoft.AspNetCore.Authorization;
+    using Core.Contracts;
     using Microsoft.AspNetCore.Mvc;
-    using Contracts;
-    using Infrastructure.Data;
-    using Infrastructure.Data.Models;
 
-    public class UserController : Controller, IUserController
+    [Authorize]
+    public class UserController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<User> _userManager;
+        private readonly IUserService _userService;
 
-        public UserController(ApplicationDbContext context,
-            RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public UserController(IUserService userService)
         {
-            _context = context;
-            _roleManager = roleManager;
-            _userManager = userManager;
-        }
-
-        public void SetUserFullName(User user, string fullName)
-        {
-            user.UserFullName = fullName;
-            _context.SaveChangesAsync();
-        }
-
-        public void SetUserDate(User user)
-        {
-            user.RegisterDate = DateTime.Now;
-            _context.SaveChangesAsync();
+            _userService = userService;
         }
 
 
         //Create role
-        public async Task<IActionResult> AddRole()
+        public async Task<IActionResult> AddRole(string name)
         {
-            //await _roleManager.CreateAsync(new IdentityRole
-            //{
-            //    Name = "Administrator"
-            //});
+            await _userService.CreateRoleAsync(name);
 
             return Ok();
         }
@@ -49,14 +29,10 @@ namespace BabyMemory.Controllers
         //Create UserRoles
         public async Task<IActionResult> CreateAdmin()
         {
-            //var role = await _roleManager.FindByNameAsync("Administrator");
-            //var user = await _userManager.GetUserAsync(User);
-            //await _context.UserRoles.AddAsync(new IdentityUserRole<string>
-            //{
-            //    UserId = user.Id,
-            //    RoleId = role.Id
-            //});
-            //await _context.SaveChangesAsync();
+            //var role = await _userService.FindRoleByNameAsync(GlobalConstants.Administrator);
+            //if (User.Identity?.Name == null) return Ok();
+            //var user = await _userService.GetUserAsync(User.Identity?.Name);
+            //if (role != null) await _userService.CreateUserRoleAsync(user.Id, role.Id);
 
             return Ok();
         }

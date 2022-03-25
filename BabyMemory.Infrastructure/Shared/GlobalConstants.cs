@@ -43,6 +43,8 @@
 
         //Shared
         public const int IdGuidMaxLen = 36;
+        public const string Administrator = "Administrator";
+
 
         public const int CarModelMAxLen = 20;
         public const int HashedPasswordMAxLen = 64;
@@ -53,7 +55,6 @@
         public const int SeatMaxLen = 6;
         public const double PriceMinLen = 0.05;
         public const double PriceMaxLen = 1000;
-        public const string EmailError = "Email must be valid.";
         public const string UserNameExist = "User alredy exist.";
         public const string ChidenNotDeletedError = "Can not Deleted.";
         public const string NewsAddError = "News is not Addet.";
