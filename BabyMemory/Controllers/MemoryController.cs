@@ -51,7 +51,7 @@ namespace BabyMemory.Controllers
 
         public async Task<IActionResult> Edit(string Id)
         {
-            Memory memory = await _memoryService.GetMemoryAsync(Id);
+            var memory = await _memoryService.GetMemoryAsync(Id);
 
             return View(memory);
         }
@@ -59,14 +59,14 @@ namespace BabyMemory.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Memory model, string submitButton)
         {
-            if (submitButton == "Edit")
+            switch (submitButton)
             {
-                await _memoryService.Edit(model);
-            }
-
-            if (submitButton == "Delete")
-            {
-                await _memoryService.DeleteAsync(model);
+                case "Edit":
+                    await _memoryService.Edit(model);
+                    break;
+                case "Delete":
+                    await _memoryService.DeleteAsync(model);
+                    break;
             }
 
             return Redirect("/Children/All");

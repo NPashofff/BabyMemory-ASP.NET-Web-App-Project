@@ -20,7 +20,7 @@ namespace BabyMemory.Controllers
         //Create role
         public async Task<IActionResult> AddRole(/*string name*/)
         {
-            await _userService.CreateRoleAsync(GlobalConstants.Administrator);
+            //await _userService.CreateRoleAsync(GlobalConstants.Administrator);
 
             return Ok();
         }

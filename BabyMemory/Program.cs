@@ -31,6 +31,7 @@ builder.Services.AddScoped<IChildrenService, ChildrenService>();
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<IMemoryService, MemoryService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 var app = builder.Build();
 
