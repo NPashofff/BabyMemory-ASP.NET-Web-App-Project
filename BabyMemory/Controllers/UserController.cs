@@ -18,16 +18,16 @@ namespace BabyMemory.Controllers
 
 
         //Create role
-        public async Task<IActionResult> AddRole(string name)
+        public async Task<IActionResult> AddRole(/*string name*/)
         {
-            await _userService.CreateRoleAsync(name);
+            await _userService.CreateRoleAsync(GlobalConstants.Administrator);
 
             return Ok();
         }
 
 
-        //Create UserRoles
-        public async Task<IActionResult> CreateAdmin()
+        //Create First Admin UserRoles
+        public async Task<IActionResult> CreateFirstAdmin()
         {
             //var role = await _userService.FindRoleByNameAsync(GlobalConstants.Administrator);
             //if (User.Identity?.Name == null) return Ok();
