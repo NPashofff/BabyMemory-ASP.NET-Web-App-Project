@@ -11,7 +11,7 @@
     }
     @foreach (var item in Model)
     {
-        <div class="card col-3 col-lg-3">
+        <div class="card col-6 col-lg-3">
             <img src="@Url.Content("~/Img/"+item.Picture)"
              class="img-fluid rounded" data-toggle="tooltip" data-placement="bottom" title="Title">
             <div class="card-body">
@@ -22,6 +22,7 @@
                 <a href="/Children/Profile?id=@item.Id" class="btn btn-primary">View</a>
             </div>
         </div>
+
 
         @* <div class="card-body box-profile">
             <div class="text-center">
