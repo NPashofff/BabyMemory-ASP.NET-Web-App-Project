@@ -27,7 +27,8 @@ namespace BabyMemory.Core.Services
             var users = await _context.Users.Select(x => new UserNameViewModel
             {
                 Id = x.Id,
-                Username = x.UserName
+                Username = x.UserName,
+
             }).ToListAsync();
 
             return users;
@@ -35,8 +36,15 @@ namespace BabyMemory.Core.Services
 
         public async Task EditUserAsync(User user)
         {
-            var x = _context.Users.Update(user);
-            var y = await _context.SaveChangesAsync();
+            var userToEdit = await _context.Users.FirstOrDefaultAsync(x => x.UserName == user.UserName);
+            
+            userToEdit.Picture = user.Picture;
+            userToEdit.UserFullName = user.UserFullName;
+            userToEdit.UserName = user.UserName;
+            userToEdit.Email = user.Email;
+            
+            _context.Users.Update(userToEdit);
+            await _context.SaveChangesAsync();
         }
     }
 }

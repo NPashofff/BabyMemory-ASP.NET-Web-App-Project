@@ -21,14 +21,14 @@ namespace BabyMemory.Controllers
 
         public async Task<IActionResult> AllUsers()
         {
-           List<UserNameViewModel> users = await _adminService.GetAllUsersAsync();
-            
+            List<UserNameViewModel> users = await _adminService.GetAllUsersAsync();
+
             return View(users);
         }
 
         public async Task<IActionResult> EditUser(string userName)
         {
-        
+
             var user = await _userService.GetUserAsync(userName);
 
             return View(user);
@@ -37,10 +37,11 @@ namespace BabyMemory.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUser(User user)
         {
-            await _adminService.EditUserAsync(user);
+                await _adminService.EditUserAsync(user);
+            
 
             return Redirect("/Administrator/AllUsers");
         }
-        
+
     }
 }
