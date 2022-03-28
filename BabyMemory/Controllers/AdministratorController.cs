@@ -1,4 +1,5 @@
 ﻿using BabyMemory.Core.Contracts;
+using BabyMemory.Infrastructure.Data.Models;
 using BabyMemory.Infrastructure.Models;
 using BabyMemory.Infrastructure.Shared;
 using Microsoft.AspNetCore.Authorization;
@@ -10,10 +11,12 @@ namespace BabyMemory.Controllers
     public class AdministratorController : Controller
     {
         private readonly IAdminService _adminService;
+        private readonly IUserService _userService;
 
-        public AdministratorController(IAdminService adminService)
+        public AdministratorController(IAdminService adminService, IUserService userService)
         {
             _adminService = adminService;
+            _userService = userService;
         }
 
         public async Task<IActionResult> AllUsers()
@@ -22,5 +25,22 @@ namespace BabyMemory.Controllers
             
             return View(users);
         }
+
+        public async Task<IActionResult> EditUser(string userName)
+        {
+        
+            var user = await _userService.GetUserAsync(userName);
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(User user)
+        {
+            await _adminService.EditUserAsync(user);
+
+            return Redirect("/Administrator/AllUsers");
+        }
+        
     }
 }

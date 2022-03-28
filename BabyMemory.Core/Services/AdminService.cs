@@ -26,10 +26,17 @@ namespace BabyMemory.Core.Services
         {
             var users = await _context.Users.Select(x => new UserNameViewModel
             {
+                Id = x.Id,
                 Username = x.UserName
             }).ToListAsync();
 
             return users;
+        }
+
+        public async Task EditUserAsync(User user)
+        {
+            var x = _context.Users.Update(user);
+            var y = await _context.SaveChangesAsync();
         }
     }
 }
