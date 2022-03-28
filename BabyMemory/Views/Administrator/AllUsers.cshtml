@@ -1,4 +1,6 @@
-﻿@model List<UserNameViewModel>
+﻿@using Microsoft.AspNetCore.Identity
+@using BabyMemory.Infrastructure.Data.Models
+@model List<UserNameViewModel>
 @{
     ViewData["Title"] = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,7 +17,7 @@
                 <div class="col-sm-12">
                     <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
                         <thead>
-                            <tr><th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">User Name</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Edit: activate to sort column ascending">Edit User</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Platform(s)</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Engine version</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">CSS grade</th></tr>
+                            <tr><th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">User Name</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Edit: activate to sort column ascending">Edit User</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="User Type: activate to sort column ascending">User Type</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Engine version</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">CSS grade</th></tr>
                         </thead>
                         <tbody>
                             @foreach (var user in Model)
@@ -23,14 +25,14 @@
                                 <tr class="odd">
                                     <td class="dtr-control sorting_1" tabindex="0">@user.Username</td>
                                     <td><a href="/Administrator/EditUser?userName=@user.Username" class="btn btn-block btn-warning btn-sm">Edit User</a></td>
-                                    <td>@user</td>
+                                    <td>@(user.Roles.Any() ? "Admin" : "User")</td>
                                     <td>1.7</td>
                                     <td>A</td>
                                 </tr>
                             }
                         </tbody>
                         <tfoot>
-                            <tr><th rowspan="1" colspan="1">User Name</th><th rowspan="1" colspan="1">Edit User</th><th rowspan="1" colspan="1">Platform(s)</th><th rowspan="1" colspan="1">Engine version</th><th rowspan="1" colspan="1">CSS grade</th></tr>
+                            <tr><th rowspan="1" colspan="1">User Name</th><th rowspan="1" colspan="1">Edit User</th><th rowspan="1" colspan="1">User Type</th><th rowspan="1" colspan="1">Engine version</th><th rowspan="1" colspan="1">CSS grade</th></tr>
                         </tfoot>
                     </table>
                 </div>
