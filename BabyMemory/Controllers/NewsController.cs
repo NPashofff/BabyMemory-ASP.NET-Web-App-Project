@@ -1,7 +1,8 @@
 ﻿#nullable disable
 namespace BabyMemory.Controllers
 {
-    using BabyMemory.Core.Contracts;
+    using Infrastructure.Shared;
+    using Core.Contracts;
     using Infrastructure.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -23,17 +24,16 @@ namespace BabyMemory.Controllers
             return View(models);
         }
 
+        [Authorize(Roles = GlobalConstants.Administrator)]
         public IActionResult AddNews()
         {
-            //TODO: User Admin
-
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = GlobalConstants.Administrator)]
         public IActionResult AddNews(AddNewsViewModel model)
         {
-            //TODO:Admin
             if (!ModelState.IsValid)
             {
                 return View("Error");
@@ -51,6 +51,7 @@ namespace BabyMemory.Controllers
             }
         }
 
+        [Authorize(Roles = GlobalConstants.Administrator)]
         public IActionResult DeleteNews(string id)
         {
             (bool, string) result = _newsService.DeleteNews(id);

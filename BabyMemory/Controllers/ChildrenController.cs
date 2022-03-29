@@ -1,10 +1,11 @@
-﻿using BabyMemory.Core.Contracts;
-using BabyMemory.Infrastructure.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-#nullable disable
+﻿#nullable disable
 namespace BabyMemory.Controllers
 {
+    using Core.Contracts;
+    using Infrastructure.Models;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     [Authorize]
     public class ChildrenController : Controller
     {
@@ -55,7 +56,7 @@ namespace BabyMemory.Controllers
         public IActionResult Profile(string id)
         {
             var result = _childrenService.GetChildren(id);
-            
+
             return View(result);
         }
     }
