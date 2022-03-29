@@ -69,5 +69,13 @@ namespace BabyMemory.Core.Services
             });
             await _context.SaveChangesAsync();
         }
+
+        public async Task RemoveUserRoleAsync(string userId, string roleId)
+        {
+            var role = await _context.UserRoles
+                .FirstOrDefaultAsync(x => x.RoleId == roleId && x.UserId == userId);
+             _context.UserRoles.Remove(role);
+             await _context.SaveChangesAsync();
+        }
     }
 }

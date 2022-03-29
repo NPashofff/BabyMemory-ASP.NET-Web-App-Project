@@ -1,5 +1,4 @@
-﻿
-namespace BabyMemory.Controllers
+﻿namespace BabyMemory.Controllers
 {
     using Core.Contracts;
     using Infrastructure.Data.Models;
@@ -31,7 +30,6 @@ namespace BabyMemory.Controllers
 
         public async Task<IActionResult> EditUser(string userName)
         {
-
             var user = await _userService.GetUserAsync(userName);
 
             return View(user);
@@ -42,10 +40,26 @@ namespace BabyMemory.Controllers
         public async Task<IActionResult> EditUser(User user)
         {
             await _adminService.EditUserAsync(user);
+            
+            return Redirect("/Administrator/AllUsers");
+        }
 
+        public async Task<IActionResult> AddUserToAdmin(string userName)
+        {
+            var user = await _userService.GetUserAsync(userName);
+            var role = await _userService.FindRoleByNameAsync(GlobalConstants.Administrator);
+            await _userService.CreateUserRoleAsync(user.Id, role.Id);
 
             return Redirect("/Administrator/AllUsers");
         }
 
+        public async Task<IActionResult> RemoveUserFromAdmin(string userName)
+        {
+            var user = await _userService.GetUserAsync(userName);
+            var role = await _userService.FindRoleByNameAsync(GlobalConstants.Administrator);
+            await _userService.RemoveUserRoleAsync(user.Id, role.Id);
+
+            return Redirect("/Administrator/AllUsers");
+        }
     }
 }
