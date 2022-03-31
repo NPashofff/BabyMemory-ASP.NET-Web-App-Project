@@ -13,19 +13,20 @@ namespace BabyMemory.Controllers
             _medicineService = medicineService;
         }
 
-        public IActionResult Add()
+        public IActionResult Add(string childId)
         {
+            ViewBag.CildId = childId;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(MedicineAddViewModel model)
+        public async Task<IActionResult> Add(MedicineAddViewModel model, string childId)
         {
 
-            //TODO ..............
+            await _medicineService.AddMedicineAsync(model);
 
 
-            return View();
+            return Redirect($"/Children/Profile?id={childId}");
         }
     }
 }
