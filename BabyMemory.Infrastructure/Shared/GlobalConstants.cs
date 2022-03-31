@@ -33,6 +33,7 @@
 
         //Medicine
         public const int MedicineNameMaxLen = 254;
+        public const int MedicineNameMinLen = 4;
         public const int MedicineDescriptionMaxLen = 2048;
 
         //News

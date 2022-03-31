@@ -14,11 +14,10 @@
 
         [StringLength(GlobalConstants.MemoryDescriptionMaxLen,
             MinimumLength = GlobalConstants.MemoryDescriptionMinLen)]
-        [AllowNull]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public DateTime? CreationDate { get; set; } = DateTime.Now;
 
-        public ICollection<Medicine> Medicines { get; set; } = new List<Medicine>();
+        public ICollection<string> Medicines { get; set; } = new List<string>();
     }
 }

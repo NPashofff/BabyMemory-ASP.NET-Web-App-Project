@@ -32,6 +32,8 @@ builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<IMemoryService, MemoryService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IHealthProcedureService, HealthProcedureService>();
+builder.Services.AddScoped<IMedicineService, MedicineService>();
 
 var app = builder.Build();
 
