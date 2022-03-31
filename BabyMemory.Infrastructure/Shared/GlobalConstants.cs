@@ -25,6 +25,7 @@
 
         //HealthProcedure
         public const int HealthProcedureNameMAxLenDb = 254;
+        public const int HealthProcedureNameMinLen = 4;
 
         //Event
         public const int EventNameMaxLen = 254;
@@ -44,6 +45,7 @@
         //Shared
         public const int IdGuidMaxLen = 36;
         public const string Administrator = "Administrator";
+        public const string User = "User";
 
 
         public const int CarModelMAxLen = 20;

@@ -1,0 +1,39 @@
+﻿@model HealthProcedureViewModel
+@{
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="helthProcedureForm" asp-route-returnUrl="@Model" method="post">
+            <h2>Create a new Health Procedure.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <input asp-for="@Model!.Name" class="form-control" autocomplete="name" aria-required="true" />
+                <label asp-for="@Model!.Name"></label>
+                <span asp-validation-for="@Model!.Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="@Model!.Description" class="form-control" autocomplete="description" aria-required="false" />
+                <label asp-for="@Model!.Description"></label>
+                <span asp-validation-for="@Model!.Description" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="@Model!.CreationDate" class="form-control" autocomplete="creationDate" aria-required="false" />
+                <label asp-for="@Model!.CreationDate"></label>
+                <span asp-validation-for="@Model!.CreationDate" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="@Model!.Medicines" class="form-control" autocomplete="medicine" aria-required="false" />
+                <label asp-for="@Model!.Medicines"></label>
+                <span asp-validation-for="@Model!.Medicines" class="text-danger"></span>
+            </div>
+            
+            <button id="addCildrenSubmit" type="submit" value="@User.Identity.Name" name="childId" class="w-100 btn btn-lg btn-primary">Add Health Procedure</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
