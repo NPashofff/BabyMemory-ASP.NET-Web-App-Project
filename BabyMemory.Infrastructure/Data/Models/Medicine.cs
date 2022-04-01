@@ -1,9 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-#nullable disable
+﻿#nullable disable
 namespace BabyMemory.Infrastructure.Data.Models
 {
-    using BabyMemory.Infrastructure.Shared;
+    using Shared;
     using System.ComponentModel.DataAnnotations;
 
     public class Medicine
@@ -17,7 +15,8 @@ namespace BabyMemory.Infrastructure.Data.Models
         public string Name { get; set; }
 
         [MaxLength(GlobalConstants.MedicineDescriptionMaxLen)]
-        [AllowNull]
-        public string Description { get; set; }
+        public string? Description { get; set; }
+
+        public ICollection<HealthProcedure> HealthProcedures { get; set; }
     }
 }

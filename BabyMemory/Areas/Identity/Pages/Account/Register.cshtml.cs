@@ -1,6 +1,7 @@
 ﻿using BabyMemory.Core.Contracts;
 using BabyMemory.Infrastructure.Data.Models;
 using BabyMemory.Infrastructure.Models;
+using BabyMemory.Infrastructure.Shared;
 
 namespace BabyMemory.Areas.Identity.Pages.Account
 {
@@ -23,6 +24,7 @@ namespace BabyMemory.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IUserService _userService;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<User> userManager,
@@ -30,7 +32,8 @@ namespace BabyMemory.Areas.Identity.Pages.Account
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IUserService userService)
+            IUserService userService, 
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -39,6 +42,7 @@ namespace BabyMemory.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _userService = userService;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -74,8 +78,23 @@ namespace BabyMemory.Areas.Identity.Pages.Account
                 
                 if (result.Succeeded)
                 {
+                    if (!_roleManager.Roles.ToArray().Any())
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole
+                        {
+                            Name = GlobalConstants.User
+                        });
+                        await _roleManager.CreateAsync(new IdentityRole
+                        {
+                            Name = GlobalConstants.Administrator
+                        });
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
+                    var role = await _userService.FindRoleByNameAsync(GlobalConstants.User);
+                    await _userService.CreateUserRoleAsync(user.Id, role.Id);
+                    
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

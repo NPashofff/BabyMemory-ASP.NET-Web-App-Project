@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BabyMemory.Infrastructure.Migrations
 {
-    public partial class NewseAddDate : Migration
+    public partial class HealthProcedureMedicine : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,6 +49,19 @@ namespace BabyMemory.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Medicines",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(254)", maxLength: 254, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Medicines", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -264,22 +277,27 @@ namespace BabyMemory.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Medicines",
+                name: "HealthProcedureMedicine",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(254)", maxLength: 254, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: true),
-                    HealthProcedureId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    HealthProceduresId = table.Column<string>(type: "nvarchar(36)", nullable: false),
+                    MedicinesId = table.Column<string>(type: "nvarchar(36)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Medicines", x => x.Id);
+                    table.PrimaryKey("PK_HealthProcedureMedicine", x => new { x.HealthProceduresId, x.MedicinesId });
                     table.ForeignKey(
-                        name: "FK_Medicines_HealthProcedures_HealthProcedureId",
-                        column: x => x.HealthProcedureId,
+                        name: "FK_HealthProcedureMedicine_HealthProcedures_HealthProceduresId",
+                        column: x => x.HealthProceduresId,
                         principalTable: "HealthProcedures",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HealthProcedureMedicine_Medicines_MedicinesId",
+                        column: x => x.MedicinesId,
+                        principalTable: "Medicines",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -337,14 +355,14 @@ namespace BabyMemory.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_HealthProcedureMedicine_MedicinesId",
+                table: "HealthProcedureMedicine",
+                column: "MedicinesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_HealthProcedures_ChildrenId",
                 table: "HealthProcedures",
                 column: "ChildrenId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Medicines_HealthProcedureId",
-                table: "Medicines",
-                column: "HealthProcedureId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Memories_ChildrenId",
@@ -370,7 +388,7 @@ namespace BabyMemory.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Medicines");
+                name: "HealthProcedureMedicine");
 
             migrationBuilder.DropTable(
                 name: "Memories");
@@ -383,6 +401,9 @@ namespace BabyMemory.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "HealthProcedures");
+
+            migrationBuilder.DropTable(
+                name: "Medicines");
 
             migrationBuilder.DropTable(
                 name: "Childrens");

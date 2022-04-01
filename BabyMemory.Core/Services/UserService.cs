@@ -1,12 +1,11 @@
-﻿using BabyMemory.Core.Contracts;
-using BabyMemory.Infrastructure.Data;
-using BabyMemory.Infrastructure.Data.Models;
-using BabyMemory.Infrastructure.Shared;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace BabyMemory.Core.Services
+﻿namespace BabyMemory.Core.Services
 {
+    using Contracts;
+    using Infrastructure.Data;
+    using Infrastructure.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+
     public class UserService : IUserService
     {
         private readonly ApplicationDbContext _context;
@@ -53,9 +52,9 @@ namespace BabyMemory.Core.Services
             });
         }
 
-        public async Task<IdentityRole?> FindRoleByNameAsync(string administrator)
+        public async Task<IdentityRole?> FindRoleByNameAsync(string name)
         {
-            var role = await _roleManager.FindByNameAsync(administrator);
+            var role = await _roleManager.FindByNameAsync(name);
 
             return role;
         }
@@ -74,8 +73,8 @@ namespace BabyMemory.Core.Services
         {
             var role = await _context.UserRoles
                 .FirstOrDefaultAsync(x => x.RoleId == roleId && x.UserId == userId);
-             _context.UserRoles.Remove(role);
-             await _context.SaveChangesAsync();
+            _context.UserRoles.Remove(role);
+            await _context.SaveChangesAsync();
         }
     }
 }

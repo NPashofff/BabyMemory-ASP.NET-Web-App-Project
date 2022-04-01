@@ -25,7 +25,7 @@
                                 <tr class="odd">
                                     <td class="dtr-control sorting_1" tabindex="0">@user.Username</td>
                                     <td><a href="/Administrator/EditUser?userName=@user.Username" class="btn btn-block btn-warning btn-sm">Edit User</a></td>
-                                    <td>@(user.Roles.Any() ? "Admin" : "User")</td>
+                                    <td>@(user.Roles.Count == 1 ? "User" : "Admin")</td>
                                     <td><a href="/Administrator/AddUserToAdmin?userName=@user.Username" class="btn btn-block btn-warning btn-sm">Add Admin</a></td>
                                     <td><a href="/Administrator/RemoveUserFromAdmin?userName=@user.Username" class="btn btn-block btn-warning btn-sm">Remove Admin</a></td>
                                 </tr>

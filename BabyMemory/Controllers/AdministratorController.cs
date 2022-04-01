@@ -23,8 +23,6 @@
         {
             var users = await _adminService.GetAllUsersAsync();
 
-
-
             return View(users);
         }
 
