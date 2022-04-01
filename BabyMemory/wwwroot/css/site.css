@@ -72,3 +72,8 @@ body {
 .w-100 {
     margin-bottom: 1em;
 }
+
+div.post clearfix {
+    background-color: #f2f2f2 !important;
+    margin-top: 1em;
+}
