@@ -34,26 +34,26 @@ namespace BabyMemory.Core.Services
 
             _repo.SaveChanges();
         }
-        
+
         public ChildrenViewModel[] All(string name)
         {
             var user = _repo.Users
                 .Include(x => x.Childrens)
-                .ThenInclude(c =>c.Memories)
+                .ThenInclude(c => c.Memories)
                 .FirstOrDefault(x => x.UserName == name);
 
             var children = user
                 .Childrens
                 .Select(x => new ChildrenViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Age = GetAge(x.BirthDate),
-                LastName = x.LastName,
-                BirthDate = x.BirthDate,
-                Picture = x.Picture,
-                Memories = x.Memories
-            }).ToArray();
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Age = GetAge(x.BirthDate),
+                    LastName = x.LastName,
+                    BirthDate = x.BirthDate,
+                    Picture = x.Picture,
+                    Memories = x.Memories
+                }).ToArray();
 
             return children;
         }
@@ -81,7 +81,8 @@ namespace BabyMemory.Core.Services
         public ChildrenViewModel GetChildren(string id)
         {
             var children = _repo.Childrens
-                .Include(x=>x.Memories)
+                .Include(x => x.Memories)
+                .Include(x => x.HealthProcedures)
                 .FirstOrDefault(x => x.Id == id);
 
             if (children != null)
@@ -94,7 +95,8 @@ namespace BabyMemory.Core.Services
                     LastName = children.LastName,
                     BirthDate = children.BirthDate,
                     Picture = children.Picture,
-                    Memories = children.Memories
+                    Memories = children.Memories,
+                    HealthProcedures = children.HealthProcedures
                 };
             }
             else
