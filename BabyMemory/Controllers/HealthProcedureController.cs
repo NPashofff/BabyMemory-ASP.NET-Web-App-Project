@@ -1,4 +1,5 @@
 ﻿using BabyMemory.Core.Contracts;
+using BabyMemory.Infrastructure.Data.Models;
 using BabyMemory.Infrastructure.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +16,18 @@ namespace BabyMemory.Controllers
             _healthProcedureService = healthProcedureService;
         }
 
-        public IActionResult Add(string childId)
+        public async Task<IActionResult> Add(string childId)
         {
             ViewBag.ChildId = childId;
+            List<Medicine> medicines = await _healthProcedureService.GetAllMedicinesAsync();
+            ViewBag.Medicines = medicines;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(HealthProcedureViewModel model, string childId)
+        public async Task<IActionResult> Add(HealthProcedureViewModel model, string childId, List<Medicine> Medicines)
         {
-            
+
             //TODO ..............
 
 
