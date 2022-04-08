@@ -31,10 +31,10 @@
                 <label asp-for="@Model!.Medicines"></label>
                 <span asp-validation-for="@Model!.Medicines" class="text-danger"></span>
                 </div>*@
-            <select name="Medicines" id="Medicines" multiple>
+            <select name="Medicines" id="Medicines" multiple class="form-control">
                 @foreach (Medicine medicine in ViewBag.Medicines)
                 {
-                    <option value="@medicine">@medicine.Name</option>
+                    <option value="@medicine.Id">@medicine.Name</option>
                 }
             </select>
             <button id="addCildrenSubmit" type="submit" value="@ViewBag.ChildId" name="childId" class="w-100 btn btn-lg btn-primary">Add Health Procedure</button>

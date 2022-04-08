@@ -25,13 +25,13 @@ namespace BabyMemory.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(HealthProcedureViewModel model, string childId, List<Medicine> Medicines)
+        public async Task<IActionResult> Add(HealthProcedureViewModel model, string childId)
         {
 
             //TODO ..............
 
 
-            return View();
+            return Redirect("/Children/Profile?id=" + childId);
         }
     }
 }
