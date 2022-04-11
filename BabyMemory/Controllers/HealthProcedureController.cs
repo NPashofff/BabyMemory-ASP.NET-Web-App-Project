@@ -21,14 +21,15 @@ namespace BabyMemory.Controllers
             ViewBag.ChildId = childId;
             List<Medicine> medicines = await _healthProcedureService.GetAllMedicinesAsync();
             ViewBag.Medicines = medicines;
-            return View();
+            HealthProcedureViewModel model = new HealthProcedureViewModel();
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Add(HealthProcedureViewModel model, string childId)
         {
 
-            //TODO ..............
+            await _healthProcedureService.AddHealthProcedureAsync(model, childId);
 
 
             return Redirect("/Children/Profile?id=" + childId);

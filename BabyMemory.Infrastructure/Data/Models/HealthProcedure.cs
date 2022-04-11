@@ -3,7 +3,7 @@
 #nullable disable
 namespace BabyMemory.Infrastructure.Data.Models
 {
-    using BabyMemory.Infrastructure.Shared;
+    using Shared;
     using System.ComponentModel.DataAnnotations;
 
     public class HealthProcedure

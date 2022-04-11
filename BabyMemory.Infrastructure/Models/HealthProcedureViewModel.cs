@@ -16,7 +16,7 @@
             MinimumLength = GlobalConstants.MemoryDescriptionMinLen)]
         public string? Description { get; set; }
 
-        public DateTime? CreationDate { get; set; } = DateTime.Now;
+        public DateTime CreationDate { get; set; } = DateTime.Now;
 
         public ICollection<string> Medicines { get; set; } = new List<string>();
     }
