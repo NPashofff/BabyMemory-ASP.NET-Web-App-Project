@@ -34,14 +34,19 @@
 
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">About Me: Todo....</h3>
+                        <h3 class="card-title">Procedures :</h3>
                     </div>
-
                     <div class="card-body">
                         <strong><i class="fas fa-book mr-1"></i> Health Procedures</strong>
                         <a href="/HealthProcedure/Add?childId=@Model.Id" class="btn btn-primary btn-block"><b>Add Health Procedure</b></a>
                         <a href="/Medicine/Add?childId=@Model.Id" class="btn btn-primary btn-block"><b>Add Medicine</b></a>
-
+                    </div>
+                    <div class="card-body">
+                        @foreach (var item in Model.HealthProcedures)
+                        {
+                            <i> @item.CreationDate.Date.ToString("dd-MMMM-yyyy")</i>
+                            <a href="/HealthProcedure/Details?childId=@Model.Id" class="btn btn-block btn-outline-dark">@item.Name</a>
+                        }
                     </div>
                 </div>
             </div>
@@ -73,7 +78,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                        <!-- END timeline item -->
+                                    <!-- END timeline item -->
                                 }
                             </div>
                             <!-- /.col -->
