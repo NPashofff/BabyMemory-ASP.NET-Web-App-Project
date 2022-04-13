@@ -19,7 +19,6 @@ namespace BabyMemory.Controllers
         public IActionResult All()
         {
             string name = User.Identity.Name;
-
             ChildrenViewModel[] children = _childrenService.All(name);
             return View(children);
         }

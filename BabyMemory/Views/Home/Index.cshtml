@@ -7,7 +7,7 @@
     <section class="content">
         <div class="container-fluid">
             <a class="btn btn-primary btn-sm">Edit</a>
-            <a class="btn btn-danger btn-sm">Create</a>
+            <a href="/Home/Create" class="btn btn-danger btn-sm">Create</a>
             <!-- Timelime example  -->
             <div class="row">
                 <div class="col-md-12">
@@ -23,7 +23,7 @@
                             <!-- /.timeline-label -->
                             <!-- timeline item -->
                             <div>
-                                <i class="fas fa-envelope bg-blue"></i>
+                                @*<i class="fas fa-envelope bg-blue"></i>*@
                                 <div class="timeline-item">
                                     <span class="time"><i class="fas fa-clock"></i>@item.EventDate.ToString("HH:mm")</span>
                                     <h3 class="timeline-header">@item.Name</h3>

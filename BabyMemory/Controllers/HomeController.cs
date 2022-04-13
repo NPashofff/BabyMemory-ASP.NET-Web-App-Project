@@ -27,9 +27,22 @@ namespace BabyMemory.Controllers
         //    return View();
         //}
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            return View();
+            EventViewModel model = new EventViewModel()
+            {
+                CreationDate = DateTime.Now,
+                EventDate = DateTime.Now,
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(EventViewModel model)
+        {
+            await _eventService.CreateEventAsync(model, User.Identity.Name);
+
+            return Redirect("/");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
