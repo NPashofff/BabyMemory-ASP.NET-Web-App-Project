@@ -1,11 +1,12 @@
-﻿using BabyMemory.Core.Contracts;
-using BabyMemory.Infrastructure.Models;
-
-namespace BabyMemory.Controllers
+﻿namespace BabyMemory.Controllers
 {
+    using Core.Contracts;
+    using Infrastructure.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
 
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IEventService _eventService;
@@ -17,8 +18,8 @@ namespace BabyMemory.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var events =await _eventService.GetAllActiveEventsAsync();
-            
+            var events = await _eventService.GetAllActiveEventsAsync();
+
             return View(events);
         }
 
@@ -48,7 +49,7 @@ namespace BabyMemory.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View( Activity.Current?.Id ?? HttpContext.TraceIdentifier );
+            return View(Activity.Current?.Id ?? HttpContext.TraceIdentifier);
         }
     }
 }
