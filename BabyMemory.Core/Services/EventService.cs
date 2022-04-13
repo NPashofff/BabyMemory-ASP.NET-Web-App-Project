@@ -1,9 +1,7 @@
-﻿
-using BabyMemory.Infrastructure.Data.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace BabyMemory.Core.Services
+﻿namespace BabyMemory.Core.Services
 {
+    using Infrastructure.Data.Models;
+    using Microsoft.EntityFrameworkCore;
     using Infrastructure.Data;
     using Infrastructure.Models;
     using Contracts;
@@ -22,7 +20,7 @@ namespace BabyMemory.Core.Services
         public async Task<ICollection<EventViewModel>> GetAllActiveEventsAsync()
         {
             return await _repo.Events
-                .Where(x => x.IsPublic == true /*&& x.EventDate <= DateTime.Now*/)
+                .Where(x => x.IsPublic == true && x.EventDate >= DateTime.Now)
                 .Select(e => new EventViewModel
                 {
                     Id = e.Id,
