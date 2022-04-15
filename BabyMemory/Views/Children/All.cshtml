@@ -1,5 +1,8 @@
 ﻿@model BabyMemory.Infrastructure.Models.ChildrenViewModel[];
-
+@{
+    ViewData["Title"] = "Childrens";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <div>
     <h1>Children</h1>
     <a href="/Children/Add" class="btn btn-info text-uppercase">Add Child</a>
@@ -19,7 +22,7 @@
                     <li class="list-group-item text-center">@(item.Name + " " + item.LastName)</li>
                     <li class="list-group-item text-center">@item.BirthDate</li>
                 </ul>
-                <a href="/Children/Profile?id=@item.Id" class="btn btn-primary">View</a>
+                <a href="/Children/Profile?id=@item.Id" class="btn btn-primary">Profile</a>
             </div>
         </div>
 

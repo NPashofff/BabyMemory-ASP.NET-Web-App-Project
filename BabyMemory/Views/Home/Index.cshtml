@@ -1,13 +1,21 @@
-﻿@model ICollection<EventViewModel>
+﻿@using BabyMemory.Infrastructure.Shared
+@model ICollection<EventViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
+<h1>Welcome to Baby Memories</h1>
+
 
 <div class="text-center">
     <section class="content">
+        <div><h2>Upcoming Events</h2></div>
         <div class="container-fluid">
             <a href="/Home/MyEvents" class="btn btn-primary btn-sm">My Events</a>
-            <a href="/Home/Create" class="btn btn-danger btn-sm">Create</a>
+            <a href="/Home/Create" class="btn btn-dark btn-sm">Create</a>
+            @if (User.IsInRole(GlobalConstants.Administrator))
+            {
+                <a href="/Administrator/AllEvents" class="btn btn-danger btn-sm">All Event</a>
+            }
             <!-- Timelime example  -->
             <div class="row">
                 <div class="col-md-12">
@@ -19,7 +27,7 @@
                             <!-- timeline time label -->
                             <div class="time-label">
                                 <i class="fas fa-clock bg-gray"></i>
-                                <span class="bg-red">@item.EventDate</span>
+                                <span class="bg-blue">@item.EventDate.ToString("D")</span>
                             </div>
                             <!-- /.timeline-label -->
                             <!-- timeline item -->
@@ -27,13 +35,12 @@
                                 @*<i class="fas fa-envelope bg-blue"></i>*@
                                 <div class="timeline-item">
                                     <span class="time"><i class="fas fa-clock"></i>@item.EventDate.ToString("HH:mm")</span>
-                                    <h3 class="timeline-header">@item.Name</h3>
+                                    <h3 class="timeline-header"><b>@item.Name</b></h3>
 
                                     <div class="timeline-body">
                                         @item.Description
                                     </div>
                                     <div class="timeline-footer">
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -42,7 +49,6 @@
                         <!-- timeline time label -->
                         <!-- Clock  -->
                         <div>
-                            
                         </div>
                     </div>
                 </div>

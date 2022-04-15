@@ -99,8 +99,24 @@
         public async Task DeleteEventAsync(string eventId)
         {
             var eventToDelete = await _repo.Events.FirstOrDefaultAsync(x => x.Id == eventId);
-            _repo.Remove(eventToDelete);
+            _repo.Events.Remove(eventToDelete);
             await _repo.SaveChangesAsync();
+        }
+
+        
+        public async Task<ICollection<EventViewModel>> GetAllEventsAsync()
+        {
+            var events = await _repo.Events.Select(x => new EventViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                CreationDate = x.CreationDate,
+                EventDate = x.EventDate,
+                IsPublic = x.IsPublic
+            }).ToListAsync();
+
+            return events;
         }
     }
 }

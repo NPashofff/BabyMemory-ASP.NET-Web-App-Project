@@ -1,4 +1,6 @@
-﻿namespace BabyMemory.Controllers
+﻿using BabyMemory.Infrastructure.Models;
+
+namespace BabyMemory.Controllers
 {
     using Core.Contracts;
     using Infrastructure.Data.Models;
@@ -11,12 +13,16 @@
     {
         private readonly IAdminService _adminService;
         private readonly IUserService _userService;
+        private readonly IEventService _eventService;
 
 
-        public AdministratorController(IAdminService adminService, IUserService userService)
+        public AdministratorController(IAdminService adminService,
+            IUserService userService, 
+            IEventService eventService)
         {
             _adminService = adminService;
             _userService = userService;
+            _eventService = eventService;
         }
 
         public async Task<IActionResult> AllUsers()
@@ -58,6 +64,12 @@
             await _userService.RemoveUserRoleAsync(user.Id, role.Id);
 
             return Redirect("/Administrator/AllUsers");
+        }
+        public async Task<IActionResult> AllEvents()
+        {
+            ICollection<EventViewModel> users = await _eventService.GetAllEventsAsync();
+
+            return View(users);
         }
     }
 }

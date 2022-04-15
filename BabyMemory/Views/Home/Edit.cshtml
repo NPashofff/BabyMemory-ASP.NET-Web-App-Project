@@ -1,14 +1,14 @@
 ﻿@model EventViewModel
-@ViewData["Title"] = "Edit";
+@{ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Edit</h1>
 
-<div class="row">
+@*<div class="row">*@
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model" method="post">
-            <h2>Create a new account.</h2>
+            <h2>Edit Event.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
@@ -43,10 +43,10 @@
                 </label>
             </div>
             
-            <button id="addCildrenSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Add Children</button>
+            <button id="addCildrenSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Edit Event</button>
         </form>
     </div>
-</div>
+@*</div>*@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
