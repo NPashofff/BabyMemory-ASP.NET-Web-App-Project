@@ -59,22 +59,14 @@
             return role;
         }
 
-        public async Task CreateUserRoleAsync(string userId, string roleId)
+        public async Task CreateUserRoleAsync(User user, IdentityRole role)
         {
-            await _context.UserRoles.AddAsync(new IdentityUserRole<string>
-            {
-                UserId = userId,
-                RoleId = roleId
-            });
-            await _context.SaveChangesAsync();
+           await _userManager.AddToRoleAsync(user, role.Name);
         }
 
-        public async Task RemoveUserRoleAsync(string userId, string roleId)
+        public async Task RemoveUserRoleAsync(User user, IdentityRole role)
         {
-            var role = await _context.UserRoles
-                .FirstOrDefaultAsync(x => x.RoleId == roleId && x.UserId == userId);
-            _context.UserRoles.Remove(role);
-            await _context.SaveChangesAsync();
+            await _userManager.RemoveFromRoleAsync(user, role.Name);
         }
     }
 }

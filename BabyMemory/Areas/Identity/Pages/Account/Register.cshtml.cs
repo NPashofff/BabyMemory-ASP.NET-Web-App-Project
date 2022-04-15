@@ -93,7 +93,7 @@ namespace BabyMemory.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var role = await _userService.FindRoleByNameAsync(GlobalConstants.User);
-                    await _userService.CreateUserRoleAsync(user.Id, role.Id);
+                    await _userService.CreateUserRoleAsync(user, role);
                     
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

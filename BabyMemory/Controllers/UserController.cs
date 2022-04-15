@@ -22,7 +22,7 @@ namespace BabyMemory.Controllers
             var role = await _userService.FindRoleByNameAsync(GlobalConstants.Administrator);
             if (User.Identity?.Name == null) return Ok();
             var user = await _userService.GetUserAsync(User.Identity?.Name);
-            if (role != null) await _userService.CreateUserRoleAsync(user.Id, role.Id);
+            if (role != null) await _userService.CreateUserRoleAsync(user, role);
 
             return Ok();
         }

@@ -10,7 +10,7 @@ namespace BabyMemory.Core.Contracts
         Task<User?> GetUserAsync(string name);
         Task CreateRoleAsync(string administrator);
         Task<IdentityRole?> FindRoleByNameAsync(string administrator);
-        Task CreateUserRoleAsync(string userId, string roleId);
-        Task RemoveUserRoleAsync(string userId, string roleId);
+        Task RemoveUserRoleAsync(User user, IdentityRole role);
+        Task CreateUserRoleAsync(User user, IdentityRole role);
     }
 }
