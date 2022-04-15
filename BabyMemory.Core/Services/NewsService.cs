@@ -3,6 +3,7 @@ using BabyMemory.Infrastructure.Data;
 using BabyMemory.Infrastructure.Data.Models;
 using BabyMemory.Infrastructure.Models;
 using BabyMemory.Infrastructure.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace BabyMemory.Core.Services
 {
@@ -15,9 +16,9 @@ namespace BabyMemory.Core.Services
             _context = context;
         }
 
-        public NewsViewModel[] GetAllNews()
+        public async Task<NewsViewModel[]> GetAllNews()
         {
-           var result = _context.News
+           var result = await _context.News
                .Where(x => x.IsActive == true)
                .OrderByDescending(x=>x.CreationDate)
                 .Select(x => new NewsViewModel
@@ -27,11 +28,12 @@ namespace BabyMemory.Core.Services
                     Description = x.Description,
                     Picture = GlobalConstants.NewsLogo,
                     IsActive = x.IsActive
-                }).ToArray();
+                }).ToArrayAsync();
 
            return result;
         }
 
+        //TODO Make ti Async
         public (bool, string) AddNews(AddNewsViewModel model)
         {
             var news = new News
@@ -43,14 +45,7 @@ namespace BabyMemory.Core.Services
             _context.News.Add(news);
             var result =_context.SaveChanges();
 
-            if (result == 1)
-            {
-                return (true, "");
-            }
-            else
-            {
-                return (false, GlobalConstants.NewsAddError);
-            }
+            return result != 1 ? (false, GlobalConstants.NewsAddError) : (true, "");
         }
 
         public (bool, string) DeleteNews(string id)
@@ -63,14 +58,7 @@ namespace BabyMemory.Core.Services
 
             var result = _context.SaveChanges();
 
-            if (result == 1)
-            {
-                return (true, "");
-            }
-            else
-            {
-                return (false, GlobalConstants.ChidenNotDeletedError);
-            }
+            return result == 1 ? (true, "") : (false, GlobalConstants.ChidenNotDeletedError);
         }
     }
 }

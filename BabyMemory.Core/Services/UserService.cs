@@ -21,20 +21,16 @@
             _userManager = userManager;
         }
 
-        public Task SetUserFullNameAsync(User user, string inputUserFullName)
+        public async Task SetUserFullNameAsync(User user, string inputUserFullName)
         {
             user.UserFullName = inputUserFullName;
-            _context.SaveChangesAsync();
-
-            return Task.CompletedTask;
+            await _context.SaveChangesAsync();
         }
 
-        public Task SetUserDateAsync(User user)
+        public async Task SetUserDateAsync(User user)
         {
             user.RegisterDate = DateTime.Now;
-            _context.SaveChangesAsync();
-
-            return Task.CompletedTask;
+            await _context.SaveChangesAsync();
         }
 
         public async Task<User?> GetUserAsync(string name)

@@ -4,8 +4,10 @@ namespace BabyMemory.Core.Contracts
 {
     public interface INewsService
     {
-        NewsViewModel[] GetAllNews();
+        Task<NewsViewModel[]> GetAllNews();
+        
         (bool, string) AddNews(AddNewsViewModel model);
+        
         (bool, string) DeleteNews(string id);
     }
 }

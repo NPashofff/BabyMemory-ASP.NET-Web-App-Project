@@ -5,7 +5,7 @@
 
     public interface IMemoryService
     {
-        void AddMemory(MemoryAddViewModel model, User currentUser);
+        Task AddMemory(MemoryAddViewModel model, User currentUser);
 
         Task<Memory> GetMemoryAsync(string id);
 

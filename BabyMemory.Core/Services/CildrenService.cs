@@ -1,8 +1,7 @@
-﻿using BabyMemory.Infrastructure.Shared;
-
-#nullable disable
+﻿#nullable disable
 namespace BabyMemory.Core.Services
 {
+    using Infrastructure.Shared;
     using Contracts;
     using Infrastructure.Data;
     using Infrastructure.Data.Models;
@@ -18,7 +17,7 @@ namespace BabyMemory.Core.Services
             _repo = repo;
         }
 
-        public void AddChildren(ChildrenAddViewModel model, string userName)
+        public async Task AddChildren(ChildrenAddViewModel model, string userName)
         {
             var children = new Children
             {
@@ -29,18 +28,18 @@ namespace BabyMemory.Core.Services
                 Memories = new List<Memory>(),
                 HealthProcedures = new List<HealthProcedure>()
             };
-            var user = _repo.Users.FirstOrDefault(x => x.UserName == userName);
+            var user = await _repo.Users.FirstOrDefaultAsync(x => x.UserName == userName);
             user?.Childrens.Add(children);
 
-            _repo.SaveChanges();
+            await _repo.SaveChangesAsync();
         }
 
-        public ChildrenViewModel[] All(string name)
+        public async Task<ChildrenViewModel[]> All(string name)
         {
-            var user = _repo.Users
+            var user = await _repo.Users
                 .Include(x => x.Childrens)
                 .ThenInclude(c => c.Memories)
-                .FirstOrDefault(x => x.UserName == name);
+                .FirstOrDefaultAsync(x => x.UserName == name);
 
             var children = user
                 .Childrens

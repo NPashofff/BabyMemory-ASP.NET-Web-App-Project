@@ -16,7 +16,7 @@ namespace BabyMemory.Core.Services
         }
 
 
-        public void AddMemory(MemoryAddViewModel model, User currentUser)
+        public async Task AddMemory(MemoryAddViewModel model, User currentUser)
         {
             Memory memory = new Memory
             {
@@ -26,35 +26,32 @@ namespace BabyMemory.Core.Services
                 Picture = model.Picture
             };
 
-            var user = _repo.Users
+            var user = await _repo.Users
                 .Include(x=>x.Childrens)
-                .FirstOrDefault(x => x.Id == currentUser.Id);
+                .FirstOrDefaultAsync(x => x.Id == currentUser.Id);
 
             var child = user.Childrens.FirstOrDefault(x => x.Id == model.ChildId);
 
             child.Memories.Add(memory);
 
-            _repo.SaveChanges();
+            await _repo.SaveChangesAsync();
         }
 
-        public Task<Memory> GetMemoryAsync(string id)
+        public async Task<Memory> GetMemoryAsync(string id)
         {
-            return _repo.Memories.FirstOrDefaultAsync(x => x.Id == id);
+            return await _repo.Memories.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task Edit(Memory model)
+        public async Task Edit(Memory model)
         {
             _repo.Memories.Update(model);
-            _repo.SaveChanges();
-
-            return Task.CompletedTask;
+            await _repo.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Memory model)
         {
             _repo.Memories.Remove(model);
            await _repo.SaveChangesAsync();
-            
         }
     }
 }
