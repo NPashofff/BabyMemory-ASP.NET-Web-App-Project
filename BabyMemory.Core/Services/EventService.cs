@@ -49,5 +49,58 @@
 
             await _repo.SaveChangesAsync();
         }
+
+        public async Task<ICollection<EventViewModel>> GetMyEventsAsync(string? identityName)
+        {
+            var user = await _userService.GetUserAsync(identityName);
+            var events = await _repo.Events
+                .Where(x => x.UserId == user.Id)
+                .Select(e => new EventViewModel
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Description = e.Description,
+                    CreationDate = e.CreationDate,
+                    EventDate = e.EventDate,
+                    IsPublic = e.IsPublic
+                })
+                .ToListAsync();
+            return events;
+        }
+
+        public async Task<EventViewModel?> GetEventByIdAsync(string eventId)
+        {
+            return await _repo.Events
+                .Where(x => x.Id == eventId)
+                .Select(e => new EventViewModel
+            {
+                Id = e.Id,
+                Name = e.Name,
+                Description = e.Description,
+                CreationDate = e.CreationDate,
+                EventDate = e.EventDate,
+                IsPublic = e.IsPublic
+            }).FirstOrDefaultAsync();
+
+        }
+
+        public async Task EditEventAsync(Event model)
+        {
+            var eventToUpdate = await _repo.Events.FirstOrDefaultAsync(x => x.Id == model.Id);
+            eventToUpdate.Name = model.Name;
+            eventToUpdate.Description = model.Description;
+            eventToUpdate.EventDate = model.EventDate;
+            eventToUpdate.IsPublic = model.IsPublic;
+            
+            //_repo.Events.Update(model);
+            await _repo.SaveChangesAsync();
+        }
+
+        public async Task DeleteEventAsync(string eventId)
+        {
+            var eventToDelete = await _repo.Events.FirstOrDefaultAsync(x => x.Id == eventId);
+            _repo.Remove(eventToDelete);
+            await _repo.SaveChangesAsync();
+        }
     }
 }

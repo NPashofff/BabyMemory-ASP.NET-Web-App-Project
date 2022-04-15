@@ -1,4 +1,6 @@
-﻿namespace BabyMemory.Controllers
+﻿using BabyMemory.Infrastructure.Data.Models;
+
+namespace BabyMemory.Controllers
 {
     using Core.Contracts;
     using Infrastructure.Models;
@@ -23,10 +25,27 @@
             return View(events);
         }
 
-        //public async Task<IActionResult> Edit()
-        //{
-        //    return View();
-        //}
+        public async Task<IActionResult> MyEvents()
+        {
+            var events = await _eventService.GetMyEventsAsync(User.Identity.Name);
+
+            return View(events);
+        }
+
+        public async Task<IActionResult> Edit(string eventId)
+        {
+            var eventToEdit = await _eventService.GetEventByIdAsync(eventId);
+
+            return View(eventToEdit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Event model)
+        {
+           await _eventService.EditEventAsync(model);
+
+            return Redirect("/");
+        }
 
         public IActionResult Create()
         {
@@ -42,6 +61,13 @@
         public async Task<IActionResult> Create(EventViewModel model)
         {
             await _eventService.CreateEventAsync(model, User.Identity.Name);
+
+            return Redirect("/");
+        }
+
+        public async Task<IActionResult> Remove(string eventId)
+        {
+            await _eventService.DeleteEventAsync(eventId);
 
             return Redirect("/");
         }
