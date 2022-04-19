@@ -16,10 +16,10 @@ namespace BabyMemory.Controllers
             _childrenService = childrenService;
         }
 
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
             string name = User.Identity.Name;
-            ChildrenViewModel[] children = _childrenService.All(name);
+            ChildrenViewModel[] children =await _childrenService.All(name);
             return View(children);
         }
 

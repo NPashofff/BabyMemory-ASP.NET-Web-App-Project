@@ -17,9 +17,9 @@ namespace BabyMemory.Controllers
             _newsService = newsService;
         }
 
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
-            var models = _newsService.GetAllNews();
+            var models =await _newsService.GetAllNews();
 
             return View(models);
         }
