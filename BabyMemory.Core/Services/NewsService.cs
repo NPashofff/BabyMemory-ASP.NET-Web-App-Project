@@ -1,12 +1,12 @@
-﻿using BabyMemory.Core.Contracts;
-using BabyMemory.Infrastructure.Data;
-using BabyMemory.Infrastructure.Data.Models;
-using BabyMemory.Infrastructure.Models;
-using BabyMemory.Infrastructure.Shared;
-using Microsoft.EntityFrameworkCore;
-
-namespace BabyMemory.Core.Services
+﻿namespace BabyMemory.Core.Services
 {
+    using Contracts;
+    using Infrastructure.Data;
+    using Infrastructure.Data.Models;
+    using Infrastructure.Models;
+    using Infrastructure.Shared;
+    using Microsoft.EntityFrameworkCore;
+    
     public class NewsService : INewsService
     {
         private readonly ApplicationDbContext _context;
@@ -18,19 +18,19 @@ namespace BabyMemory.Core.Services
 
         public async Task<NewsViewModel[]> GetAllNews()
         {
-           var result = await _context.News
-               .Where(x => x.IsActive == true)
-               .OrderByDescending(x=>x.CreationDate)
-                .Select(x => new NewsViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Description = x.Description,
-                    Picture = GlobalConstants.NewsLogo,
-                    IsActive = x.IsActive
-                }).ToArrayAsync();
+            var result = await _context.News
+                .Where(x => x.IsActive == true)
+                .OrderByDescending(x => x.CreationDate)
+                 .Select(x => new NewsViewModel
+                 {
+                     Id = x.Id,
+                     Name = x.Name,
+                     Description = x.Description,
+                     Picture = GlobalConstants.NewsLogo,
+                     IsActive = x.IsActive
+                 }).ToArrayAsync();
 
-           return result;
+            return result;
         }
 
         //TODO Make ti Async
@@ -43,7 +43,7 @@ namespace BabyMemory.Core.Services
             };
 
             _context.News.Add(news);
-            var result =_context.SaveChanges();
+            var result = _context.SaveChanges();
 
             return result != 1 ? (false, GlobalConstants.NewsAddError) : (true, "");
         }

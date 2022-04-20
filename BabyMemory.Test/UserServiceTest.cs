@@ -1,20 +1,21 @@
-using System;
-using System.Threading.Tasks;
-using BabyMemory.Core.Contracts;
-using BabyMemory.Core.Services;
-using BabyMemory.Infrastructure.Data;
-using BabyMemory.Infrastructure.Data.Models;
-using BabyMemory.Infrastructure.Data.Repositories;
-using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
-
 namespace BabyMemory.Test
 {
+    using Core.Contracts;
+    using Core.Services;
+    using Infrastructure.Data;
+    using Infrastructure.Data.Models;
+    using Infrastructure.Data.Repositories;
+    using Infrastructure.Models;
+    using Microsoft.Extensions.DependencyInjection;
+    using NUnit.Framework;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    
     public class Tests
     {
         private ServiceProvider serviceProvider;
         private InMemoryDbContext dbContext;
-        private IUserService _userService;
 
         [SetUp]
         public async Task Setup()
@@ -24,50 +25,76 @@ namespace BabyMemory.Test
 
             serviceProvider = serviceCollection
                 .AddSingleton(sp => dbContext.CreateContext())
-                .AddSingleton<ApplicationDbContext>()
-                .AddSingleton<IUserService, UserService>()
+                .AddSingleton<IApplicatioDbRepository, ApplicatioDbRepository>()
+                .AddSingleton<INewsService, NewsService>()
                 .BuildServiceProvider();
 
-            var repo = serviceProvider.GetService<ApplicationDbContext>();
+            var repo = serviceProvider.GetService<IApplicatioDbRepository>();
             await SeedDbAsync(repo);
+            ;
         }
 
         [Test]
-        public void SetUserName()
+        public void AddNewsTest()
         {
-            var user = new User
+            var newsService = serviceProvider.GetService<INewsService>();
+            var repo = serviceProvider.GetService<ApplicationDbContext>();
+            AddOneNews(repo, newsService);
+
+            Assert.That(repo.News.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public async Task GetAllNewsTest()
+        {
+            var newsService = serviceProvider.GetService<INewsService>();
+            var repo = serviceProvider.GetService<ApplicationDbContext>();
+            AddOneNews(repo, newsService);
+
+
+            var allNewse = await newsService.GetAllNews();
+            var count = allNewse.Count();
+
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void RemoveNewsTest()
+        {
+            var newsService = serviceProvider.GetService<INewsService>();
+            var repo = serviceProvider.GetService<ApplicationDbContext>();
+            AddOneNews(repo, newsService);
+            string id = repo.News.First().Id;
+
+            newsService.DeleteNews(id);
+
+            Assert.That(repo.News.Count(), Is.EqualTo(0));
+        }
+
+        private void AddOneNews(ApplicationDbContext repo, INewsService newsService)
+        {
+            AddNewsViewModel news = new AddNewsViewModel()
             {
-                Id = Guid.NewGuid().ToString(),
-                UserName = "pesho",
-                Email = "Pesho@pesho.com",
-                UserFullName = null,
+                Name = "Nivina",
+                Description = " Description ",
             };
-
-            var service = _userService.SetUserFullNameAsync(user, "Prsho Peshev");
-
-            Assert.That(user.UserFullName, Is.EqualTo("Prsho Peshev"));
+            newsService.AddNews(news); ;
         }
-
-        [Test]
-        public void Test1()
-        {
-            Assert.Pass();
-        }
-
+        
         [TearDown]
         public void TearDown()
         {
             dbContext.Dispose();
         }
 
-        private async Task SeedDbAsync(ApplicationDbContext repo)
+        private async Task SeedDbAsync(IApplicatioDbRepository repo)
         {
             var user = new User
             {
                 Id = Guid.NewGuid().ToString(),
                 UserName = "pesho",
                 Email = "Pesho@pesho.com",
-                UserFullName = null,
+                UserFullName = "null",
             };
 
             await repo.AddAsync(user);
