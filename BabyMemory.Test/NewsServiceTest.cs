@@ -12,7 +12,7 @@ namespace BabyMemory.Test
     using System.Linq;
     using System.Threading.Tasks;
     
-    public class Tests
+    public class NewsServiceTests
     {
         private ServiceProvider serviceProvider;
         private InMemoryDbContext dbContext;

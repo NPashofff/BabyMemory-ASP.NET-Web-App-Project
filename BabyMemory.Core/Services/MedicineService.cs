@@ -1,5 +1,4 @@
-﻿using BabyMemory.Core.Common;
-using BabyMemory.Core.Contracts;
+﻿using BabyMemory.Core.Contracts;
 using BabyMemory.Infrastructure.Data;
 using BabyMemory.Infrastructure.Data.Models;
 using BabyMemory.Infrastructure.Models;
