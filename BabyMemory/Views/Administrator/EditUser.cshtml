@@ -13,6 +13,11 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
+                <input asp-for="@Model!.Id" class="form-control" autocomplete="name" readonly />
+                <label asp-for="@Model!.Id"></label>
+                <span asp-validation-for="@Model!.Id" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
                 <input asp-for="@Model!.UserFullName" class="form-control" autocomplete="name" aria-required="true" />
                 <label asp-for="@Model!.UserFullName"></label>
                 <span asp-validation-for="@Model!.UserFullName" class="text-danger"></span>

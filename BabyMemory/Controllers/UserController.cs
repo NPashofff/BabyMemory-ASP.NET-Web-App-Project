@@ -15,8 +15,8 @@ namespace BabyMemory.Controllers
         {
             _userService = userService;
         }
-        
-        //Create First Admin UserRoles
+
+        //Create First Admin then comment this section
         public async Task<IActionResult> CreateFirstAdmin()
         {
             var role = await _userService.FindRoleByNameAsync(GlobalConstants.Administrator);
