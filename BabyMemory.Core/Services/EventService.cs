@@ -53,7 +53,7 @@
             await _repo.SaveChangesAsync();
         }
 
-        public async Task<ICollection<EventViewModel>> GetMyEventsAsync(string? identityName)
+        public async Task<ICollection<EventViewModel>> GetMyEventsAsync(string identityName)
         {
             var user = await _userService.GetUserAsync(identityName);
             var events = await _repo.Events
@@ -105,7 +105,7 @@
         public async Task DeleteEventAsync(string eventId)
         {
             var eventToDelete = await _repo.Events.FirstOrDefaultAsync(x => x.Id == eventId);
-            _repo.Events.Remove(eventToDelete);
+            if (eventToDelete != null) _repo.Events.Remove(eventToDelete);
             await _repo.SaveChangesAsync();
         }
 

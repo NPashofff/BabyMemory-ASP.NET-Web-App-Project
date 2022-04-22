@@ -30,7 +30,7 @@
                 .BuildServiceProvider();
 
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
-            await SeedDbAsync(repo);
+            if (repo != null) await SeedDbAsync(repo);
         }
 
         [Test]

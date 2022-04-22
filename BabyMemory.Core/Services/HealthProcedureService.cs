@@ -26,7 +26,7 @@
             foreach (var variable in model.Medicines)
             {
                 var medicine = await _repo.Medicines.FindAsync(variable);
-                medicines.Add(medicine);
+                if (medicine != null) medicines.Add(medicine);
             }
 
             var procedure = new HealthProcedure

@@ -30,8 +30,7 @@ namespace BabyMemory.Test
                 .BuildServiceProvider();
 
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
-            await SeedDbAsync(repo);
-            ;
+            if (repo != null) await SeedDbAsync(repo);
         }
 
         [Test]
@@ -39,6 +38,8 @@ namespace BabyMemory.Test
         {
             var newsService = serviceProvider.GetService<INewsService>();
             var repo = serviceProvider.GetService<ApplicationDbContext>();
+            if (repo == null || newsService == null) return;
+            
             AddOneNews(repo, newsService);
 
             Assert.That(repo.News.Count(), Is.EqualTo(1));
@@ -49,6 +50,8 @@ namespace BabyMemory.Test
         {
             var newsService = serviceProvider.GetService<INewsService>();
             var repo = serviceProvider.GetService<ApplicationDbContext>();
+            if (repo == null || newsService == null) return;
+            
             AddOneNews(repo, newsService);
 
 
@@ -63,6 +66,8 @@ namespace BabyMemory.Test
         {
             var newsService = serviceProvider.GetService<INewsService>();
             var repo = serviceProvider.GetService<ApplicationDbContext>();
+            if (repo == null || newsService == null) return;
+            
             AddOneNews(repo, newsService);
             string id = repo.News.First().Id;
 
