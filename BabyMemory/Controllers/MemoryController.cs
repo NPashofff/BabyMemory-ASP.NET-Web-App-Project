@@ -41,7 +41,7 @@
             if (ModelState.IsValid)
             {
                 var currentUser = await _userManager.GetUserAsync(User);
-                _memoryService.AddMemory(model, currentUser);
+                await _memoryService.AddMemory(model, currentUser);
                 return Redirect("/Children/Profile?id=" + model.ChildId);
             }
 
