@@ -45,10 +45,15 @@ namespace BabyMemory.Test
                 BirthDate = DateTime.Now,
                 Picture = null
             };
-            await childrenService.AddChildren(model, "pesho");
+
+            if (childrenService != null)
+                await childrenService.AddChildren(model, "pesho");
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
-            var user = repo.All<User>().First();
-            Assert.That(user.Childrens.Count, Is.EqualTo(2));
+            if (repo != null)
+            {
+                var user = repo.All<User>().First();
+                Assert.That(user.Childrens.Count, Is.EqualTo(2));
+            }
         }
 
 
@@ -57,9 +62,12 @@ namespace BabyMemory.Test
         public async Task ChildrenAllTest()
         {
             var childrenService = serviceProvider.GetService<IChildrenService>();
-            var result = await childrenService.All("pesho");
+            if (childrenService != null)
+            {
+                var result = await childrenService.All("pesho");
 
-            Assert.That(result.Count(), Is.EqualTo(1));
+                Assert.That(result.Count(), Is.EqualTo(1));
+            }
         }
 
         [Test]
@@ -67,10 +75,13 @@ namespace BabyMemory.Test
         {
             var childrenService = serviceProvider.GetService<IChildrenService>();
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
-            var child = repo.All<User>().First().Childrens.First();
-            await childrenService.Delete(child.Id);
-
-            Assert.That(repo.All<User>().First().Childrens.Count, Is.EqualTo(0));
+            if (repo != null)
+            {
+                var child = repo.All<User>().First().Childrens.First();
+                if (childrenService != null) await childrenService.Delete(child.Id);
+                
+                Assert.That(repo.All<User>().First().Childrens.Count, Is.EqualTo(0));
+            }
         }
 
         [Test]
@@ -78,10 +89,16 @@ namespace BabyMemory.Test
         {
             var childrenService = serviceProvider.GetService<IChildrenService>();
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
-            var children = repo.All<User>().First().Childrens.First();
-            var child = await childrenService.GetChildren(children.Id);
+            if (repo != null)
+            {
+                var children = repo.All<User>().First().Childrens.First();
+                if (childrenService != null)
+                {
+                    var child = await childrenService.GetChildren(children.Id);
 
-            Assert.That(children.Name, Is.EqualTo(child.Name));
+                    Assert.That(children.Name, Is.EqualTo(child.Name));
+                }
+            }
         }
 
         [Test]
@@ -89,9 +106,15 @@ namespace BabyMemory.Test
         {
             var childrenService = serviceProvider.GetService<IChildrenService>();
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
-            var children = repo.All<User>().First().Childrens.First();
-            var age = await childrenService.GetChildren(children.Id);
-            Assert.That(age.Age, Is.EqualTo(0));
+            if (repo != null)
+            {
+                var children = repo.All<User>().First().Childrens.First();
+                if (childrenService != null)
+                {
+                    var age = await childrenService.GetChildren(children.Id);
+                    Assert.That(age.Age, Is.EqualTo(0));
+                }
+            }
         }
 
         [TearDown]

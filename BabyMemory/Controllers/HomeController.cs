@@ -27,6 +27,11 @@ namespace BabyMemory.Controllers
 
         public async Task<IActionResult> MyEvents()
         {
+            if (User.Identity == null)
+            {
+                return Redirect("/");
+            }
+
             var events = await _eventService.GetMyEventsAsync(User.Identity.Name);
 
             return View(events);
@@ -42,7 +47,7 @@ namespace BabyMemory.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Event model)
         {
-           await _eventService.EditEventAsync(model);
+            await _eventService.EditEventAsync(model);
 
             return Redirect("/");
         }
@@ -60,6 +65,10 @@ namespace BabyMemory.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(EventViewModel model)
         {
+            if (User.Identity == null) return Redirect("/");
+            
+            if (User.Identity.Name == null) return Redirect("/");
+            
             await _eventService.CreateEventAsync(model, User.Identity.Name);
 
             return Redirect("/");

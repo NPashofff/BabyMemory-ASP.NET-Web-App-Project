@@ -31,12 +31,16 @@
         {
             var userToEdit = await _context.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
 
-            userToEdit.Picture = user.Picture;
-            userToEdit.UserFullName = user.UserFullName;
-            userToEdit.UserName = user.UserName;
-            userToEdit.Email = user.Email;
+            if (userToEdit != null)
+            {
+                userToEdit.Picture = user.Picture;
+                userToEdit.UserFullName = user.UserFullName;
+                userToEdit.UserName = user.UserName;
+                userToEdit.Email = user.Email;
 
-            _context.Users.Update(userToEdit);
+                _context.Users.Update(userToEdit);
+            }
+
             await _context.SaveChangesAsync();
         }
     }

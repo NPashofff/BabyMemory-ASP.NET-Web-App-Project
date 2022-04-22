@@ -38,8 +38,11 @@ namespace BabyMemory.Test
         public async Task GetAllUsersTest()
         {
             var healthProcedureService = serviceProvider.GetService<IHealthProcedureService>();
-            var result =await healthProcedureService.GetAllMedicinesAsync();
-            Assert.That(result.Count, Is.EqualTo(1));
+            if (healthProcedureService != null)
+            {
+                var result =await healthProcedureService.GetAllMedicinesAsync();
+                Assert.That(result.Count, Is.EqualTo(1));
+            }
         }
 
         [Test]
@@ -47,20 +50,24 @@ namespace BabyMemory.Test
         {
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
             var healthProcedureService = serviceProvider.GetService<IHealthProcedureService>();
-            var medicines = await repo.All<Medicine>()
-                .Select(x => x.Id).ToListAsync();
-            HealthProcedureViewModel healthProcedure = new HealthProcedureViewModel()
+            if (repo != null)
             {
-                Name = "Imeto e",
-                Description = "null",
-                CreationDate = DateTime.Now,
-                Medicines = medicines
-            };
-            var child = repo.All<User>().First().Childrens.First();
-            await healthProcedureService.AddHealthProcedureAsync(healthProcedure, child.Id);
+                var medicines = await repo.All<Medicine>()
+                    .Select(x => x.Id).ToListAsync();
+                HealthProcedureViewModel healthProcedure = new HealthProcedureViewModel()
+                {
+                    Name = "Imeto e",
+                    Description = "null",
+                    CreationDate = DateTime.Now,
+                    Medicines = medicines
+                };
+                var child = repo.All<User>().First().Childrens.First();
+                if (healthProcedureService != null)
+                    await healthProcedureService.AddHealthProcedureAsync(healthProcedure, child.Id);
 
 
-            Assert.That(child.HealthProcedures.Count, Is.EqualTo(1));
+                Assert.That(child.HealthProcedures.Count, Is.EqualTo(1));
+            }
         }
 
 

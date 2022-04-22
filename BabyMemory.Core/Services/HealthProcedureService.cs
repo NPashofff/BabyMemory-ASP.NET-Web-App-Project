@@ -38,9 +38,13 @@
             };
 
             var child = await _repo.Childrens.FindAsync(childId);
-            child.HealthProcedures.Add(procedure);
+            if (child != null)
+            {
+                child.HealthProcedures.Add(procedure);
 
-            _repo.Childrens.Update(child);
+                _repo.Childrens.Update(child);
+            }
+
             await _repo.SaveChangesAsync();
         }
     }

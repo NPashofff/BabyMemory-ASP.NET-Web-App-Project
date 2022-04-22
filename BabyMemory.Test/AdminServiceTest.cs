@@ -37,9 +37,12 @@
         public async Task GetAllUsersTest()
         {
             var adminService = serviceProvider.GetService<IAdminService>();
-            var users = await adminService.GetAllUsersAsync();
+            if (adminService != null)
+            {
+                var users = await adminService.GetAllUsersAsync();
 
-            Assert.That(users.Count, Is.EqualTo(1));
+                Assert.That(users.Count, Is.EqualTo(1));
+            }
         }
 
 
@@ -49,11 +52,14 @@
         {
             var adminService = serviceProvider.GetService<IAdminService>();
             var repo = serviceProvider.GetService<ApplicationDbContext>();
-            var user = repo.Users.First();
-            user.UserName = "Gosho";
-            await adminService.EditUserAsync(user);
+            if (repo != null)
+            {
+                var user = repo.Users.First();
+                user.UserName = "Gosho";
+                if (adminService != null) await adminService.EditUserAsync(user);
+            }
 
-            Assert.That(repo.Users.First().UserName, Is.EqualTo("Gosho"));
+            if (repo != null) Assert.That(repo.Users.First().UserName, Is.EqualTo("Gosho"));
         }
 
         [TearDown]

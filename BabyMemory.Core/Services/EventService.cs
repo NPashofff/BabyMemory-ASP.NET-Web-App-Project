@@ -44,8 +44,11 @@
                 EventDate = model.EventDate,
                 IsPublic = model.IsPublic
             };
-            user.Events.Add(newEvent);
-            _repo.Users.Update(user);
+            if (user != null)
+            {
+                user.Events.Add(newEvent);
+                _repo.Users.Update(user);
+            }
 
             await _repo.SaveChangesAsync();
         }
@@ -54,7 +57,7 @@
         {
             var user = await _userService.GetUserAsync(identityName);
             var events = await _repo.Events
-                .Where(x => x.UserId == user.Id)
+                .Where(x => user != null && x.UserId == user.Id)
                 .Select(e => new EventViewModel
                 {
                     Id = e.Id,
@@ -87,11 +90,14 @@
         public async Task EditEventAsync(Event model)
         {
             var eventToUpdate = await _repo.Events.FirstOrDefaultAsync(x => x.Id == model.Id);
-            eventToUpdate.Name = model.Name;
-            eventToUpdate.Description = model.Description;
-            eventToUpdate.EventDate = model.EventDate;
-            eventToUpdate.IsPublic = model.IsPublic;
-            
+            if (eventToUpdate != null)
+            {
+                eventToUpdate.Name = model.Name;
+                eventToUpdate.Description = model.Description;
+                eventToUpdate.EventDate = model.EventDate;
+                eventToUpdate.IsPublic = model.IsPublic;
+            }
+
             //_repo.Events.Update(model);
             await _repo.SaveChangesAsync();
         }
