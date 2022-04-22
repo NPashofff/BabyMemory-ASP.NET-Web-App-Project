@@ -19,7 +19,7 @@ namespace BabyMemory.Controllers
         public async Task<IActionResult> All()
         {
             string name = User.Identity.Name;
-            ChildrenViewModel[] children =await _childrenService.All(name);
+            ChildrenViewModel[] children = await _childrenService.All(name);
             return View(children);
         }
 
@@ -40,21 +40,16 @@ namespace BabyMemory.Controllers
             return View();
         }
 
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
-            (bool, string) result = _childrenService.Delete(id);
-
-            if (result.Item1)
-            {
-                return Redirect("/Children/All");
-            }
-
-            return View("/Error", result.Item2);
+            await _childrenService.Delete(id);
+            
+            return Redirect("/Children/All");
         }
 
-        public IActionResult Profile(string id)
+        public async Task<IActionResult> Profile(string id)
         {
-            var result = _childrenService.GetChildren(id);
+            var result =await _childrenService.GetChildren(id);
 
             return View(result);
         }

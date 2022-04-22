@@ -57,32 +57,23 @@ namespace BabyMemory.Core.Services
             return children;
         }
 
-        public (bool, string) Delete(string id)
+        public async Task Delete(string id)
         {
-            Children children = _repo.Childrens.FirstOrDefault(x => x.Id == id);
+            Children children = await _repo.Childrens.FirstOrDefaultAsync(x => x.Id == id);
             if (children != null)
             {
                 _repo.Childrens.Remove(children);
             }
 
-            var result = _repo.SaveChanges();
-
-            if (result == 1)
-            {
-                return (true, "");
-            }
-            else
-            {
-                return (false, GlobalConstants.ChidenNotDeletedError);
-            }
+            var result = await _repo.SaveChangesAsync();
         }
 
-        public ChildrenViewModel GetChildren(string id)
+        public async Task<ChildrenViewModel> GetChildren(string id)
         {
-            var children = _repo.Childrens
+            var children =await _repo.Childrens
                 .Include(x => x.Memories)
                 .Include(x => x.HealthProcedures)
-                .FirstOrDefault(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (children != null)
             {

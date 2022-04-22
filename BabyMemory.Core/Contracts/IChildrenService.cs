@@ -7,8 +7,8 @@
 
         Task<ChildrenViewModel[]> All(string name);
         
-        (bool, string) Delete(string id);
+        Task Delete(string id);
         
-        ChildrenViewModel GetChildren(string id);
+        Task<ChildrenViewModel> GetChildren(string id);
     }
 }
