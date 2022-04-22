@@ -52,8 +52,8 @@ namespace BabyMemory.Controllers
         {
             var user = await _userService.GetUserAsync(userName);
             var role = await _userService.FindRoleByNameAsync(GlobalConstants.Administrator);
-            //?????
-            await _userService.CreateUserRoleAsync(user, role);
+            if (user != null && role != null)
+                await _userService.CreateUserRoleAsync(user, role);
 
             return Redirect("/Administrator/AllUsers");
         }
@@ -62,7 +62,8 @@ namespace BabyMemory.Controllers
         {
             var user = await _userService.GetUserAsync(userName);
             var role = await _userService.FindRoleByNameAsync(GlobalConstants.Administrator);
-            await _userService.RemoveUserRoleAsync(user, role);
+            if (user != null && role != null)
+                await _userService.RemoveUserRoleAsync(user, role);
 
             return Redirect("/Administrator/AllUsers");
         }
