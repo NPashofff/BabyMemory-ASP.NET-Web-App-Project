@@ -1,11 +1,10 @@
-﻿using BabyMemory.Core.Contracts;
-using BabyMemory.Infrastructure.Data;
-using BabyMemory.Infrastructure.Data.Models;
-using BabyMemory.Infrastructure.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace BabyMemory.Core.Services
+﻿namespace BabyMemory.Core.Services
 {
+    using Contracts;
+    using Infrastructure.Data;
+    using Infrastructure.Data.Models;
+    using Infrastructure.Models;
+    using Microsoft.EntityFrameworkCore;
     public class HealthProcedureService : IHealthProcedureService
     {
         private readonly ApplicationDbContext _repo;
@@ -29,7 +28,7 @@ namespace BabyMemory.Core.Services
                 var medicine = await _repo.Medicines.FindAsync(variable);
                 medicines.Add(medicine);
             }
-            
+
             var procedure = new HealthProcedure
             {
                 Name = model.Name,

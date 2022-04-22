@@ -84,6 +84,16 @@ namespace BabyMemory.Test
             Assert.That(children.Name, Is.EqualTo(child.Name));
         }
 
+        [Test]
+        public async Task ChildrenGetAgeTest()
+        {
+            var childrenService = serviceProvider.GetService<IChildrenService>();
+            var repo = serviceProvider.GetService<IApplicatioDbRepository>();
+            var children = repo.All<User>().First().Childrens.First();
+            var age = await childrenService.GetChildren(children.Id);
+            Assert.That(age.Age, Is.EqualTo(0));
+        }
+
         [TearDown]
         public void TearDown()
         {
