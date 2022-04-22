@@ -1,9 +1,9 @@
-﻿using BabyMemory.Infrastructure.Data;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-
-namespace BabyMemory.Test
+﻿namespace BabyMemory.Test
 {
+    using Infrastructure.Data;
+    using Microsoft.Data.Sqlite;
+    using Microsoft.EntityFrameworkCore;
+
     public class InMemoryDbContext
     {
         private readonly SqliteConnection connection;

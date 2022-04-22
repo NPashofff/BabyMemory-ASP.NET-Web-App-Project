@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BabyMemory.Core.Contracts;
-using BabyMemory.Core.Services;
-using BabyMemory.Infrastructure.Data.Models;
-using BabyMemory.Infrastructure.Data.Repositories;
-using BabyMemory.Infrastructure.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
-
-namespace BabyMemory.Test
+﻿namespace BabyMemory.Test
 {
+    using Core.Contracts;
+    using Core.Services;
+    using Infrastructure.Data.Models;
+    using Infrastructure.Data.Repositories;
+    using Infrastructure.Models;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    
     public class HeathProcedureServiceTest
     {
         private ServiceProvider serviceProvider;
@@ -40,7 +40,7 @@ namespace BabyMemory.Test
             var healthProcedureService = serviceProvider.GetService<IHealthProcedureService>();
             if (healthProcedureService != null)
             {
-                var result =await healthProcedureService.GetAllMedicinesAsync();
+                var result = await healthProcedureService.GetAllMedicinesAsync();
                 Assert.That(result.Count, Is.EqualTo(1));
             }
         }
@@ -87,7 +87,7 @@ namespace BabyMemory.Test
                 Email = "Pesho@pesho.com",
                 UserFullName = "null",
             };
-            
+
             Children child = new()
             {
                 Id = Guid.NewGuid().ToString(),

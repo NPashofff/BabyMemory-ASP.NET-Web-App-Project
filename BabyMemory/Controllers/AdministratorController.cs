@@ -1,13 +1,12 @@
-﻿using BabyMemory.Infrastructure.Models;
-
-namespace BabyMemory.Controllers
+﻿namespace BabyMemory.Controllers
 {
+    using Infrastructure.Models;
     using Core.Contracts;
     using Infrastructure.Data.Models;
     using Infrastructure.Shared;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    
+
     [Authorize(Roles = GlobalConstants.Administrator)]
     public class AdministratorController : Controller
     {
@@ -17,7 +16,7 @@ namespace BabyMemory.Controllers
 
 
         public AdministratorController(IAdminService adminService,
-            IUserService userService, 
+            IUserService userService,
             IEventService eventService)
         {
             _adminService = adminService;
@@ -44,7 +43,7 @@ namespace BabyMemory.Controllers
         public async Task<IActionResult> EditUser(User user)
         {
             await _adminService.EditUserAsync(user);
-            
+
             return Redirect("/Administrator/AllUsers");
         }
 
