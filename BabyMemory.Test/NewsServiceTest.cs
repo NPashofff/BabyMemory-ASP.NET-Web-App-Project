@@ -56,7 +56,7 @@ namespace BabyMemory.Test
 
 
             var allNewse = await newsService.GetAllNews();
-            var count = allNewse.Count();
+            var count = allNewse.Length;
 
             Assert.That(count, Is.EqualTo(1));
         }
@@ -78,7 +78,7 @@ namespace BabyMemory.Test
 
         private void AddOneNews(ApplicationDbContext repo, INewsService newsService)
         {
-            AddNewsViewModel news = new AddNewsViewModel()
+            AddNewsViewModel news = new()
             {
                 Name = "Nivina",
                 Description = " Description ",
@@ -92,7 +92,7 @@ namespace BabyMemory.Test
             dbContext.Dispose();
         }
 
-        private async Task SeedDbAsync(IApplicatioDbRepository repo)
+        private static async Task SeedDbAsync(IApplicatioDbRepository repo)
         {
             var user = new User
             {

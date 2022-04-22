@@ -1,10 +1,10 @@
-﻿using BabyMemory.Core.Contracts;
-using BabyMemory.Infrastructure.Data;
-using BabyMemory.Infrastructure.Data.Models;
-using BabyMemory.Infrastructure.Models;
-
-namespace BabyMemory.Core.Services
+﻿namespace BabyMemory.Core.Services
 {
+    using Contracts;
+    using Infrastructure.Data;
+    using Infrastructure.Data.Models;
+    using Infrastructure.Models;
+
     public class MedicineService : IMedicineService
     {
         private readonly ApplicationDbContext _context;
@@ -16,7 +16,7 @@ namespace BabyMemory.Core.Services
 
         public async Task AddMedicineAsync(MedicineAddViewModel model)
         {
-            Medicine medicine = new Medicine
+            Medicine medicine = new()
             {
                 Name = model.Name,
                 Description = model.Description

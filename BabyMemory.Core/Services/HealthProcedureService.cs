@@ -21,7 +21,7 @@
 
         public async Task AddHealthProcedureAsync(HealthProcedureViewModel model, string childId)
         {
-            List<Medicine> medicines = new List<Medicine>();
+            List<Medicine> medicines = new();
 
             foreach (var variable in model.Medicines)
             {

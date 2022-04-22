@@ -21,7 +21,7 @@ namespace BabyMemory.Controllers
             ViewBag.ChildId = childId;
             List<Medicine> medicines = await _healthProcedureService.GetAllMedicinesAsync();
             ViewBag.Medicines = medicines;
-            HealthProcedureViewModel model = new HealthProcedureViewModel();
+            HealthProcedureViewModel model = new();
             
             return View(model);
         }

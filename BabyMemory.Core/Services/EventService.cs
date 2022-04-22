@@ -36,7 +36,7 @@
         public async Task CreateEventAsync(EventViewModel model, string userName)
         {
             var user = await _userService.GetUserAsync(userName);
-            Event newEvent = new Event
+            Event newEvent = new()
             {
                 Name = model.Name,
                 Description = model.Description,

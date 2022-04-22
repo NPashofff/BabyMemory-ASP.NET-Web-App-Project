@@ -18,7 +18,7 @@ namespace BabyMemory.Core.Services
 
         public async Task AddMemory(MemoryAddViewModel model, User currentUser)
         {
-            Memory memory = new Memory
+            Memory memory = new()
             {
                 CreationDate = model.CreationDate,
                 Name = model.Name,

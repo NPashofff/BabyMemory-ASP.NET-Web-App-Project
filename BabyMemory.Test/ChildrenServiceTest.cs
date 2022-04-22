@@ -66,7 +66,7 @@ namespace BabyMemory.Test
             {
                 var result = await childrenService.All("pesho");
 
-                Assert.That(result.Count(), Is.EqualTo(1));
+                Assert.That(result.Length, Is.EqualTo(1));
             }
         }
 
@@ -79,7 +79,7 @@ namespace BabyMemory.Test
             {
                 var child = repo.All<User>().First().Childrens.First();
                 if (childrenService != null) await childrenService.Delete(child.Id);
-                
+
                 Assert.That(repo.All<User>().First().Childrens.Count, Is.EqualTo(0));
             }
         }
@@ -132,7 +132,7 @@ namespace BabyMemory.Test
                 Email = "Pesho@pesho.com",
                 UserFullName = "null",
             };
-            Children child = new Children
+            Children child = new()
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = "pesho",

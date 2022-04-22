@@ -23,7 +23,7 @@ namespace BabyMemory.Test
             context.Database.EnsureCreated();
         }
 
-        public ApplicationDbContext CreateContext() => new ApplicationDbContext(dbContextOptions);
+        public ApplicationDbContext CreateContext() => new(dbContextOptions);
 
         public void Dispose() => connection.Dispose();
     }

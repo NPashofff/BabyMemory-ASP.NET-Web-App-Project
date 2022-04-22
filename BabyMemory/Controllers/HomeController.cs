@@ -54,7 +54,7 @@ namespace BabyMemory.Controllers
 
         public IActionResult Create()
         {
-            EventViewModel model = new EventViewModel()
+            EventViewModel model = new()
             {
                 CreationDate = DateTime.Now,
                 EventDate = DateTime.Now,

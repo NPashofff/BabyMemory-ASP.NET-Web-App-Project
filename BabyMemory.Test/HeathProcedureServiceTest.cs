@@ -54,7 +54,7 @@ namespace BabyMemory.Test
             {
                 var medicines = await repo.All<Medicine>()
                     .Select(x => x.Id).ToListAsync();
-                HealthProcedureViewModel healthProcedure = new HealthProcedureViewModel()
+                HealthProcedureViewModel healthProcedure = new()
                 {
                     Name = "Imeto e",
                     Description = "null",
@@ -87,7 +87,8 @@ namespace BabyMemory.Test
                 Email = "Pesho@pesho.com",
                 UserFullName = "null",
             };
-            Children child = new Children
+            
+            Children child = new()
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = "pesho",
@@ -97,7 +98,7 @@ namespace BabyMemory.Test
             };
             user.Childrens.Add(child);
 
-            Medicine medicine = new Medicine
+            Medicine medicine = new()
             {
                 Name = "null",
                 Description = "null",
