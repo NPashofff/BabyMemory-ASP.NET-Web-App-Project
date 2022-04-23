@@ -37,7 +37,7 @@ namespace BabyMemory.Controllers
                 return Redirect("/Children/All");
             }
 
-            return View();
+            return View(model);
         }
 
         public async Task<IActionResult> Delete(string id)
