@@ -29,11 +29,11 @@ namespace BabyMemory.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ChildrenAddViewModel model)
+        public async Task<IActionResult> Add(ChildrenAddViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _childrenService.AddChildren(model, User.Identity.Name);
+                await _childrenService.AddChildren(model, User.Identity.Name);
                 return Redirect("/Children/All");
             }
 
