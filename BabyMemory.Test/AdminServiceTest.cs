@@ -75,6 +75,7 @@
                 UserName = "pesho",
                 Email = "Pesho@pesho.com",
                 UserFullName = "null",
+                
             };
 
             await repo.AddAsync(user);

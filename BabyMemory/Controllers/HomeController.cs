@@ -1,7 +1,6 @@
-﻿using BabyMemory.Infrastructure.Data.Models;
-
-namespace BabyMemory.Controllers
+﻿namespace BabyMemory.Controllers
 {
+    using Infrastructure.Data.Models;
     using Core.Contracts;
     using Infrastructure.Models;
     using Microsoft.AspNetCore.Authorization;
@@ -66,9 +65,9 @@ namespace BabyMemory.Controllers
         public async Task<IActionResult> Create(EventViewModel model)
         {
             if (User.Identity == null) return Redirect("/");
-            
+
             if (User.Identity.Name == null) return Redirect("/");
-            
+
             await _eventService.CreateEventAsync(model, User.Identity.Name);
 
             return Redirect("/");
