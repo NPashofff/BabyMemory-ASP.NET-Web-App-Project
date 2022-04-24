@@ -33,7 +33,7 @@ namespace BabyMemory.Test
         }
 
         [Test]
-        public async Task GetAllUsersTest()
+        public async Task AddMemoryToChildrenTest()
         {
             var memoryService = serviceProvider.GetService<IMemoryService>();
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
@@ -52,6 +52,43 @@ namespace BabyMemory.Test
             await memoryService.AddMemory(memoryAddViewModel, user);
 
             Assert.That(user.Childrens.First().Memories.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public async Task GetMemoryTest()
+        {
+            var memoryService = serviceProvider.GetService<IMemoryService>();
+
+            var result = await memoryService.GetMemoryAsync("12345");
+
+            Assert.That(result.Id, Is.EqualTo("12345"));
+        }
+
+        [Test]
+        public async Task EditMemoryTest()
+        {
+            var memoryService = serviceProvider.GetService<IMemoryService>();
+            var repo = serviceProvider.GetService<IApplicatioDbRepository>();
+
+
+            var memory = await memoryService.GetMemoryAsync("12345");
+            memory.Name = "new name";
+            await memoryService.Edit(memory);
+
+            Assert.That(repo.All<Memory>().First().Name, Is.EqualTo(memory.Name));
+        }
+
+        [Test]
+        public async Task DeleteMemoryTest()
+        {
+            var memoryService = serviceProvider.GetService<IMemoryService>();
+            var repo = serviceProvider.GetService<IApplicatioDbRepository>();
+
+
+            var memory = await memoryService.GetMemoryAsync("12345");
+            await memoryService.DeleteAsync(memory);
+
+            Assert.That(repo.All<Memory>().Count(), Is.EqualTo(0));
         }
 
         [TearDown]
