@@ -21,11 +21,10 @@
         {
             dbContext = new InMemoryDbContext();
             var serviceCollection = new ServiceCollection();
-
+             
             serviceProvider = serviceCollection
                 .AddSingleton(sp => dbContext.CreateContext())
                 .AddSingleton<IApplicatioDbRepository, ApplicatioDbRepository>()
-                //.AddSingleton<ApplicationDbContext>()
                 .AddSingleton<IAdminService, AdminService>()
                 .BuildServiceProvider();
 
