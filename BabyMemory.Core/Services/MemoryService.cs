@@ -27,12 +27,14 @@ namespace BabyMemory.Core.Services
             };
 
             var user = await _repo.Users
-                .Include(x=>x.Childrens)
+                .Include(x => x.Childrens)
                 .FirstOrDefaultAsync(x => x.Id == currentUser.Id);
+            if (user == null) return;
 
             var child = user.Childrens.FirstOrDefault(x => x.Id == model.ChildId);
 
-            child.Memories.Add(memory);
+            if (child != null) child.Memories.Add(memory);
+
 
             await _repo.SaveChangesAsync();
         }
@@ -51,7 +53,7 @@ namespace BabyMemory.Core.Services
         public async Task DeleteAsync(Memory model)
         {
             _repo.Memories.Remove(model);
-           await _repo.SaveChangesAsync();
+            await _repo.SaveChangesAsync();
         }
     }
 }

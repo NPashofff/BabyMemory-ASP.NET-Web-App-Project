@@ -6,6 +6,7 @@ using BabyMemory.Infrastructure.Data;
 using BabyMemory.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Azure.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

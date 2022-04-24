@@ -31,13 +31,11 @@ namespace BabyMemory.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ChildrenAddViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                await _childrenService.AddChildren(model, User.Identity.Name);
-                return Redirect("/Children/All");
-            }
-
-            return View(model);
+            if (!ModelState.IsValid) return View(model);
+            
+            await _childrenService.AddChildren(model, User.Identity.Name);
+            
+            return Redirect("/Children/All");
         }
 
         public async Task<IActionResult> Delete(string id)
