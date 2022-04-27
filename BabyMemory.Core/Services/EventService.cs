@@ -1,4 +1,6 @@
-﻿namespace BabyMemory.Core.Services
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace BabyMemory.Core.Services
 {
     using Infrastructure.Data.Models;
     using Microsoft.EntityFrameworkCore;
@@ -9,12 +11,12 @@
     public class EventService : IEventService
     {
         private readonly ApplicationDbContext _repo;
-        private readonly IUserService _userService;
+        //private readonly IUserService _userService;
 
-        public EventService(ApplicationDbContext repo, IUserService userService)
+        public EventService(ApplicationDbContext repo /*IUserService userService*/)
         {
             _repo = repo;
-            _userService = userService;
+            //_userService = userService;
         }
 
         public async Task<ICollection<EventViewModel>> GetAllActiveEventsAsync()
@@ -35,7 +37,7 @@
 
         public async Task CreateEventAsync(EventViewModel model, string userName)
         {
-            var user = await _userService.GetUserAsync(userName);
+            var user = await GetUserAsync(userName);
             Event newEvent = new()
             {
                 Name = model.Name,
@@ -53,9 +55,11 @@
             await _repo.SaveChangesAsync();
         }
 
+
+
         public async Task<ICollection<EventViewModel>> GetMyEventsAsync(string identityName)
         {
-            var user = await _userService.GetUserAsync(identityName);
+            var user = await GetUserAsync(identityName);
             var events = await _repo.Events
                 .Where(x => user != null && x.UserId == user.Id)
                 .Select(e => new EventViewModel
@@ -76,14 +80,14 @@
             return await _repo.Events
                 .Where(x => x.Id == eventId)
                 .Select(e => new EventViewModel
-            {
-                Id = e.Id,
-                Name = e.Name,
-                Description = e.Description,
-                CreationDate = e.CreationDate,
-                EventDate = e.EventDate,
-                IsPublic = e.IsPublic
-            }).FirstOrDefaultAsync();
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Description = e.Description,
+                    CreationDate = e.CreationDate,
+                    EventDate = e.EventDate,
+                    IsPublic = e.IsPublic
+                }).FirstOrDefaultAsync();
 
         }
 
@@ -109,7 +113,7 @@
             await _repo.SaveChangesAsync();
         }
 
-        
+
         public async Task<ICollection<EventViewModel>> GetAllEventsAsync()
         {
             var events = await _repo.Events.Select(x => new EventViewModel
@@ -123,6 +127,11 @@
             }).ToListAsync();
 
             return events;
+        }
+
+        private async Task<User> GetUserAsync(string userName)
+        {
+            return await _repo.Users.FirstOrDefaultAsync(x => x.UserName == userName);
         }
     }
 }
