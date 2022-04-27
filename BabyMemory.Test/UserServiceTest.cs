@@ -1,12 +1,10 @@
-﻿using BabyMemory.Core.Services;
-using BabyMemory.Infrastructure.Data;
-using BabyMemory.Infrastructure.Data.Models;
-using BabyMemory.Infrastructure.Data.Repositories;
-using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
-
-namespace BabyMemory.Test
+﻿namespace BabyMemory.Test
 {
+    using Core.Services;
+    using Infrastructure.Data;
+    using Infrastructure.Data.Models;
+    using Microsoft.Extensions.DependencyInjection;
+    using NUnit.Framework;
     using System;
     using System.Linq;
     using System.Threading.Tasks;

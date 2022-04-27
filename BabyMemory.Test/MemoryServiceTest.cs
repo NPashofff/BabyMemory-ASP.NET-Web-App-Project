@@ -1,16 +1,16 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using BabyMemory.Core.Contracts;
-using BabyMemory.Core.Services;
-using BabyMemory.Infrastructure.Data.Models;
-using BabyMemory.Infrastructure.Data.Repositories;
-using BabyMemory.Infrastructure.Models;
-using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
-
-namespace BabyMemory.Test
+﻿namespace BabyMemory.Test
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Core.Contracts;
+    using Core.Services;
+    using Infrastructure.Data.Models;
+    using Infrastructure.Data.Repositories;
+    using Infrastructure.Models;
+    using Microsoft.Extensions.DependencyInjection;
+    using NUnit.Framework;
+
     public class MemoryServiceTest
     {
         private ServiceProvider serviceProvider;

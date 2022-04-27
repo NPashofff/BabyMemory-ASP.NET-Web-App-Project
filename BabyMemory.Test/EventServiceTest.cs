@@ -1,9 +1,7 @@
-﻿using BabyMemory.Infrastructure.Data;
-
-namespace BabyMemory.Test
+﻿namespace BabyMemory.Test
 {
-    using Core.Services;
     using Core.Contracts;
+    using Core.Services;
     using Infrastructure.Data.Models;
     using Infrastructure.Data.Repositories;
     using Infrastructure.Models;
