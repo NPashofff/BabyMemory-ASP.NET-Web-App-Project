@@ -9,5 +9,7 @@ namespace BabyMemory.Core.Contracts
         //List<Medicine> GetAllMedicinesAsync();
         
         Task AddHealthProcedureAsync(HealthProcedureViewModel model, string childId);
+        Task<HealthProcedure?> GetHealthProcedureByIdAsync(string heathProcedureId);
+        Task DeleteByIdAsync(string id);
     }
 }

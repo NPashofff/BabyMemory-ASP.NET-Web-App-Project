@@ -47,5 +47,20 @@
 
             await _repo.SaveChangesAsync();
         }
+
+        public async Task<HealthProcedure?> GetHealthProcedureByIdAsync(string heathProcedureId)
+        {
+            return await _repo.HealthProcedures
+                .Include(x => x.Medicines)
+                .FirstOrDefaultAsync(x => x.Id == heathProcedureId);
+
+        }
+
+        public async Task DeleteByIdAsync(string id)
+        {
+            var procedure = await _repo.HealthProcedures.FindAsync(id);
+            if (procedure != null) _repo.HealthProcedures.Remove(procedure);
+            await _repo.SaveChangesAsync();
+        }
     }
 }

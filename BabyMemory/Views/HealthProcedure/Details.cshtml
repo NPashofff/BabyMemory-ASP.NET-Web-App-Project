@@ -1,0 +1,23 @@
+﻿@model BabyMemory.Infrastructure.Data.Models.HealthProcedure
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div class="card-body">
+    <div class="row-cols-auto">
+        <b class="card-title">@Model.Name</b>
+    </div>
+    <p class="card-text">@Model.CreationDate</p>
+    <p class="card-text">@Model.Description</p>
+    <b>Medicines:</b>
+    @foreach (var item in Model.Medicines)
+    {
+        <li>@item.Name</li>
+    }
+    <div><a href="/HealthProcedure/Delete?id=@Model.Id" class="btn-danger btn">Delete</a></div>
+</div>
+
+

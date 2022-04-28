@@ -48,7 +48,7 @@
                         @foreach (var item in Model.HealthProcedures)
                         {
                             <i> @item.CreationDate.Date.ToString("dd-MMMM-yyyy")</i>
-                            <a href="/HealthProcedure/Details?childId=@Model.Id" class="btn btn-block btn-outline-dark">@item.Name</a>
+                            <a href="/HealthProcedure/Details?heathProcedureId=@item.Id" class="btn btn-block btn-outline-dark">@item.Name</a>
                         }
                     </div>
                 </div>

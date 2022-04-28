@@ -26,6 +26,18 @@
             return View(model);
         }
 
+        public async Task<IActionResult> Details(string heathProcedureId)
+        {
+            var model = await _healthProcedureService.GetHealthProcedureByIdAsync(heathProcedureId);
+            return View(model);
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _healthProcedureService.DeleteByIdAsync(id);
+            return Redirect("/Children/All/");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add(HealthProcedureViewModel model, string childId)
         {
