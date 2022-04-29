@@ -19,6 +19,8 @@ namespace BabyMemory.Core.Services
 
         public async Task AddChildren(ChildrenAddViewModel model, string userName)
         {
+            if (model.Picture == null) model.Picture = GlobalConstants.DefaultPicture;
+            
             var children = new Children
             {
                 Name = model.Name,
@@ -93,6 +95,21 @@ namespace BabyMemory.Core.Services
             {
                 return new ChildrenViewModel();
             }
+        }
+
+        public async Task Edit(ChildrenViewModel model)
+        {
+            var children =await _repo.Childrens.FirstOrDefaultAsync(x => x.Id == model.Id);
+            
+            if (children != null)
+            {
+                children.Name = model.Name;
+                children.LastName = model.LastName;
+                children.BirthDate = model.BirthDate;
+                children.Picture = model.Picture;
+            }
+
+            await _repo.SaveChangesAsync();
         }
 
         private static int GetAge(DateTime argBirthDate)

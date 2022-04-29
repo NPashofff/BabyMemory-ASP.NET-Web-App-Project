@@ -39,16 +39,14 @@
         public async Task GetAllActiveEventTest()
         {
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
-            var result = await repo.All<Event>().ToListAsync();
-
 
             var eventService = new Mock<IEventService>();
             eventService.Setup(x => x.GetAllActiveEventsAsync())
                 .Returns(GetAllActiveEventsAsync(repo));
 
-            var result1 = await eventService.Object.GetAllActiveEventsAsync();
+            var result = await eventService.Object.GetAllActiveEventsAsync();
 
-            Assert.IsNotNull(result1);
+            Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Count());
         }
 

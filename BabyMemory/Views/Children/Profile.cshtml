@@ -19,7 +19,7 @@
                         <div class="text-center">
                             <img class="profile-user-img img-fluid img-circle" src="@Url.Content("~/Img/"+Model.Picture)" alt="User profile picture">
                         </div>
-                        <h3 class="profile-username text-center">@Model.Name @Model.LastName</h3>
+                        <h3 class="profile-username text-center"><a href="/Children/Edit?childrenId=@Model.Id">@Model.Name @Model.LastName</a></h3>
 
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">

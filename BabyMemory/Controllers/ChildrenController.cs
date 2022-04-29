@@ -38,10 +38,10 @@ namespace BabyMemory.Controllers
             return Redirect("/Children/All");
         }
 
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string childrenId)
         {
-            await _childrenService.Delete(id);
-            
+            await _childrenService.Delete(childrenId);
+
             return Redirect("/Children/All");
         }
 
@@ -50,6 +50,21 @@ namespace BabyMemory.Controllers
             var result =await _childrenService.GetChildren(id);
 
             return View(result);
+        }
+        
+        public async Task<IActionResult> Edit(string childrenId)
+        {
+            var result = await _childrenService.GetChildren(childrenId);
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ChildrenViewModel model)
+        {
+            await _childrenService.Edit(model);
+
+            return Redirect("/Children/Profile/" + model.Id);
         }
     }
 }

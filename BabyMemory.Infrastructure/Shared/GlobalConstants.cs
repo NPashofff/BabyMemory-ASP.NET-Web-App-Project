@@ -61,5 +61,6 @@
         public const string UserNameExist = "User alredy exist.";
         public const string ChidenNotDeletedError = "Can not Deleted.";
         public const string NewsAddError = "News is not Addet.";
+        public static string DefaultPicture = "baby.jpg";
     }
 }

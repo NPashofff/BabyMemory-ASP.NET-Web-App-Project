@@ -10,5 +10,6 @@
         Task Delete(string id);
         
         Task<ChildrenViewModel> GetChildren(string id);
+        Task Edit(ChildrenViewModel model);
     }
 }

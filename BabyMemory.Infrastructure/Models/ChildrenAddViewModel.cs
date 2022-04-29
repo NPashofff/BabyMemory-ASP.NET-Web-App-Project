@@ -18,6 +18,6 @@ namespace BabyMemory.Infrastructure.Models
 
 
         [MaxLength(GlobalConstants.UrlMaxLen)]
-        public string Picture { get; set; }
+        public string Picture { get; set; } = GlobalConstants.DefaultPicture;
     }
 }
