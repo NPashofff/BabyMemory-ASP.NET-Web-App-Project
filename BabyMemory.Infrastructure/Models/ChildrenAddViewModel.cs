@@ -18,6 +18,7 @@ namespace BabyMemory.Infrastructure.Models
         public DateTime BirthDate { get; set; }
 
         [MaxLength(GlobalConstants.UrlMaxLen)]
+        [Display(Name = GlobalConstants.ImageName)]
         public string Picture { get; set; } = GlobalConstants.DefaultPicture;
     }
 }

@@ -2,7 +2,7 @@
 namespace BabyMemory.Infrastructure.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using BabyMemory.Infrastructure.Shared;
+    using Shared;
     public class RegisterInputModel
     {
         [Required]

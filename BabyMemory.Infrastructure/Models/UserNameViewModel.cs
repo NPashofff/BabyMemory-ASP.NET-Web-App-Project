@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace BabyMemory.Infrastructure.Models
+﻿namespace BabyMemory.Infrastructure.Models
 {
     public class UserNameViewModel
     {

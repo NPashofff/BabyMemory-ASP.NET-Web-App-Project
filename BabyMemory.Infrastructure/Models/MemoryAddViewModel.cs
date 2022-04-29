@@ -15,7 +15,8 @@
         public string? Description { get; set; }
 
         public DateTime CreationDate { get; set; }
-        
+
+        [Display(Name = GlobalConstants.ImageName)]
         public string? Picture { get; set; }
     }
 }

@@ -24,6 +24,7 @@ namespace BabyMemory.Infrastructure.Data.Models
 
         [MaxLength(GlobalConstants.UrlMaxLen)]
         [AllowNull]
+        [Display(Name = GlobalConstants.ImageName)]
         public string Picture { get; set; }
     }
 }

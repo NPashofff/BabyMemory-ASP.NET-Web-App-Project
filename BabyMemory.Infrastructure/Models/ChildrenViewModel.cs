@@ -1,8 +1,10 @@
-﻿using BabyMemory.Infrastructure.Data.Models;
-
+﻿#nullable disable
 namespace BabyMemory.Infrastructure.Models
 {
-#nullable disable
+    using System.ComponentModel.DataAnnotations;
+    using BabyMemory.Infrastructure.Data.Models;
+    using Shared;
+
     public class ChildrenViewModel
     {
         public string Id { get; set; }
@@ -15,6 +17,7 @@ namespace BabyMemory.Infrastructure.Models
 
         public DateTime BirthDate { get; set; }
 
+        [Display(Name = GlobalConstants.ImageName)]
         public string Picture { get; set; }
 
         public ICollection<Memory> Memories { get; set; } = new List<Memory>();

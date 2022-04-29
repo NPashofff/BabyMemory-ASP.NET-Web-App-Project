@@ -53,6 +53,7 @@
         public const string UserNameExist = "User alredy exist.";
         public const string ChidenNotDeletedError = "Can not Deleted.";
         public const string NewsAddError = "News is not Addet.";
+        public const string ImageName = "Avalible Pic: child1.jpg child2.jpg event.png";
         public static string DefaultPicture = "baby.jpg";
         public static string BirthDateError = "Date cannot be in future";
         public static string EventDateError = "Event date cannot be in the past";
