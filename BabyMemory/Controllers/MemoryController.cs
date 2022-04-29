@@ -1,4 +1,6 @@
-﻿namespace BabyMemory.Controllers
+﻿using BabyMemory.Infrastructure.Shared;
+
+namespace BabyMemory.Controllers
 {
     using Core.Contracts;
     using Infrastructure.Data.Models;
@@ -38,6 +40,10 @@
         [HttpPost]
         public async Task<IActionResult> Add(MemoryAddViewModel model)
         {
+            if (model.CreationDate > DateTime.Now) ModelState
+                .AddModelError(nameof(model.CreationDate),
+                    GlobalConstants.BirthDateError);
+            
             if (ModelState.IsValid)
             {
                 var currentUser = await _userManager.GetUserAsync(User);
@@ -61,6 +67,13 @@
             switch (submitButton)
             {
                 case "Edit":
+                    if (model.CreationDate > DateTime.Now)
+                    {
+                        ModelState
+                        .AddModelError(nameof(model.CreationDate),
+                            GlobalConstants.BirthDateError);
+                        return View(model);
+                    }
                     await _memoryService.Edit(model);
                     break;
                 case "Delete":
