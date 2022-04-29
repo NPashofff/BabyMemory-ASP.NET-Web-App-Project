@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BabyMemory.Infrastructure.Shared;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BabyMemory.Controllers
 {
@@ -46,6 +47,20 @@ namespace BabyMemory.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Event model)
         {
+            if (model.EventDate < DateTime.Now) ModelState
+                .AddModelError(nameof(model.EventDate),
+                    GlobalConstants.EventDateError);
+
+            if (!ModelState.IsValid) return View(new EventViewModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                CreationDate = model.CreationDate,
+                EventDate = model.EventDate,
+                IsPublic = model.IsPublic
+            });
+            
             await _eventService.EditEventAsync(model);
 
             return Redirect("/Event/All");
@@ -65,8 +80,13 @@ namespace BabyMemory.Controllers
         public async Task<IActionResult> Create(EventViewModel model)
         {
             if (User.Identity == null) return Redirect("/");
-
             if (User.Identity.Name == null) return Redirect("/");
+            
+            if (model.EventDate < DateTime.Now) ModelState
+                .AddModelError(nameof(model.EventDate),
+            GlobalConstants.EventDateError);
+
+            if (!ModelState.IsValid) return View(model);
 
             await _eventService.CreateEventAsync(model, User.Identity.Name);
 

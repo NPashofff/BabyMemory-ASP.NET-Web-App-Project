@@ -49,18 +49,12 @@
         public const string User = "User";
 
 
-        public const int CarModelMAxLen = 20;
-        public const int HashedPasswordMAxLen = 64;
-        public const int ProductNameMAxLen = 20;
-        public const int ProductNameMinLen = 4;
-        public const int DescriptionMaxLen = 80;
-        public const int SeatMinLen = 2;
-        public const int SeatMaxLen = 6;
-        public const double PriceMinLen = 0.05;
-        public const double PriceMaxLen = 1000;
+        //Other
         public const string UserNameExist = "User alredy exist.";
         public const string ChidenNotDeletedError = "Can not Deleted.";
         public const string NewsAddError = "News is not Addet.";
         public static string DefaultPicture = "baby.jpg";
+        public static string BirthDateError = "Date cannot be in future";
+        public static string EventDateError = "Event date cannot be in the past";
     }
 }

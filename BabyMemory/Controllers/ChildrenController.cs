@@ -1,4 +1,6 @@
-﻿#nullable disable
+﻿using BabyMemory.Infrastructure.Shared;
+
+#nullable disable
 namespace BabyMemory.Controllers
 {
     using Core.Contracts;
@@ -31,8 +33,12 @@ namespace BabyMemory.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ChildrenAddViewModel model)
         {
+            if (model.BirthDate > DateTime.Now) ModelState
+                .AddModelError(nameof(model.BirthDate), 
+                    GlobalConstants.BirthDateError);
+
             if (!ModelState.IsValid) return View(model);
-            
+
             await _childrenService.AddChildren(model, User.Identity.Name);
             
             return Redirect("/Children/All");
@@ -62,6 +68,12 @@ namespace BabyMemory.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(ChildrenViewModel model)
         {
+            if (model.BirthDate > DateTime.Now) ModelState
+                .AddModelError(nameof(model.BirthDate), 
+                    GlobalConstants.BirthDateError);
+
+            if (!ModelState.IsValid) return View(model);
+
             await _childrenService.Edit(model);
 
             return Redirect("/Children/Profile/" + model.Id);
