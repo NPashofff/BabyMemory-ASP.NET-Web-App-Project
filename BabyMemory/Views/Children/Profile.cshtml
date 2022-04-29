@@ -45,7 +45,7 @@
                         <a href="/Medicine/Add?childId=@Model.Id" class="btn btn-primary btn-block"><b>Add Medicine</b></a>
                     </div>
                     <div class="card-body">
-                        @foreach (var item in Model.HealthProcedures)
+                        @foreach (var item in Model.HealthProcedures.OrderByDescending(x => x.CreationDate))
                         {
                             <i> @item.CreationDate.Date.ToString("dd-MMMM-yyyy")</i>
                             <a href="/HealthProcedure/Details?heathProcedureId=@item.Id" class="btn btn-block btn-outline-dark">@item.Name</a>
@@ -60,7 +60,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- The time line -->
-                                @foreach (var item in Model.Memories)
+                                @foreach (var item in Model.Memories.OrderByDescending(x =>x.CreationDate))
                                 {
                                     <div class="timeline">
                                         <div class="time-label">
