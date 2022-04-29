@@ -73,5 +73,19 @@
 
             return View(users);
         }
+
+        public async Task<IActionResult> AllMedicine()
+        {
+            var medicines = await _adminService.GetAllMedicineAsync();
+
+            return View(medicines);
+        }
+
+        public async Task<IActionResult> RemoveMedicine(string id)
+        {
+            await _adminService.RemoveMedicineAsync(id);
+
+            return Redirect("/Administrator/AllMedicine");
+        }
     }
 }

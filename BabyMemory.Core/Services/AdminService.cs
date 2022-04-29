@@ -26,7 +26,7 @@
 
             return users;
         }
-        
+
         public async Task EditUserAsync(User user)
         {
             var userToEdit = await _context.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
@@ -40,6 +40,19 @@
 
                 _context.Users.Update(userToEdit);
             }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<ICollection<Medicine>> GetAllMedicineAsync()
+        {
+            return await _context.Medicines.ToListAsync();
+        }
+
+        public async Task RemoveMedicineAsync(string id)
+        {
+            var medicine = await _context.Medicines.FirstOrDefaultAsync(x => x.Id == id);
+            if (medicine != null) _context.Medicines.Remove(medicine);
 
             await _context.SaveChangesAsync();
         }

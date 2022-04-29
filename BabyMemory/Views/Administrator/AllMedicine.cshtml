@@ -1,0 +1,29 @@
+﻿@model ICollection<BabyMemory.Infrastructure.Data.Models.Medicine>
+@{
+    ViewData["Title"] = "AllMedicine";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AllMedicine</h1>
+
+<div class="card-body">
+        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="col-sm-12">
+                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                        <thead>
+                            <tr><th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Medicine Name</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Edit: activate to sort column ascending">Remove</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="User Type: activate to sort column ascending">Description</th>
+                        </thead>
+                        <tbody>
+                            @foreach (var medicine in Model)
+                            {
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">@medicine.Name</td>
+                                    <td><a href="/Administrator/RemoveMedicine?id=@medicine.Id" class="btn btn-block btn-warning btn-sm">Remove Medicine</a></td>
+                                    <td>@medicine.Description</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>

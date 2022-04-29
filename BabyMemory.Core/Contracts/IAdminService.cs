@@ -8,5 +8,7 @@ namespace BabyMemory.Core.Contracts
         Task<List<UserNameViewModel>> GetAllUsersAsync();
 
         Task EditUserAsync(User user);
+        Task<ICollection<Medicine>> GetAllMedicineAsync();
+        Task RemoveMedicineAsync(string id);
     }
 }
