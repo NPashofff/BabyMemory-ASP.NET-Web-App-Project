@@ -34,10 +34,7 @@ namespace BabyMemory.Controllers
         [Authorize(Roles = GlobalConstants.Administrator)]
         public IActionResult AddNews(AddNewsViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Error");
-            }
+            if (!ModelState.IsValid) return View(model);
 
             (bool, string) result = _newsService.AddNews(model);
 

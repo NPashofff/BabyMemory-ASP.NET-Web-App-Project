@@ -45,7 +45,7 @@
                 return Redirect("/Children/Profile?id=" + model.ChildId);
             }
 
-            return View();
+            return View(model);
         }
 
         public async Task<IActionResult> Edit(string Id)

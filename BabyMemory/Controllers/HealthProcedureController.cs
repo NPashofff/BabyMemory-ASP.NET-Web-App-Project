@@ -41,6 +41,7 @@
         [HttpPost]
         public async Task<IActionResult> Add(HealthProcedureViewModel model, string childId)
         {
+            if (!ModelState.IsValid) return View(childId);
 
             await _healthProcedureService.AddHealthProcedureAsync(model, childId);
 

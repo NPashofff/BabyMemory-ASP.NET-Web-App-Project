@@ -23,6 +23,8 @@
         [HttpPost]
         public async Task<IActionResult> Add(MedicineAddViewModel model, string childId)
         {
+            if (!ModelState.IsValid) return View(childId);
+            
             await _medicineService.AddMedicineAsync(model);
 
             return Redirect($"/Children/Profile?id={childId}");

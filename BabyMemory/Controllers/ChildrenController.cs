@@ -1,8 +1,7 @@
-﻿using BabyMemory.Infrastructure.Shared;
-
-#nullable disable
+﻿#nullable disable
 namespace BabyMemory.Controllers
 {
+    using Infrastructure.Shared;
     using Core.Contracts;
     using Infrastructure.Models;
     using Microsoft.AspNetCore.Authorization;
@@ -34,13 +33,13 @@ namespace BabyMemory.Controllers
         public async Task<IActionResult> Add(ChildrenAddViewModel model)
         {
             if (model.BirthDate > DateTime.Now) ModelState
-                .AddModelError(nameof(model.BirthDate), 
+                .AddModelError(nameof(model.BirthDate),
                     GlobalConstants.BirthDateError);
 
             if (!ModelState.IsValid) return View(model);
 
             await _childrenService.AddChildren(model, User.Identity.Name);
-            
+
             return Redirect("/Children/All");
         }
 
@@ -53,11 +52,11 @@ namespace BabyMemory.Controllers
 
         public async Task<IActionResult> Profile(string id)
         {
-            var result =await _childrenService.GetChildren(id);
+            var result = await _childrenService.GetChildren(id);
 
             return View(result);
         }
-        
+
         public async Task<IActionResult> Edit(string childrenId)
         {
             var result = await _childrenService.GetChildren(childrenId);
@@ -69,7 +68,7 @@ namespace BabyMemory.Controllers
         public async Task<IActionResult> Edit(ChildrenViewModel model)
         {
             if (model.BirthDate > DateTime.Now) ModelState
-                .AddModelError(nameof(model.BirthDate), 
+                .AddModelError(nameof(model.BirthDate),
                     GlobalConstants.BirthDateError);
 
             if (!ModelState.IsValid) return View(model);

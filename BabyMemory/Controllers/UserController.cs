@@ -19,10 +19,10 @@ namespace BabyMemory.Controllers
         //Create First Admin then comment this section
         public async Task<IActionResult> CreateFirstAdmin()
         {
-            var role = await _userService.FindRoleByNameAsync(GlobalConstants.Administrator);
-            if (User.Identity?.Name == null) return Ok();
-            var user = await _userService.GetUserAsync(User.Identity?.Name);
-            if (role != null) await _userService.CreateUserRoleAsync(user, role);
+            //var role = await _userService.FindRoleByNameAsync(GlobalConstants.Administrator);
+            //if (User.Identity?.Name == null) return Ok();
+            //var user = await _userService.GetUserAsync(User.Identity?.Name);
+            //if (role != null) await _userService.CreateUserRoleAsync(user, role);
 
             return Ok();
         }

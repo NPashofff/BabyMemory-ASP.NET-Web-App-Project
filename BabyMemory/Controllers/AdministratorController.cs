@@ -66,6 +66,7 @@
 
             return Redirect("/Administrator/AllUsers");
         }
+        
         public async Task<IActionResult> AllEvents()
         {
             ICollection<EventViewModel> users = await _eventService.GetAllEventsAsync();
