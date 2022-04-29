@@ -20,8 +20,8 @@
                             <td class="dtr-control sorting_1" tabindex="0">@item.Name</td>
                             <td>@item.EventDate</td>
                             <td>@(item.IsPublic == true ? "Public" : "Privet")</td>
-                            <td><a href="/Home/Edit?eventId=@item.Id" class="btn btn-block btn-warning btn-sm">Edit Event</a></td>
-                            <td><a href="/Home/Remove?eventId=@item.Id" class="btn btn-block btn-danger btn-sm">Remove Event</a></td>
+                            <td><a href="/Event/Edit?eventId=@item.Id" class="btn btn-block btn-warning btn-sm">Edit Event</a></td>
+                            <td><a href="/Event/Remove?eventId=@item.Id" class="btn btn-block btn-danger btn-sm">Remove Event</a></td>
                         </tr>
                     }
                 </tbody>

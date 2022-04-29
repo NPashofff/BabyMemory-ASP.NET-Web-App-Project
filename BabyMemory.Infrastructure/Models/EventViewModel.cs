@@ -1,11 +1,13 @@
 ﻿using BabyMemory.Infrastructure.Shared;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BabyMemory.Infrastructure.Models
 {
     public class EventViewModel
     {
-        public string Id { get; set; }
+        [AllowNull]
+        public string? Id { get; set; }
 
         [Required]
         [MaxLength(GlobalConstants.EventNameMaxLen)]
