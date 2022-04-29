@@ -13,10 +13,11 @@ namespace BabyMemory.Core.Contracts
         
         Task<EventViewModel?> GetEventByIdAsync(string eventId);
         
-        Task EditEventAsync(Event model);
+        Task EditEventAsync(EventViewModel model);
         
         Task DeleteEventAsync(string eventId);
         
         Task<ICollection<EventViewModel>> GetAllEventsAsync();
+        Task<Event?> GetEventAsync(string eventId);
     }
 }

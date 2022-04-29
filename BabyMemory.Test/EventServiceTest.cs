@@ -140,7 +140,7 @@
         {
             var eventService = serviceProvider.GetService<IEventService>();
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
-            var eventEdited = repo.All<Event>().First();
+            var eventEdited = await eventService.GetEventByIdAsync("1234");
             eventEdited.Name = "gosho";
 
             await eventService.EditEventAsync(eventEdited);

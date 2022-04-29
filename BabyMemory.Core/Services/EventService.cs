@@ -11,12 +11,10 @@ namespace BabyMemory.Core.Services
     public class EventService : IEventService
     {
         private readonly ApplicationDbContext _repo;
-        //private readonly IUserService _userService;
 
-        public EventService(ApplicationDbContext repo /*IUserService userService*/)
+        public EventService(ApplicationDbContext repo )
         {
             _repo = repo;
-            //_userService = userService;
         }
 
         public async Task<ICollection<EventViewModel>> GetAllActiveEventsAsync()
@@ -91,7 +89,7 @@ namespace BabyMemory.Core.Services
 
         }
 
-        public async Task EditEventAsync(Event model)
+        public async Task EditEventAsync(EventViewModel model)
         {
             var eventToUpdate = await _repo.Events.FirstOrDefaultAsync(x => x.Id == model.Id);
             if (eventToUpdate != null)
@@ -127,6 +125,11 @@ namespace BabyMemory.Core.Services
             }).ToListAsync();
 
             return events;
+        }
+
+        public async Task<Event> GetEventAsync(string eventId)
+        {
+            return await _repo.Events.FirstOrDefaultAsync(x => x.Id == eventId);
         }
 
         private async Task<User> GetUserAsync(string userName)

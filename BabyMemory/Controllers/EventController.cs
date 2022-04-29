@@ -45,22 +45,15 @@ namespace BabyMemory.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Event model)
+        public async Task<IActionResult> Edit(EventViewModel model)
         {
             if (model.EventDate < DateTime.Now) ModelState
                 .AddModelError(nameof(model.EventDate),
                     GlobalConstants.EventDateError);
 
-            if (!ModelState.IsValid) return View(new EventViewModel
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Description = model.Description,
-                CreationDate = model.CreationDate,
-                EventDate = model.EventDate,
-                IsPublic = model.IsPublic
-            });
+            if (!ModelState.IsValid) return View();
             
+
             await _eventService.EditEventAsync(model);
 
             return Redirect("/Event/All");
