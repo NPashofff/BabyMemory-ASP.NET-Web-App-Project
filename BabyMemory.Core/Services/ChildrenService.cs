@@ -20,7 +20,7 @@ namespace BabyMemory.Core.Services
         public async Task AddChildren(ChildrenAddViewModel model, string userName)
         {
             if (model.Picture == null) model.Picture = GlobalConstants.DefaultPicture;
-            
+
             var children = new Children
             {
                 Name = model.Name,
@@ -61,18 +61,26 @@ namespace BabyMemory.Core.Services
 
         public async Task Delete(string id)
         {
-            Children children = await _repo.Childrens.FirstOrDefaultAsync(x => x.Id == id);
-            if (children != null)
-            {
-                _repo.Childrens.Remove(children);
-            }
+            Children children = await _repo.Childrens
+                .Include(x => x.HealthProcedures)
+                .Include(x => x.Memories)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (children == null) return;
+            
+            
+            _repo.Memories.RemoveRange(children.Memories);
+            await _repo.SaveChangesAsync();
+            _repo.HealthProcedures.RemoveRange(children.HealthProcedures);
+            await _repo.SaveChangesAsync();
+            _repo.Childrens.Remove(children);
 
             var result = await _repo.SaveChangesAsync();
         }
 
         public async Task<ChildrenViewModel> GetChildren(string id)
         {
-            var children =await _repo.Childrens
+            var children = await _repo.Childrens
                 .Include(x => x.Memories)
                 .Include(x => x.HealthProcedures)
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -99,8 +107,8 @@ namespace BabyMemory.Core.Services
 
         public async Task Edit(ChildrenViewModel model)
         {
-            var children =await _repo.Childrens.FirstOrDefaultAsync(x => x.Id == model.Id);
-            
+            var children = await _repo.Childrens.FirstOrDefaultAsync(x => x.Id == model.Id);
+
             if (children != null)
             {
                 children.Name = model.Name;
