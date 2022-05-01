@@ -5,6 +5,7 @@ using BabyMemory.Core.Services;
 using BabyMemory.Infrastructure.Data;
 using BabyMemory.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,10 @@ builder.Services.AddDefaultIdentity<User>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+    {
+        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+    });
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IChildrenService, ChildrenService>();
 builder.Services.AddScoped<IRepository, Repository>();
