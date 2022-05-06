@@ -20,8 +20,27 @@ namespace BabyMemory.Controllers
         public async Task<IActionResult> All()
         {
             var models =await _newsService.GetAllNews();
+            // -------------
+            List<NewsNewVewModel> newses = new();
+            
+            foreach (var model in models)
+            {
+                var news = new NewsNewVewModel
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Description = model.Description
+                        .Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries)
+                        .ToList(),
+                    Picture = model.Picture,
+                    IsActive = model.IsActive
+                };
 
-            return View(models);
+                newses.Add(news);
+            }
+            
+            
+            return View(newses);
         }
 
         [Authorize(Roles = GlobalConstants.Administrator)]

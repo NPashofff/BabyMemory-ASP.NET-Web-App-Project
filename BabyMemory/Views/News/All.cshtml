@@ -1,4 +1,4 @@
-﻿@model BabyMemory.Infrastructure.Models.NewsViewModel[];
+﻿@model ICollection<NewsNewVewModel>
 @{
     ViewData["Title"] = "News";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,25 +18,40 @@
 
 @foreach (var item in Model)
 {
-    <div class="post clearfix">
-        <div class="user-block">
-            <img class="img-circle img-bordered-sm" src="@item.Picture" alt="User Image">
-            <span class="username">
-                <b>@item.Name</b>
-            </span>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="timeline">
+                <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="@item.Picture" alt="User Image">
+                </div>
+
+                <div>
+                    @*<i class="fas fa-envelope bg-blue"></i>*@
+                    <div class="timeline-item">
+                        <h3 class="timeline-header"><b>@item.Name</b></h3>
+
+                        <div class="timeline-body">
+                            @foreach (var description in item.Description)
+                            {
+                                <p>
+                                    @description
+                                </p>
+                            }
+                        </div>
+                        <div class="timeline-footer">
+                        </div>
+                    </div>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a href="/News/DeleteNews?id=@item.Id" class="btn-danger btn">Delete</a>
+                    }
+                </div>
+                <div>
+                </div>
+            </div>
         </div>
-
-        <p>
-            @item.Description
-        </p>
-        <p>
-            @if (User.IsInRole("Administrator"))
-            {
-                <a href="/News/DeleteNews?id=@item.Id" class="btn-danger btn">Delete</a>
-            }
-        </p>
     </div>
-
-
+    
 }
 
