@@ -67,15 +67,14 @@ namespace BabyMemory.Core.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (children == null) return;
-            
-            
+
+
             _repo.Memories.RemoveRange(children.Memories);
             await _repo.SaveChangesAsync();
             _repo.HealthProcedures.RemoveRange(children.HealthProcedures);
             await _repo.SaveChangesAsync();
             _repo.Childrens.Remove(children);
-
-            var result = await _repo.SaveChangesAsync();
+            await _repo.SaveChangesAsync();
         }
 
         public async Task<ChildrenViewModel> GetChildren(string id)

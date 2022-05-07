@@ -21,6 +21,7 @@ namespace BabyMemory.Controllers
         {
             string name = User.Identity.Name;
             ChildrenViewModel[] children = await _childrenService.All(name);
+            
             return View(children);
         }
 

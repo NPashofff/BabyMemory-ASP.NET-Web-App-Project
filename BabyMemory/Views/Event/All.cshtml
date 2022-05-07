@@ -7,7 +7,6 @@
 
 <h1>All Events</h1>
 
-
 <div class="text-center">
     <section class="content">
         <div><h2>Upcoming Events</h2></div>
@@ -18,23 +17,16 @@
             {
                 <a href="/Administrator/AllEvents" class="btn btn-danger btn-sm">All Event</a>
             }
-            <!-- Timelime example  -->
             <div class="row">
                 <div class="col-md-12">
-                    <!-- The time line -->
                     <div class="timeline">
-
                         @foreach (var item in Model.OrderBy(x => x.CreationDate))
                         {
-                            <!-- timeline time label -->
                             <div class="time-label">
                                 <i class="fas fa-clock bg-gray"></i>
                                 <span class="bg-blue">@item.EventDate.ToString("D")</span>
                             </div>
-                            <!-- /.timeline-label -->
-                            <!-- timeline item -->
                             <div>
-                                @*<i class="fas fa-envelope bg-blue"></i>*@
                                 <div class="timeline-item">
                                     <span class="time"><i class="fas fa-clock"></i>@item.EventDate.ToString("HH:mm")</span>
                                     <h3 class="timeline-header"><b>@item.Name</b></h3>
@@ -46,18 +38,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- END timeline item -->
                         }
-                        <!-- timeline time label -->
-                        <!-- Clock  -->
                         <div>
                         </div>
                     </div>
                 </div>
-                <!-- /.col -->
             </div>
         </div>
-        <!-- /.timeline -->
-
     </section>
 </div>
