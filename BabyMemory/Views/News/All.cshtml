@@ -6,7 +6,7 @@
 
 @section scripts
     {
-    <script src="~/js/newse.js" asp-append-version="true"></script>
+    <script src="~/js/news.js" asp-append-version="true"></script>
     }
 
 <div>
@@ -20,7 +20,7 @@
 @{
     System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
 }
-
+<h3>@(Model.Count > 0 ? "Site News" : "No Site News")</h3>
 @foreach (var item in Model)
 {
 
@@ -59,6 +59,8 @@
     </div>
 
 }
+
+<h3>Word News</h3>
 @*<div class="card">*@
     @*<div class="card-body pb-0">*@
         <div class="row" id="news-wraper">
